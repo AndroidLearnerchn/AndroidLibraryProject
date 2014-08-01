@@ -1,0 +1,76 @@
+package com.contextawareframework.backgroundservices;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.util.Log;
+
+public class CAFService extends Service{
+
+	/** indicates how to behave if the service is killed */
+	   int mStartMode;
+	   /** interface for clients that bind */
+	   IBinder mBinder;     
+	   /** indicates whether onRebind should be used */
+	   boolean mAllowRebind;
+	   /** Tag for debugging */
+	   private final String TAG = "CAFService";
+	   private static boolean enableDebugging = false;
+	   
+	   /**
+	    * Method to start debugging, all log tags in this class will be printed
+	    */
+	   protected void setEnableDebugging(boolean value)
+	   {
+		   enableDebugging = value;
+	   }
+	   protected boolean getEnableDebugging()
+	   {
+		  return enableDebugging;		  
+	   }
+	   /** Called when the service is being created. */
+	   @Override
+	   public void onCreate() {
+		  if(enableDebugging)
+			  Log.d(TAG,"onCreate");
+	   }
+
+	   /** The service is starting, due to a call to startService() */
+	   @Override
+	   public int onStartCommand(Intent intent, int flags, int startId) {
+		   if(enableDebugging)
+			   Log.d(TAG,"onStartCommand");
+	       return mStartMode;
+	   }
+
+	   /** A client is binding to the service with bindService() */
+	   @Override
+	   public IBinder onBind(Intent intent) {
+		   if(enableDebugging)
+			   Log.d(TAG,"onBind");
+	      return mBinder;
+	   }
+
+	   /** Called when all clients have unbound with unbindService() */
+	   @Override
+	   public boolean onUnbind(Intent intent) {
+		   if(enableDebugging)
+			   Log.d(TAG,"onUnbind");
+		   return mAllowRebind;
+	   }
+
+	   /** Called when a client is binding to the service with bindService()*/
+	   @Override
+	   public void onRebind(Intent intent) {
+		   if(enableDebugging)
+			   Log.d(TAG,"onRebind");
+	   }
+
+	   /** Called when The service is no longer used and is being destroyed */
+	   @Override
+	   public void onDestroy() {
+		   if(enableDebugging)
+			   Log.d(TAG,"onDestroy");
+	   }
+	
+}

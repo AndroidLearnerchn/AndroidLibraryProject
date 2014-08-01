@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices
+END
+BatteryDataService.java
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/BatteryDataService.java
+END
+GPSTracker.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/ANDROID/!svn/ver/20/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/GPSTracker.java
+END
+AccelerometerDataListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/ANDROID/!svn/ver/30/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/AccelerometerDataListener.java
+END
+ProximityDataListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/ProximityDataListener.java
+END
+SoundRecorder.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/SoundRecorder.java
+END
+CAFService.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/CAFService.java
+END
+CopyOfGPSTracker.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/CopyOfGPSTracker.java
+END
+LightDataListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/LightDataListener.java
+END
+GPSTracker1.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/GPSTracker1.java
+END
+BluetoothListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/BluetoothListener.java
+END

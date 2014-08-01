@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors
+END
+Orientation.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/Orientation.java
+END
+Proximity.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/Proximity.java
+END
+LocationPojo.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/LocationPojo.java
+END
+Magnetic.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/Magnetic.java
+END

@@ -1,0 +1,89 @@
+10
+
+dir
+35
+http://10.184.0.69/ANDROID/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework
+http://10.184.0.69/ANDROID
+
+
+
+2014-07-31T07:06:42.188820Z
+35
+prasenjit
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+c5c3cdc6-d890-4b1c-b83d-d7e3fad01292
+
+
+
+
+
+
+0
+
+automatescript
+dir
+
+backgroundservices
+dir
+
+contextawarefunctions
+dir
+
+controller
+dir
+
+dataanalysis
+dir
+
+dbmanager
+dir
+
+exceptions
+dir
+
+globalvariable
+dir
+
+hardware
+dir
+
+notificationService
+dir
+
+os
+dir
+
+probe
+dir
+
+querymodule
+dir
+
+security
+dir
+
+sensorlistener
+dir
+
+sensors
+dir
+
+uploadmanager
+dir
+
+utility
+dir
+

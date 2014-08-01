@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.5" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="com.contextawareframework.automatescript" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/automatescript" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="306" x="33" y="5"/>    
+    <display autosize="false" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.contextawareframework.automatescript.UploadScheduler" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/automatescript/UploadScheduler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="139" y="141"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="3" language="java" name="com.contextawareframework.backgroundservices" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/backgroundservices" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="517" y="36"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="com.contextawareframework.backgroundservices.LightDataListener" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/backgroundservices/LightDataListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="481" y="178"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.contextawareframework.backgroundservices.GPSTracker" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/backgroundservices/GPSTracker.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="903" y="273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.contextawareframework.backgroundservices.ProximityDataListener" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/backgroundservices/ProximityDataListener.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1244" y="151"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.contextawareframework.backgroundservices.AccelerometerDataListener" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/backgroundservices/AccelerometerDataListener.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1624" y="152"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="8" language="java" name="com.contextawareframework.contextawarefunctions" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/contextawarefunctions" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="184" y="461"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="9" language="java" name="com.contextawareframework.contextawarefunctions.ContextAwareFunction" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/contextawarefunctions/ContextAwareFunction.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="121" y="636"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="10" language="java" name="com.contextawareframework.controller" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="523" y="457"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="11" language="java" name="com.contextawareframework.controller.SensorController1" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/controller/SensorController1.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="551" y="633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="12" language="java" name="com.contextawareframework.dataanalysis" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dataanalysis" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="46" width="288" x="853" y="535"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="13" language="java" name="com.contextawareframework.dataanalysis.LocationDataAnalysis" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dataanalysis/LocationDataAnalysis.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="947" y="664"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.contextawareframework.dataanalysis.AccelerometerDataAnalysis" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dataanalysis/AccelerometerDataAnalysis.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1157" y="637"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="15" language="java" name="com.contextawareframework.security" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/security" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1504" y="424"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="16" language="java" name="com.contextawareframework.security.FileEncryptor" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/security/FileEncryptor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1458" y="517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="17" language="java" name="com.contextawareframework.sensors.environmentsensors" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/sensors/environmentsensors" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1567" y="627"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="18" language="java" name="com.contextawareframework.sensors.environmentsensors.Light" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/sensors/environmentsensors/Light.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1500" y="766"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="19" language="java" name="com.contextawareframework.sensors.positionsensors" 
+    project="ContextAwareFramework" file="/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1956" y="627"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="20" language="java" name="com.contextawareframework.sensors.positionsensors.LocationPojo" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/LocationPojo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1892" y="822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.contextawareframework.sensors.positionsensors.Proximity" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/sensors/positionsensors/Proximity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2127" y="796"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="22" language="java" name="com.contextawareframework.utility" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/utility" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="153" y="855"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="23" language="java" name="com.contextawareframework.utility.StoreDataTxtFile" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/utility/StoreDataTxtFile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="155" y="1022"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="24" language="java" name="com.contextawareframework.uploadmanager" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/uploadmanager" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="508" y="858"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="25" language="java" name="com.contextawareframework.uploadmanager.UploadToServer" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/uploadmanager/UploadToServer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="455" y="999"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="26" language="java" name="com.contextawareframework.exceptions" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1224" y="1015"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="27" language="java" name="com.contextawareframework.exceptions.ProximitySensorException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/ProximitySensorException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="730" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.contextawareframework.exceptions.GPSSensorException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/GPSSensorException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="502" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.contextawareframework.exceptions.WifiConnectivityException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/WifiConnectivityException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1186" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.contextawareframework.exceptions.SDCardException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/SDCardException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="958" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.contextawareframework.exceptions.LightSensorException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/LightSensorException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1677" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.contextawareframework.exceptions.AccelerometerSensorException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/AccelerometerSensorException.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1437" y="1231"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.contextawareframework.exceptions.BluetoothConnectionException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/BluetoothConnectionException.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1917" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.contextawareframework.exceptions.CAFException" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/exceptions/CAFException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1175" y="1087"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="35" language="java" name="com.contextawareframework.dbmanager" project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="168" y="1396"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="36" language="java" name="com.contextawareframework.dbmanager.AccelerometerDbHelper" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager/AccelerometerDbHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="184" y="1530"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.contextawareframework.dbmanager.ProximityDbHelper" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager/ProximityDbHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="499" y="1530"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.contextawareframework.dbmanager.ContextAwareSQLiteHelper" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager/ContextAwareSQLiteHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="642" y="2061"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.contextawareframework.dbmanager.LightDbHelper" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager/LightDbHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1102" y="1530"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.contextawareframework.dbmanager.LocationDbHelper" 
+    project="ContextAwareFramework" 
+    file="/ContextAwareFramework/src/com/contextawareframework/dbmanager/LocationDbHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="812" y="1507"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="43">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="44" name="dbHelper"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="47">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="48" name="gps"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="51">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="52" name="dbHelper"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="55" name="accel"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="58">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="59" name="dbHelper"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="62" name="light"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="66">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="67" name="dbHelper"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="70" name="proximity"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
