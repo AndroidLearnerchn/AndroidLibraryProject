@@ -1,12 +1,5 @@
 /*
  * Copyright (c) 2013 by CDAC Chennai 
- * @File        SensorController
- * @Created:    25.11.2013
- * @author:     Prasenjit
- * Last Change: 26.11.2013 by Prasenjit
- */
-/*
- * Copyright (c) 2013 by CDAC Chennai 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * @File        ContextAwareFunction
+ * @Created:    25.11.2013
+ * @author:     Prasenjit
+ * Last Change: 26.11.2013 by Prasenjit
  */
+
 package com.contextawareframework.contextawarefunctions;
 
 import android.content.Context;
@@ -29,10 +28,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
-/****************************************************************************
+/**
  * This class is the controller part. User can register the sensor listener 
  * and can store data in the database by using this class
- * **************************************************************************/
+ */
 
 public class ContextAwareFunction {
 	Context localContext;
@@ -44,10 +43,10 @@ public class ContextAwareFunction {
 		localContext = contextFromMainApp;
 	}
 
-	/******************************************************************************
+	/**
 	 * Description : Method to increase the volume by getting AudioManager.STREAM_MUSIC
 	 * service of Android 
-	 ******************************************************************************/
+	 */
 	public void volumeIncrease()
 	{
 
@@ -68,10 +67,10 @@ public class ContextAwareFunction {
 		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
 	}
 
-	/******************************************************************************
+	/**
 	 * Description : To decrease the volume by getting AudioManager.STREAM_MUSIC sevice
 	 * of Android. 
-	 ******************************************************************************/
+	 */
 	public void volumeDecrease()
 	{
 
@@ -90,9 +89,9 @@ public class ContextAwareFunction {
 		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
 	}
 	// Function to play / pause / nextSong / prevSong of a music player
-	/******************************************************************************
+	/**
 	 * Description : Method to play Song. It uses ACION_MEDIA_BUTTON intent.
-	 ******************************************************************************/
+	 */
 	public final void playSong()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
@@ -118,9 +117,9 @@ public class ContextAwareFunction {
 			Log.d("PlaySong2","Check");
 		}
 	}
-	/******************************************************************************
+	/**
 	 * Description : Method to pause the song. It uses ACTION_MEDIA_BUTTON intent.
-	 ******************************************************************************/
+	 */
 	public final void pauseSong()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
@@ -135,9 +134,9 @@ public class ContextAwareFunction {
 			Log.d("PauseSong","Check2");
 		}
 	}
-	/******************************************************************************
+	/**
 	 * Description : Play the next Song. It uses ACTION_MEDIA_BUTTON intent.
-	 ******************************************************************************/
+	 */
 	public final void playNextSong()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
@@ -149,9 +148,9 @@ public class ContextAwareFunction {
 			downIntentnext.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
 			localContext.sendOrderedBroadcast(downIntentnext, null);
 		}
-	}/********************************************************************************
+	}/**
 	 * Description : Method to play previous song. It uses ACTION_MEDIA_BUTTON intent.
-	 *********************************************************************************/
+	 */
 	public final void playPrevSong()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
@@ -165,9 +164,9 @@ public class ContextAwareFunction {
 		}
 	}
 	//Another way 
-	/******************************************************************************
+	/**
 	 * Description : Another way to play a song
-	 ******************************************************************************/
+	 */
 	public void play1()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
@@ -177,9 +176,9 @@ public class ContextAwareFunction {
 			localContext.sendBroadcast(mediaIntent);
 		}
 	}
-	/******************************************************************************
+	/**
 	 * Description : Another way to pause the song
-	 ******************************************************************************/
+	 */
 	public void pause1()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
@@ -189,9 +188,9 @@ public class ContextAwareFunction {
 			localContext.sendBroadcast(mediaIntent);
 		}
 	}
-	/******************************************************************************
+	/**
 	 * Description : Another way to play next song
-	 ******************************************************************************/
+	 */
 	public void next1()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
@@ -201,9 +200,9 @@ public class ContextAwareFunction {
 			localContext.sendBroadcast(mediaIntent);
 		}
 	}
-	/******************************************************************************
+	/**
 	 * Description : Another way to play previous song
-	 ******************************************************************************/
+	 */
 	public void previous1()
 	{
 		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
@@ -213,7 +212,7 @@ public class ContextAwareFunction {
 			localContext.sendBroadcast(mediaIntent);
 		}
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion, shake in Left for X axis
 	 */
 	public boolean shakeRight(float xAxis)
@@ -223,7 +222,7 @@ public class ContextAwareFunction {
 		else
 			return false; 
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion, shake in Right for X axis
 	 */
 	public boolean shakeLeft(float xAxis)
@@ -233,7 +232,7 @@ public class ContextAwareFunction {
 		else
 			return false;
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion, detects shake in up for Z axis
 	 */
 	public boolean shakeUp(float zAxis)
@@ -243,7 +242,7 @@ public class ContextAwareFunction {
 		else
 			return false;
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion, detects shake in down for Z axis
 	 */
 	public boolean shakeDown(float zAxis)
@@ -253,7 +252,7 @@ public class ContextAwareFunction {
 		else
 			return false;
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion, detects shake in front for Y axis
 	 */
 	public boolean shakeFront(float yAxis)
@@ -263,7 +262,7 @@ public class ContextAwareFunction {
 		else
 			return false;
 	}
-	/*
+	/**
 	 * Detect Accelerometer Motion,detects shake back for Y axis
 	 */
 	public boolean shakeBack(float yAxis)
@@ -274,21 +273,21 @@ public class ContextAwareFunction {
 			return false;
 	}
 
-	/*
+	/**
 	 * Method to give more flexibility to Developers
 	 */
 	
-	/*
+	/**
 	 * Detect Accelerometer Motion, shake in Left for X axis
 	 */
 		public boolean shakeRight(float xAxis,int range)
 		{	//boolean status = false;
-			if(xAxis < range)
+			if(xAxis < -range)
 				return true;
 			else
 				return false; 
 		}
-		/*
+		/**
 		 * Detect Accelerometer Motion, shake in Right for X axis
 		 */
 		public boolean shakeLeft(float xAxis,int range)
@@ -298,17 +297,17 @@ public class ContextAwareFunction {
 			else
 				return false;
 		}
-		/*
+		/**
 		 * Detect Accelerometer Motion, detects shake in up for Z axis
 		 */
 		public boolean shakeUp(float zAxis,int range)
 		{
-			if(zAxis < range)
+			if(zAxis < -range)
 				return true;
 			else
 				return false;
 		}
-		/*
+		/**
 		 * Detect Accelerometer Motion, detects shake in down for Z axis
 		 */
 		public boolean shakeDown(float zAxis,int range)
@@ -318,17 +317,17 @@ public class ContextAwareFunction {
 			else
 				return false;
 		}
-		/*
+		/**
 		 * Detect Accelerometer Motion, detects shake in front for Y axis
 		 */
 		public boolean shakeFront(float yAxis,int range)
 		{
-			if(yAxis < range)
+			if(yAxis < -range)
 				return true;
 			else
 				return false;
 		}
-		/*
+		/**
 		 * Detect Accelerometer Motion,detects shake back for Y axis
 		 */
 		public boolean shakeBack(float yAxis,int range)
