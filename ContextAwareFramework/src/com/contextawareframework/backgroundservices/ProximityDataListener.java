@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2013 by CDAC Chennai 
- * @File        SensorController
- * @Created:    20.11.2013
- * @author:     Prasenjit
- * Last Change: 24.07.2014 by Prasenjit
- */
 /*
  * Copyright (c) 2013 by CDAC Chennai 
  *
@@ -19,6 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @File        ProximityDataListener
+ * @Created:    20.11.2013
+ * @author:     Prasenjit
+ * Last Change: 24.07.2014 by Prasenjit
  */
 package com.contextawareframework.backgroundservices;
 
@@ -37,16 +35,22 @@ public class ProximityDataListener extends CAFService {
 
 	/* Android SensorManager object to work with sensors.*/
 	private SensorManager mSensorManager;
+
 	/* Local variable to select the type of sensor.*/
 	private Sensor mProximity;
+
 	/* Local variable to store the context of the calling activity.*/
 	private final Context mContext;
+
 	/* Local variable to store the SensorEventListener from the calling / implementing Activity. */
 	private SensorEventListener listener;
+
 	// Use this string constant to debug this class
 	private static final String TAG = "ProximityDataListener";
+
 	/* To enable / disable Log messages. */
 	private static boolean enableDebugging = false;
+
 	/* Class instance variable */
 	private static ProximityDataListener proximityDataListenerInstance;
 
@@ -58,6 +62,7 @@ public class ProximityDataListener extends CAFService {
 	{
 		enableDebugging = value;
 	}
+
 	/**
 	 * Method to get the present value of enableDebugging
 	 * @return boolean
@@ -66,6 +71,7 @@ public class ProximityDataListener extends CAFService {
 	{
 		return enableDebugging;
 	}
+
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context
@@ -74,6 +80,7 @@ public class ProximityDataListener extends CAFService {
 	{
 		mContext = context;
 	}
+
 	/**
 	 * Description : Method to create an instance of ProximityDataListener Class.
 	 * @param context Calling Activity context
