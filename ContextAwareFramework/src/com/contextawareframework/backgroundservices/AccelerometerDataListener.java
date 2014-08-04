@@ -31,6 +31,7 @@ import android.widget.Toast;
  * 				 the package name inside service tag of your Android manifest file
  * */
 
+
 public class AccelerometerDataListener extends CAFService {
 	/** Android SensorManager object to work with sensors. This variable is not 
 	 * exposed to user.
