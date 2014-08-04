@@ -1,12 +1,5 @@
 /*
  * Copyright (c) 2013 by CDAC Chennai 
- * @File        SensorController
- * @Created:    19.11.2013
- * @author:     Prasenjit
- * Last Change: 20.11.2013 by Prasenjit
- */
-/*
- * Copyright (c) 2013 by CDAC Chennai 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @File        SensorController1
+ * @Created:    19.11.2013
+ * @author:     Prasenjit
+ * Last Change: 20.11.2013 by Prasenjit
  */
+ 
 package com.contextawareframework.controller;
 
 import android.content.Context;
@@ -45,12 +44,12 @@ import com.contextawareframework.exceptions.ProximitySensorException;
 import com.contextawareframework.globalvariable.GlobalVariable;
 
 
-/****************************************************************************
+/**
  * This class is the controller part. User can register / unregister the sensor 
  * listener using the specific methods. To use this class, create an object of
  * the class, pass the localcontext, assign the specific sensor global variable 
  * true, call the method written here
- * **************************************************************************/
+ */
 public class SensorController1 {
 
 	public Context SensorControllerclasscontext;
@@ -64,13 +63,13 @@ public class SensorController1 {
 	{
 		SensorControllerclasscontext = context;
 	}
-	/************************************************************************************
+	/**
 	 * To register the Accelerometer Service 
-	 * *************************************************************************************/
+	 */
 	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException // 1st Sensor
 	{
 		accelListener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_ACCELEROMETER == true)
+		if(GlobalVariable.isSENSOR_ACCELEROMETER())
 		{
 			// Create an object of specific service class to  
 			accel = AccelerometerDataListener.getInstance(SensorControllerclasscontext);
@@ -90,13 +89,13 @@ public class SensorController1 {
 
 		}
 	}
-	/*************************************************************************************
+	/**
 	 * To register the Proximity Service
-	 * *************************************************************************************/
+	 */
 	public final void registerProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
 	{
 		proximityListener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_PROXIMITY == true)
+		if(GlobalVariable.isSENSOR_PROXIMITY())
 		{
 			// Create an object of specific service class to  
 			proximity = ProximityDataListener.getInstance(SensorControllerclasscontext);
@@ -117,13 +116,13 @@ public class SensorController1 {
 		}
 	}
 
-	/*************************************************************************************
+	/**
 	 * To register the Light Service
-	 * *************************************************************************************/
+	 */
 	public final void registerLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
 	{	
 		lightListener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_LIGHT == true)
+		if(GlobalVariable.isSENSOR_LIGHT())
 		{
 			// Create an object of specific service class to  
 			light = LightDataListener.getInstance(SensorControllerclasscontext);
@@ -145,48 +144,48 @@ public class SensorController1 {
 		}
 	}
 
-	/*************************************************************************************
+	/**
 	 * To un-register the Accelerometer 
-	 * *************************************************************************************/
+	 */
 	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
 	{
 		//sensorManager.unregisterListener(lightSensorEventListener); // Change the Listener
 		accel.disableAccelerometerListener(listenerfromMainApp);
-		GlobalVariable.SENSOR_ACCELEROMETER = false;
+		GlobalVariable.setSENSOR_ACCELEROMETER(false);
 		Log.d("Debug","Unregister Accelerometer Sensor");
 	}
-	/*************************************************************************************
+	/**
 	 * To un-register the Proximity Service
-	 * *************************************************************************************/
+	 */
 	public final void unregisterProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
 	{
 		proximity.disableProximitySensor(listenerfromMainApp);
-		GlobalVariable.SENSOR_PROXIMITY =  false;
+		GlobalVariable.setSENSOR_PROXIMITY(false);
 		Log.d("Debug","Unregister Proximity Sensor");
 	}
-	/*************************************************************************************
+	/**
 	 * To un-register the Light sensor Service
-	 * *************************************************************************************/
+	 */
 	public final void unregisterLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
 	{
 		light.disableLightSensor(listenerfromMainApp);
-		GlobalVariable.SENSOR_LIGHT = false;
+		GlobalVariable.setSENSOR_LIGHT(false);
 		Log.d("Debug","Unregister Light Sensor");
 	}
-	/*************************************************************************************
+	/**
 	 * To un-register the Battery Service
-	 * *************************************************************************************/
+	 */
 	public final void unregisterBatteryService() 
 	{
 		
 	}
-	/*************************************************************************************
+	/**
 	 * To un-register the Location Service
-	 * *************************************************************************************/
+	 */
 	public final void unregisterLocationService() throws GPSSensorException
 	{
 		//gps.stopUsingGPS(); // Change the Listener 
-		GlobalVariable.SENSOR_LOCATION = false;
+		GlobalVariable.setSENSOR_LOCATION(false);
 		
 		Log.d("Debug","Unregister Location Service");
 	}
