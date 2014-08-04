@@ -1,10 +1,24 @@
-/*****************************************************************
+/*
  * Copyright (c) 2013 by CDAC Chennai 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  * @File        SensorController
  * @Created:    25.11.2013
  * @author:     Prasenjit
  * Last Change: 26.11.2013 by Prasenjit
- ******************************************************************/
+ */
+
 package com.contextawareframework.controller;
 
 import com.contextawareframework.globalvariable.GlobalVariable;
@@ -15,9 +29,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.Toast;
-/****************************************************************************
+/**
  * This class is the controller part. User can register the sensor listener. 
- ****************************************************************************/
+ */
 
 public class SensorController {
 	public Context SensorControllerclasscontext;
@@ -31,14 +45,14 @@ public class SensorController {
 	{
 		SensorControllerclasscontext = context;
 	}
-	/*
+	/**
 	 * Method to register the Proximity Sensor listener. Listener will be implemented on
 	 * Main Application level. For storing the data aslo user will mention in the listener
-	 * */
+	 */
 	public final void registerProximityService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_PROXIMITY == true)
+		if(GlobalVariable.isSENSOR_PROXIMITY())
 		{
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
 	        Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -69,14 +83,14 @@ public class SensorController {
 		}
 	}
 
-	/*
+	/**
 	 * Method to register the Proximity Sensor listener. Listener will be implemented on
 	 * Main Application level. For storing the data aslo user will mention in the listener
-	 * */
+	 */
 	public final void registerLightService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_LIGHT == true)
+		if(GlobalVariable.isSENSOR_LIGHT())
 		{
 			
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
@@ -108,14 +122,14 @@ public class SensorController {
 			
 		}
 	}
-	/*
+	/**
 	 * Method to register the Proximity Sensor listener. Listener will be implemented on
 	 * Main Application level. For storing the data aslo user will mention in the listener
-	 * */
+	 */
 	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.SENSOR_ACCELEROMETER == true)
+		if(GlobalVariable.isSENSOR_ACCELEROMETER())
 		{
 			
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
@@ -156,7 +170,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.SENSOR_LIGHT = false;
+		GlobalVariable.setSENSOR_LIGHT(false);
 		
 	}
 	/*
@@ -166,7 +180,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.SENSOR_PROXIMITY = false;
+		GlobalVariable.setSENSOR_PROXIMITY(false);
 		
 	}
 	/*
@@ -176,7 +190,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.SENSOR_LOCATION = false;
+		GlobalVariable.setSENSOR_LOCATION(false);
 		
 	}
 	/*
@@ -186,7 +200,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.SENSOR_ACCELEROMETER = false;
+		GlobalVariable.setSENSOR_ACCELEROMETER(false);
 		
 	}
 	

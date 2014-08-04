@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 by CDAC Chennai 
+ *  
  * @File        SensorController
  * @Created:    19.11.2013
  * @author:     Prasenjit
@@ -8,7 +8,7 @@
  * This is the default file down-loaded from developers.android.com
  * */
 /*
- * Copyright (c) 2013 by CDAC Chennai 
+ * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

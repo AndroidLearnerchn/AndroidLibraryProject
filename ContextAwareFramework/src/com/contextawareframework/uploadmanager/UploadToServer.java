@@ -1,10 +1,22 @@
-/*****************************************************************
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  * Copyright (c) 2013 by CDAC Chennai 
- * @File        SensorController
+ * @File        UploadToServer
  * @Created:    01.01.2014
  * @author:     Prasenjit
  * Last Change: 13.01.2014 by Prasenjit
- ******************************************************************/
+ */
 package com.contextawareframework.uploadmanager;
 
 import java.io.DataOutputStream;
@@ -23,10 +35,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-/****************************************************************************
+/**
  * File can be uploaded to external server using this class. User has to 
  * provide the file path which he / she wants to send to the external server 
- * **************************************************************************/
+ */
 public class UploadToServer {
     
     TextView messageText;
