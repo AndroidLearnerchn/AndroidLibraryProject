@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2013 by CDAC Chennai 
- * @File        LightDataListener
- * @Created:    20.11.2013
- * @author:     Prasenjit
- * Last Changed: 24.07.2014 by Prasenjit
- * */
 /*
  * Copyright (c) 2013 by CDAC Chennai 
  *
@@ -19,6 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *  
+ * @File         LightDataListener
+ * @Created:     20.11.2013
+ * @author:      Prasenjit
+ * Last Changed: 24.07.2014 by Prasenjit
  */
 package com.contextawareframework.backgroundservices;
 
@@ -35,21 +33,28 @@ import android.widget.Toast;
  * 				 package name inside service tag of your Android manifest file
  * */
 public class LightDataListener  extends CAFService{
-	
+
 	/* Android SensorManager object to work with sensors.*/
 	private SensorManager mSensorManager;
+
 	/* Local variable to select the type of sensor.*/
 	private Sensor mLight;
+
 	/* Local variable to store the context of the calling activity.*/
 	private final Context mContext;
+
 	/* Local variable to store the SensorEventListener from the calling / implementing Activity. */
 	private SensorEventListener listener;
+
 	/* Tag for debugging the class */
-    private static final String TAG = "LightDataListener";
-    /* To enable / disable Log messages. */
+	private static final String TAG = "LightDataListener";
+
+	/* To enable / disable Log messages. */
 	private static boolean enableDebugging = false;
-    /* Class instance variable */
+
+	/* Class instance variable */
 	private static LightDataListener lightDataListenerInstance;
+
 	/**
 	 * Method to enable debugging
 	 * @param boolean
@@ -58,6 +63,7 @@ public class LightDataListener  extends CAFService{
 	{
 		enableDebugging = value;
 	}
+
 	/**
 	 * Method to get the present value of enableDebugging
 	 * @return boolean
@@ -66,6 +72,7 @@ public class LightDataListener  extends CAFService{
 	{
 		return enableDebugging;
 	}
+
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context
@@ -74,6 +81,7 @@ public class LightDataListener  extends CAFService{
 	{
 		mContext = context;
 	}
+
 	/**
 	 * Description : Method to create an instance of AccelerometerDataListener Class.
 	 * @param context Calling Activity context
@@ -86,50 +94,52 @@ public class LightDataListener  extends CAFService{
 
 		return lightDataListenerInstance;
 	}
-    /**
+
+	/**
 	 * Method to enable Light Sensor in Android
 	 * */
 	public void enableLightSensor(SensorEventListener listenerFromActivity)
-    {
+	{
 		listener = listenerFromActivity;
 		if(enableDebugging)
 			Log.d(TAG,"enableLightSensor method");
-    	mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-    	if(mSensorManager == null)
-    	{
-    		if(enableDebugging)
-    		{
-    			Log.d(TAG,"Light Sensor not found");
-    			Toast.makeText(this,"No Light Sensor found! quit-",Toast.LENGTH_SHORT).show();
-    		}
-    	}
-    	else
-    	{
-    		if(enableDebugging)
-    		{
-    			Log.d(TAG,"Light Sensor Found");
-    			Toast.makeText(mContext,"Light Sensor found",Toast.LENGTH_LONG).show();
-    		}
-    	try{
-        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        mSensorManager.registerListener(listener, mLight , SensorManager.SENSOR_DELAY_NORMAL);
-    	}
-    	catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
-    	}
-    }
+		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+		if(mSensorManager == null)
+		{
+			if(enableDebugging)
+			{
+				Log.d(TAG,"Light Sensor not found");
+				Toast.makeText(this,"No Light Sensor found! quit-",Toast.LENGTH_SHORT).show();
+			}
+		}
+		else
+		{
+			if(enableDebugging)
+			{
+				Log.d(TAG,"Light Sensor Found");
+				Toast.makeText(mContext,"Light Sensor found",Toast.LENGTH_LONG).show();
+			}
+			try{
+				mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+				mSensorManager.registerListener(listener, mLight , SensorManager.SENSOR_DELAY_NORMAL);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
 	/**
 	 * Method to disable Light Sensor in Android
 	 * @param listenerFromActivity 
 	 * */
-    public void disableLightSensor(SensorEventListener listenerFromActivity)
-    {
-    	if(mSensorManager != null)
-    	{
-    	   	mSensorManager.unregisterListener(listenerFromActivity);
-    	}
-    }
+	public void disableLightSensor(SensorEventListener listenerFromActivity)
+	{
+		if(mSensorManager != null)
+		{
+			mSensorManager.unregisterListener(listenerFromActivity);
+		}
+	}
 
 }
