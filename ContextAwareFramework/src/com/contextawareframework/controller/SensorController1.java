@@ -22,22 +22,15 @@
 package com.contextawareframework.controller;
 
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-import android.widget.Toast;
-
 
 import com.contextawareframework.backgroundservices.AccelerometerDataListener;
 import com.contextawareframework.backgroundservices.GPSTracker;
 import com.contextawareframework.backgroundservices.LightDataListener;
 import com.contextawareframework.backgroundservices.ProximityDataListener;
-
-
 import com.contextawareframework.exceptions.AccelerometerSensorException;
-
 import com.contextawareframework.exceptions.GPSSensorException;
 import com.contextawareframework.exceptions.LightSensorException;
 import com.contextawareframework.exceptions.ProximitySensorException;
@@ -59,6 +52,7 @@ public class SensorController1 {
 	private ProximityDataListener proximity;
 	private LightDataListener light;
 	private SensorEventListener accelListener, proximityListener, lightListener;
+	private static final String TAG = "SENSORCONTROLLER1";
 	public SensorController1(Context context)
 	{
 		SensorControllerclasscontext = context;
@@ -69,12 +63,15 @@ public class SensorController1 {
 	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException // 1st Sensor
 	{
 		accelListener = listenerfromMainApp;
+		
+		// Create an object of specific service class to  
+		accel = AccelerometerDataListener.getInstance(SensorControllerclasscontext);
+		
 		if(GlobalVariable.isSENSOR_ACCELEROMETER())
 		{
-			// Create an object of specific service class to  
-			accel = AccelerometerDataListener.getInstance(SensorControllerclasscontext);
-			try{
-				Log.d("Debug","inside registerAccelerometerListner");
+			try
+			{
+				Log.d(TAG,"inside registerAccelerometerListner");
 				accel.enableAccelerometerListener(accelListener, SensorManager.SENSOR_DELAY_NORMAL);
 			}
 			catch(Exception e)
@@ -85,6 +82,7 @@ public class SensorController1 {
 		else
 		{
 			//Else part
+			Log.d(TAG,"SENSOR_ACCELEROMETER is false");
 			accel.disableAccelerometerListener(accelListener);
 
 		}
@@ -95,12 +93,14 @@ public class SensorController1 {
 	public final void registerProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
 	{
 		proximityListener = listenerfromMainApp;
+		
+		// Create an object of specific service class to  
+		proximity = ProximityDataListener.getInstance(SensorControllerclasscontext);
+		
 		if(GlobalVariable.isSENSOR_PROXIMITY())
-		{
-			// Create an object of specific service class to  
-			proximity = ProximityDataListener.getInstance(SensorControllerclasscontext);
+		{						
 			try{
-				Log.d("Debug","inside registerProximityListener");
+				Log.d(TAG,"inside registerProximityListener");
 				proximity.enableProximitySensor(proximityListener);
 			}
 			catch(Exception e)
@@ -111,7 +111,7 @@ public class SensorController1 {
 		else
 		{
 			//Else part
-			Log.d("Debug","Sensor may not be available");
+			Log.d(TAG,"SENSOR_PROXIMITY is false");
 			proximity.disableProximitySensor(proximityListener);
 		}
 	}
@@ -122,13 +122,15 @@ public class SensorController1 {
 	public final void registerLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
 	{	
 		lightListener = listenerfromMainApp;
+		// Create an object of specific service class to  
+		light = LightDataListener.getInstance(SensorControllerclasscontext);
 		if(GlobalVariable.isSENSOR_LIGHT())
 		{
-			// Create an object of specific service class to  
-			light = LightDataListener.getInstance(SensorControllerclasscontext);
+			
 			try{
-				Log.d("Debug","inside registerProximityListener");
-				light.enableLightSensor(lightListener);
+				Log.d(TAG,"inside registerProximityListener");
+				if(lightListener!=null)
+					light.enableLightSensor(lightListener);
 			}
 			catch(Exception e)
 			{
@@ -138,7 +140,7 @@ public class SensorController1 {
 		else
 		{
 			//Else part
-			Log.d("Debug","Sensor may not be available");
+			Log.d(TAG,"SENSOR_LIGHT is false");
 			light.disableLightSensor(lightListener);
 
 		}
@@ -150,27 +152,49 @@ public class SensorController1 {
 	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
 	{
 		//sensorManager.unregisterListener(lightSensorEventListener); // Change the Listener
-		accel.disableAccelerometerListener(listenerfromMainApp);
-		GlobalVariable.setSENSOR_ACCELEROMETER(false);
-		Log.d("Debug","Unregister Accelerometer Sensor");
+		if(listenerfromMainApp!=null)
+		{
+			accel.disableAccelerometerListener(listenerfromMainApp);
+			GlobalVariable.setSENSOR_ACCELEROMETER(false);
+			Log.d(TAG,"Unregister Accelerometer Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+		
 	}
 	/**
 	 * To un-register the Proximity Service
 	 */
 	public final void unregisterProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
 	{
-		proximity.disableProximitySensor(listenerfromMainApp);
-		GlobalVariable.setSENSOR_PROXIMITY(false);
-		Log.d("Debug","Unregister Proximity Sensor");
+		if(listenerfromMainApp!=null)
+		{
+			proximity.disableProximitySensor(listenerfromMainApp);
+			GlobalVariable.setSENSOR_PROXIMITY(false);
+			Log.d(TAG,"Unregister Proximity Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
 	}
 	/**
 	 * To un-register the Light sensor Service
 	 */
 	public final void unregisterLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
 	{
-		light.disableLightSensor(listenerfromMainApp);
-		GlobalVariable.setSENSOR_LIGHT(false);
-		Log.d("Debug","Unregister Light Sensor");
+		if(listenerfromMainApp!=null)
+		{
+			light.disableLightSensor(listenerfromMainApp);
+			GlobalVariable.setSENSOR_LIGHT(false);
+			Log.d(TAG,"Unregister Light Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
 	}
 	/**
 	 * To un-register the Battery Service
@@ -185,8 +209,9 @@ public class SensorController1 {
 	public final void unregisterLocationService() throws GPSSensorException
 	{
 		//gps.stopUsingGPS(); // Change the Listener 
+		
 		GlobalVariable.setSENSOR_LOCATION(false);
 		
-		Log.d("Debug","Unregister Location Service");
+		Log.d(TAG,"Unregister Location Service");
 	}
 }
