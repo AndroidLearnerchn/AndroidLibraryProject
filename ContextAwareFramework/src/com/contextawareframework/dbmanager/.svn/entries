@@ -1,7 +1,7 @@
 10
 
 dir
-35
+38
 http://10.184.0.69/ANDROID/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/dbmanager
 http://10.184.0.69/ANDROID
 
@@ -35,14 +35,14 @@ c5c3cdc6-d890-4b1c-b83d-d7e3fad01292
 
 AccelerometerDbHelper.java
 file
+43
 
 
 
-
-2014-05-26T07:03:14.000000Z
-646582e858db19d11e9a14445728d258
-2014-06-04T11:49:50.949581Z
-18
+2014-08-06T11:59:03.000000Z
+ccf10874c5255967440c57f9c68fed44
+2014-08-06T12:33:18.353579Z
+43
 prasenjit
 
 
@@ -65,7 +65,7 @@ prasenjit
 
 
 
-4901
+4003
 
 BatteryDbHelper.java
 file
@@ -103,14 +103,14 @@ prasenjit
 
 ContextAwareSQLiteHelper.java
 file
+43
 
 
 
-
-2014-05-26T07:03:14.000000Z
-309ac2cc3941b8e64dd3a017c56a1220
-2014-06-04T11:49:50.949581Z
-18
+2014-08-04T11:55:03.000000Z
+b397b4125090241f118d176c3190ee26
+2014-08-06T12:33:18.353579Z
+43
 prasenjit
 
 
@@ -133,18 +133,18 @@ prasenjit
 
 
 
-8137
+11498
 
 LightDbHelper.java
 file
+43
 
 
 
-
-2014-05-26T07:03:14.000000Z
-8f54092429e379b540e0ba754bed5c9c
-2014-06-04T11:49:50.949581Z
-18
+2014-08-06T09:41:20.000000Z
+02a707b98eb12828f9c159780a63bbdc
+2014-08-06T12:33:18.353579Z
+43
 prasenjit
 
 
@@ -167,7 +167,7 @@ prasenjit
 
 
 
-4563
+3646
 
 LocationDbHelper.java
 file
@@ -239,14 +239,14 @@ prasenjit
 
 ProximityDbHelper.java
 file
+43
 
 
 
-
-2014-05-26T07:03:14.000000Z
-271b0019a0f2bb9e3f12b4692e92c120
-2014-06-04T11:49:50.949581Z
-18
+2014-08-06T09:33:07.000000Z
+029e02385cecf4c5615c4c08277a50e4
+2014-08-06T12:33:18.353579Z
+43
 prasenjit
 
 
@@ -269,5 +269,39 @@ prasenjit
 
 
 
-4665
+3938
+
+UserInfoDbHelper.java
+file
+44
+
+
+
+2014-06-09T04:53:17.000000Z
+01cf211a78755a4ed2a920c492fc6ba1
+2014-08-06T12:33:48.122172Z
+44
+prasenjit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5100
 

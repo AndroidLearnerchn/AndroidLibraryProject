@@ -1,4 +1,6 @@
-/*
+/* 
+ * Copyright (c) 2013 by CDAC Chennai 
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,7 +32,6 @@ import android.widget.Toast;
  * Description : To register / un-register Accelerometer Sensor. To make it as service mention
  * 				 the package name inside service tag of your Android manifest file
  * */
-
 
 public class AccelerometerDataListener extends CAFService {
 	/** Android SensorManager object to work with sensors. This variable is not 

@@ -1,7 +1,7 @@
 10
 
 dir
-35
+38
 http://10.184.0.69/ANDROID/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/globalvariable
 http://10.184.0.69/ANDROID
 
@@ -35,14 +35,14 @@ c5c3cdc6-d890-4b1c-b83d-d7e3fad01292
 
 GlobalVariable.java
 file
+45
 
 
 
-
-2014-05-26T07:03:04.000000Z
-0059d94b3a645c196ef5df2619fc205c
-2014-06-04T11:49:50.949581Z
-18
+2014-08-05T11:45:32.000000Z
+730494f4032b5fb517704e7a50804217
+2014-08-06T12:34:14.623868Z
+45
 prasenjit
 
 
@@ -65,5 +65,5 @@ prasenjit
 
 
 
-1071
+4870
 

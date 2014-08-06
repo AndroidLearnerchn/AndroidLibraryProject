@@ -1,10 +1,23 @@
-/**
- * Copyright (c) 2014 by CDAC Chennai 
+/* 
+ * Copyright (c) 2013 by CDAC Chennai 
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  * @File        AccelerometerDataListener
  * @Created:    20.11.2013
  * @author:     Prasenjit
  * Last Change: 24.07.2014 by Prasenjit
- * */
+ */
 
 package com.contextawareframework.backgroundservices;
 
@@ -21,7 +34,7 @@ import android.widget.Toast;
  * */
 
 public class AccelerometerDataListener extends CAFService {
-	/* Android SensorManager object to work with sensors. This variable is not 
+	/** Android SensorManager object to work with sensors. This variable is not 
 	 * exposed to user.
 	 * */
 	private SensorManager mSensorManager;
@@ -53,15 +66,6 @@ public class AccelerometerDataListener extends CAFService {
 	{
 		return enableDebugging;
 	}
-	/**
-	 * Default Constructor
-	 */
-
-	/*public AccelerometerDataListener(Context context) 
-    {
-		this.mContext = context;
-   	}*/
-
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context

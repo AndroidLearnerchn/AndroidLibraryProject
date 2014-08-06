@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 138
-/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices
+/ANDROID/!svn/ver/38/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices
 END
 BatteryDataService.java
 K 25
@@ -19,13 +19,13 @@ AccelerometerDataListener.java
 K 25
 svn:wc:ra_dav:version-url
 V 169
-/ANDROID/!svn/ver/30/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/AccelerometerDataListener.java
+/ANDROID/!svn/ver/41/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/AccelerometerDataListener.java
 END
 ProximityDataListener.java
 K 25
 svn:wc:ra_dav:version-url
 V 165
-/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/ProximityDataListener.java
+/ANDROID/!svn/ver/41/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/ProximityDataListener.java
 END
 SoundRecorder.java
 K 25
@@ -37,7 +37,7 @@ CAFService.java
 K 25
 svn:wc:ra_dav:version-url
 V 154
-/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/CAFService.java
+/ANDROID/!svn/ver/41/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/CAFService.java
 END
 CopyOfGPSTracker.java
 K 25
@@ -45,11 +45,17 @@ svn:wc:ra_dav:version-url
 V 160
 /ANDROID/!svn/ver/18/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/CopyOfGPSTracker.java
 END
+Text2Speech.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/ANDROID/!svn/ver/39/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/Text2Speech.java
+END
 LightDataListener.java
 K 25
 svn:wc:ra_dav:version-url
 V 161
-/ANDROID/!svn/ver/31/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/LightDataListener.java
+/ANDROID/!svn/ver/41/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices/LightDataListener.java
 END
 GPSTracker1.java
 K 25

@@ -1,14 +1,14 @@
 10
 
 dir
-35
+38
 http://10.184.0.69/ANDROID/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os
 http://10.184.0.69/ANDROID
 
 
 
-2014-07-31T07:06:42.188820Z
-35
+2014-08-04T10:27:50.965307Z
+36
 prasenjit
 
 
@@ -33,7 +33,7 @@ c5c3cdc6-d890-4b1c-b83d-d7e3fad01292
 
 0
 
-((conflict PowerMngr.java file update deleted deleted (version http://10.184.0.69/ANDROID 2 35 116 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/PowerMngr.java 0 ) (version http://10.184.0.69/ANDROID 2 34 116 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/PowerMngr.java none)))
+((conflict CAFPowerManager.java file update added added (version http://10.184.0.69/ANDROID 2 35 122 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/CAFPowerManager.java none) (version http://10.184.0.69/ANDROID 2 38 122 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/CAFPowerManager.java file)) (conflict PowerMngr.java file update deleted deleted (version http://10.184.0.69/ANDROID 2 35 116 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/PowerMngr.java 0 ) (version http://10.184.0.69/ANDROID 2 34 116 ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/os/PowerMngr.java none)))
 
 Battery.java
 file
@@ -71,7 +71,7 @@ prasenjit
 
 CAFPowerManager.java
 file
-
+35
 
 
 add

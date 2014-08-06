@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
-		/*controller = new SensorController1(this);
+		controller = new SensorController1(this);
 		try
 		{
 			
@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		try{
-			GlobalVariable.SENSOR_ACCELEROMETER = true;
+			GlobalVariable.setSENSOR_ACCELEROMETER(true);
 			controller.registerAccelerometerService(accelSensorListener);
 			controller.registerAccelerometerService(accelSensorListener1);
 			
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
 		catch(AccelerometerSensorException e)
 		{
 			e.printStackTrace();
-		}*/
+		}
 		
 		}	
 	@Override
@@ -99,21 +99,21 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		Log.d(TAG,"onDestroy");
 		
-//		try{
-//			controller.unregisterAccelerometerService(accelSensorListener);
-//			controller.unregisterAccelerometerService(accelSensorListener1);
-//		}
-//		catch(AccelerometerSensorException e)
-//		{
-//			e.printStackTrace();
-//		}
+		try{
+			controller.unregisterAccelerometerService(accelSensorListener);
+			controller.unregisterAccelerometerService(accelSensorListener1);
+		}
+		catch(AccelerometerSensorException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	public void startSecondActivity(View v)
 	{
 		try{
 			Intent intent = new Intent(this,SecondActivity.class);
 			startActivity(intent);
-		//	controller.unregisterAccelerometerService(accelSensorListener1);
+			//controller.unregisterAccelerometerService(accelSensorListener1);
 		}
 		catch(Exception e)
 		{

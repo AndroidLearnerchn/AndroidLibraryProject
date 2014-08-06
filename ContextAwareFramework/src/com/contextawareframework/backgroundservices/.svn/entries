@@ -1,14 +1,14 @@
 10
 
 dir
-35
+38
 http://10.184.0.69/ANDROID/ContextAwareLibrary/Head/ContextAwareFramework/ContextAwareFramework/src/com/contextawareframework/backgroundservices
 http://10.184.0.69/ANDROID
 
 
 
-2014-07-24T11:48:15.725015Z
-31
+2014-08-05T12:22:06.917346Z
+38
 prasenjit
 
 
@@ -35,14 +35,14 @@ c5c3cdc6-d890-4b1c-b83d-d7e3fad01292
 
 AccelerometerDataListener.java
 file
+41
 
 
 
-
-2014-07-24T09:29:10.000000Z
-7e09df14c7a0675a870b5b4762191afa
-2014-07-24T11:41:42.962236Z
-30
+2014-08-05T09:15:29.000000Z
+585a30baa41402bd5662d0882fc0f887
+2014-08-06T12:32:33.019709Z
+41
 prasenjit
 
 
@@ -65,7 +65,7 @@ prasenjit
 
 
 
-3939
+4370
 
 BatteryDataService.java
 file
@@ -137,14 +137,14 @@ has-props
 
 CAFService.java
 file
+41
 
 
 
-
-2014-07-24T06:42:18.000000Z
-34f8b66ad3114b7759bbe5caa7ef678b
-2014-07-24T11:48:15.725015Z
-31
+2014-08-04T12:08:09.000000Z
+57a46fd6652de8d1e9b3f1d20ebe50af
+2014-08-06T12:32:33.019709Z
+41
 prasenjit
 
 
@@ -167,7 +167,7 @@ prasenjit
 
 
 
-2039
+2631
 
 CopyOfGPSTracker.java
 file
@@ -273,14 +273,14 @@ prasenjit
 
 LightDataListener.java
 file
+41
 
 
 
-
-2014-07-24T11:06:20.000000Z
-f28b5d0d152518f833bce73cb6c8d523
-2014-07-24T11:48:15.725015Z
-31
+2014-08-04T12:08:18.000000Z
+d315d992eabe8b1b2e2a67e0ab2ead13
+2014-08-06T12:32:33.019709Z
+41
 prasenjit
 
 
@@ -303,18 +303,18 @@ prasenjit
 
 
 
-3530
+3992
 
 ProximityDataListener.java
 file
+41
 
 
 
-
-2014-07-24T11:05:56.000000Z
-e5535d0f6d94f4f68ce1850e6bd9a4be
-2014-07-24T11:48:15.725015Z
-31
+2014-08-04T12:08:31.000000Z
+309d13961db601a8edebc00266e4ccd1
+2014-08-06T12:32:33.019709Z
+41
 prasenjit
 
 
@@ -337,7 +337,7 @@ prasenjit
 
 
 
-3607
+4183
 
 SoundRecorder.java
 file
@@ -372,4 +372,16 @@ prasenjit
 
 
 3891
+
+Text2Speech.java
+file
+39
+
+
+
+
+e9683b4ef3c0b909e719f2512dbf7543
+2014-08-06T07:23:09.069582Z
+39
+prasenjit
 
