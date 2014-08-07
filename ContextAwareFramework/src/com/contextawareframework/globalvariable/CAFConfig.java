@@ -29,14 +29,20 @@ package com.contextawareframework.globalvariable;
  */
 public class CAFConfig {
 	
+	// Boolean variable to enable / disable available sensors 
 	
 	private static  boolean sensorAccelerometer = false;
+	
 	private static  boolean SensorProximity = false;
 	private static  boolean sensorLight = false;
 	private static  boolean sensorLocation = false;
-	private static  boolean sensorBattery = false;
+	private static  boolean batteryStatus = false;
+	
+	// Presently not in use.
 	private static 	boolean sensorAccelerometerHighpass = false;
 	private static 	boolean sensorAccelerometerLowpass = false;
+	
+	// Boolean Variables to enable table creation in the database
 	private static 	boolean tableAccelerometer = false;
 	private static 	boolean tableProximity = false;
 	private static 	boolean tableLocation = false;
@@ -46,24 +52,28 @@ public class CAFConfig {
 	private static  boolean enableDebugging = false;
 	
 	/**
+	 * Method to get sensorAccelerometer boolean value
 	 * @return the sensorAccelerometer
 	 */
 	public static final boolean isSensorAccelerometer() {
 		return sensorAccelerometer;
 	}
 	/**
+	 * Method to set sensorAccelerometer boolean value
 	 * @param sensorAccelerometer the sensorAccelerometer to set
 	 */
 	public static final void setSensorAccelerometer(boolean sensorAccelerometer) {
 		CAFConfig.sensorAccelerometer = sensorAccelerometer;
 	}
 	/**
+	 * Method to get sensorProximity boolean value
 	 * @return the sensorProximity
 	 */
 	public static final boolean isSensorProximity() {
 		return SensorProximity;
 	}
 	/**
+	 * Method to set sensorProximity boolean value
 	 * @param sensorProximity the sensorProximity to set
 	 */
 	public static final void setSensorProximity(boolean sensorProximity) {
@@ -76,34 +86,39 @@ public class CAFConfig {
 		return sensorLight;
 	}
 	/**
+	 * Method to set sensorLight boolean value
 	 * @param sensorLight the sensorLight to set
 	 */
 	public static final void setSensorLight(boolean sensorLight) {
 		CAFConfig.sensorLight = sensorLight;
 	}
 	/**
+	 * Method to get sensorLight boolean value
 	 * @return the sensorLocation
 	 */
 	public static final boolean isSensorLocation() {
 		return sensorLocation;
 	}
 	/**
+	 * Method to set sensorLocation boolean value
 	 * @param sensorLocation the sensorLocation to set
 	 */
 	public static final void setSensorLocation(boolean sensorLocation) {
 		CAFConfig.sensorLocation = sensorLocation;
 	}
 	/**
-	 * @return the sensorBattery
+	 * Method to get batteryStatus boolean value
+	 * @return the batteryStatus
 	 */
-	public static final boolean isSensorBattery() {
-		return sensorBattery;
+	public static final boolean isBatteryStatus() {
+		return batteryStatus;
 	}
 	/**
-	 * @param sensorBattery the sensorBattery to set
+	 * Method to set batteryStatus boolean value
+	 * @param sensorBattery the batteryStatus to set
 	 */
-	public static final void setSensorBattery(boolean sensorBattery) {
-		CAFConfig.sensorBattery = sensorBattery;
+	public static final void setBatteryStatus(boolean batteryStatus) {
+		CAFConfig.batteryStatus = batteryStatus;
 	}
 	/**
 	 * @return the sensorAccelerometerHighpass
@@ -119,12 +134,14 @@ public class CAFConfig {
 		CAFConfig.sensorAccelerometerHighpass = sensorAccelerometerHighpass;
 	}
 	/**
+	 * Method to get sensorAccelerometerLowpass boolean value
 	 * @return the sensorAccelerometerLowpass
 	 */
 	public static final boolean isSensorAccelerometerLowpass() {
 		return sensorAccelerometerLowpass;
 	}
 	/**
+	 * Method to set sensorAccelerometerLowpass boolean value
 	 * @param sensorAccelerometerLowpass the sensorAccelerometerLowpass to set
 	 */
 	public static final void setSensorAccelerometerLowpass(
@@ -132,84 +149,102 @@ public class CAFConfig {
 		CAFConfig.sensorAccelerometerLowpass = sensorAccelerometerLowpass;
 	}
 	/**
+	 * Method to get tableAccelerometer boolean value
 	 * @return the tableAccelerometer
 	 */
 	public static final boolean isTableAccelerometer() {
 		return tableAccelerometer;
 	}
 	/**
+	 * Method to set tableAccelerometer boolean value
 	 * @param tableAccelerometer the tableAccelerometer to set
 	 */
 	public static final void setTableAccelerometer(boolean tableAccelerometer) {
 		CAFConfig.tableAccelerometer = tableAccelerometer;
 	}
 	/**
+	 * Method to get tableProximity boolean value
 	 * @return the tableProximity
 	 */
 	public static final boolean isTableProximity() {
 		return tableProximity;
 	}
 	/**
+	 * Method to set tableProximity boolean value
 	 * @param tableProximity the tableProximity to set
 	 */
 	public static final void setTableProximity(boolean tableProximity) {
 		CAFConfig.tableProximity = tableProximity;
 	}
 	/**
+	 * Method to get tableLocation boolean value
 	 * @return the tableLocation
 	 */
 	public static final boolean isTableLocation() {
 		return tableLocation;
 	}
 	/**
+	 * Method to set tableLocation boolean value
 	 * @param tableLocation the tableLocation to set
 	 */
 	public static final void setTableLocation(boolean tableLocation) {
 		CAFConfig.tableLocation = tableLocation;
 	}
 	/**
+	 * Method to get tableLight boolean value
 	 * @return the tableLight
 	 */
 	public static final boolean isTableLight() {
 		return tableLight;
 	}
+	
 	/**
+	 * Method to set tableLight boolean value
 	 * @param tableLight the tableLight to set
 	 */
 	public static final void setTableLight(boolean tableLight) {
 		CAFConfig.tableLight = tableLight;
 	}
+	
 	/**
+	 * Method to get tableBattery boolean value
 	 * @return the tableBattery
 	 */
 	public static final boolean isTableBattery() {
 		return tableBattery;
 	}
+	
 	/**
+	 * Method to set tableBattery boolean value
 	 * @param tableBattery the tableBattery to set
 	 */
 	public static final void setTableBattery(boolean tableBattery) {
 		CAFConfig.tableBattery = tableBattery;
 	}
+	
 	/**
+	 * Method to get tableUserInfo boolean value
 	 * @return the tableUserinfo
 	 */
 	public static final boolean isTableUserinfo() {
 		return tableUserinfo;
 	}
 	/**
+	 * Method to set tableUserinfo boolean value
 	 * @param tableUserinfo the tableUserinfo to set
 	 */
 	public static final void setTableUserinfo(boolean tableUserinfo) {
 		CAFConfig.tableUserinfo = tableUserinfo;
 	}
 	/**
+	 * Method to get enableDebugging boolean value
 	 * @return the enableDebugging
 	 */
 	public static final boolean isEnableDebugging() {
 		return enableDebugging;
 	}
 	/**
+	 * Method to set enableDebugging boolean value
 	 * @param enableDebugging the enableDebugging to set
 	 */
 	public static final void setEnableDebugging(boolean enableDebugging) {
