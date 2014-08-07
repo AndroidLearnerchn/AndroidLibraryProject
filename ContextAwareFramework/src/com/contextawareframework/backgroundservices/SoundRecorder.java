@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2013 by CDAC Chennai 
- * @File        SensorController
- * @Created:    20.11.2013
- * @author:     Prasenjit
- * Last Change: 24.07.2014 by Prasenjit
- */
  /*
  * Copyright (c) 2013 by CDAC Chennai 
  *
@@ -19,6 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *   
+ * @File        SoundRecorder
+ * @Created:    20.11.2013
+ * @author:     Prasenjit
+ * Last Change: 24.07.2014 by Prasenjit
  */
 package com.contextawareframework.backgroundservices;
 
@@ -27,10 +25,10 @@ import android.media.MediaRecorder;
 
 import android.os.Handler;
 import android.util.Log;
+
 /**
  * Description : This class need to be re-designed. 22.07.14 Prasenjit
  */
-
 public class SoundRecorder extends CAFService{
 	MediaRecorder mRecorder;
     Thread runner;

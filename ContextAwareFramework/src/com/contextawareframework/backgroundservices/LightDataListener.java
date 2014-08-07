@@ -100,7 +100,7 @@ public class LightDataListener  extends CAFService{
 	/**
 	 * Method to enable Light Sensor in Android
 	 * */
-	public void enableLightSensor(SensorEventListener listenerFromActivity)
+	public void enableLightSensor(SensorEventListener listenerFromActivity, int sampleRate)
 	{
 		listener = listenerFromActivity;
 		if(enableDebugging)
@@ -123,7 +123,7 @@ public class LightDataListener  extends CAFService{
 			}
 			try{
 				mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-				mSensorManager.registerListener(listener, mLight , SensorManager.SENSOR_DELAY_NORMAL);
+				mSensorManager.registerListener(listener, mLight , sampleRate);
 			}
 			catch(Exception e)
 			{

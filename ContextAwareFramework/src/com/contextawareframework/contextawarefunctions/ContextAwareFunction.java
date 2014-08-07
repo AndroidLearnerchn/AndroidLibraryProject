@@ -30,18 +30,21 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
+
 /**
  * This class is the controller part. User can register the sensor listener 
  * and can store data in the database by using this class
  */
 
 public class ContextAwareFunction {
-	Context localContext;
+
+	/* To enable / disable Log messages. */
 	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
 
+	Context localContext;
 	private static String TAG = "ContextAwareFuntion";
 
-	AudioManager mAudioManager ;  
+	private AudioManager mAudioManager ;  
 
 	long eventtime;
 
@@ -62,11 +65,11 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-			if(audioManager!=null)
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			if(mAudioManager!=null)
 			{
-				int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-				int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+				int maxVal = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+				int curVal = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 				if(curVal <= maxVal)
 					curVal = curVal + 1;
 				if(curVal == maxVal )
@@ -78,7 +81,7 @@ public class ContextAwareFunction {
 				{
 					curVal = maxVal;
 				}
-				audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
 			}
 
 		}
@@ -99,25 +102,28 @@ public class ContextAwareFunction {
 			Log.d(TAG,"VolumeDecrease Method");
 		}	
 		try{
-			AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
 			//int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-
-			int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-			if(curVal > 0 )
-				curVal = curVal - 1;
-			if( curVal <= 0 )
+			if(mAudioManager!=null)
 			{
-				curVal = 0;
-				Toast.makeText(localContext,"Min volume Reached", Toast.LENGTH_SHORT).show();
-			}
+				int curVal = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+				if(curVal > 0 )
+					curVal = curVal - 1;
+				if( curVal <= 0 )
+				{
+					curVal = 0;
+					Toast.makeText(localContext,"Min volume Reached", Toast.LENGTH_SHORT).show();
+				}
 
-			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
+
 	// Function to play / pause / nextSong / prevSong of a music player
 	/**
 	 * Description : Method to play Song. It uses ACION_MEDIA_BUTTON intent.
@@ -134,23 +140,30 @@ public class ContextAwareFunction {
 			eventtime = SystemClock.uptimeMillis();
 
 			//mAudioManager.requestAudioFocus(l, streamType, ); here 
-			if(!mAudioManager.isMusicActive())
+			if(mAudioManager!=null)
 			{
-				Log.d("PlaySong11","Check");
-				Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-				KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MUSIC, 0);
-				upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
-				localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
-				Log.d("PlaySong22","Check");
+				if(!mAudioManager.isMusicActive())
+				{
+					Log.d("PlaySong11","Check");
+					Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+					KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MUSIC, 0);
+					upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
+					localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
+					Log.d("PlaySong22","Check");
+				}
+				if(mAudioManager.isMusicActive()) //Check Here
+				{
+					Log.d("PlaySong1","Check");
+					Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+					KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
+					upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
+					localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
+					Log.d("PlaySong2","Check");
+				}
 			}
-			if(mAudioManager.isMusicActive()) //Check Here
+			else
 			{
-				Log.d("PlaySong1","Check");
-				Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-				KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
-				upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
-				localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
-				Log.d("PlaySong2","Check");
+				Log.d(TAG,"audioManager is null");
 			}
 		}
 		catch(Exception e)
@@ -171,21 +184,25 @@ public class ContextAwareFunction {
 		{
 			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
 			eventtime = SystemClock.uptimeMillis();
-			if(mAudioManager.isMusicActive())
+			if(mAudioManager!=null)
 			{
-				Log.d("PauseSong","Check1");
-				Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-				KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE, 0);
-				downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
-				localContext.sendOrderedBroadcast(downIntent, null);
-				Log.d("PauseSong","Check2");
+				if(mAudioManager.isMusicActive())
+				{
+					Log.d("PauseSong","Check1");
+					Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+					KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE, 0);
+					downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
+					localContext.sendOrderedBroadcast(downIntent, null);
+					Log.d("PauseSong","Check2");
+				}
 			}
 		}
 		catch(Exception e)
 		{
-
+			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * Description : Play the next Song. It uses ACTION_MEDIA_BUTTON intent.
 	 */
@@ -197,21 +214,26 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-			eventtime = SystemClock.uptimeMillis();
-			if(mAudioManager.isMusicActive())
+			if(mAudioManager!=null)
 			{
-				Intent downIntentnext = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-				KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN,   KeyEvent.KEYCODE_MEDIA_NEXT, 0);
-				downIntentnext.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
-				localContext.sendOrderedBroadcast(downIntentnext, null);
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+				eventtime = SystemClock.uptimeMillis();
+				if(mAudioManager.isMusicActive())
+				{
+					Intent downIntentnext = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+					KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN,   KeyEvent.KEYCODE_MEDIA_NEXT, 0);
+					downIntentnext.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
+					localContext.sendOrderedBroadcast(downIntentnext, null);
+				}
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-	}/**
+	}
+
+	/**
 	 * Description : Method to play previous song. It uses ACTION_MEDIA_BUTTON intent.
 	 */
 	public final void playPrevSong()
@@ -222,14 +244,17 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-			eventtime = SystemClock.uptimeMillis();
-			if(mAudioManager.isMusicActive())
+			if(mAudioManager!=null)
 			{
-				Intent downIntentprev = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-				KeyEvent downEventprev = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
-				downIntentprev.putExtra(Intent.EXTRA_KEY_EVENT, downEventprev);
-				localContext.sendOrderedBroadcast(downIntentprev, null);
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+				eventtime = SystemClock.uptimeMillis();
+				if(mAudioManager.isMusicActive())
+				{
+					Intent downIntentprev = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+					KeyEvent downEventprev = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
+					downIntentprev.putExtra(Intent.EXTRA_KEY_EVENT, downEventprev);
+					localContext.sendOrderedBroadcast(downIntentprev, null);
+				}
 			}
 		}
 		catch(Exception e)
@@ -237,7 +262,7 @@ public class ContextAwareFunction {
 			e.printStackTrace();
 		}
 	}
-	//Another way 
+
 	/**
 	 * Description : Another way to play a song
 	 */
@@ -249,11 +274,14 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-			if (mAudioManager.isMusicActive()) {
-				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-				mediaIntent.putExtra("command", "play");
-				localContext.sendBroadcast(mediaIntent);
+			if(mAudioManager!=null)
+			{
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+				if (mAudioManager.isMusicActive()) {
+					Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+					mediaIntent.putExtra("command", "play");
+					localContext.sendBroadcast(mediaIntent);
+				}
 			}
 		}
 		catch(Exception e)
@@ -272,11 +300,14 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-			if (mAudioManager.isMusicActive()) {
-				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-				mediaIntent.putExtra("command", "pause");
-				localContext.sendBroadcast(mediaIntent);
+			if(mAudioManager!=null)
+			{
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+				if (mAudioManager.isMusicActive()) {
+					Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+					mediaIntent.putExtra("command", "pause");
+					localContext.sendBroadcast(mediaIntent);
+				}
 			}
 		}
 		catch(Exception e)
@@ -295,11 +326,14 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-			if (mAudioManager.isMusicActive()) {
-				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-				mediaIntent.putExtra("command", "next");
-				localContext.sendBroadcast(mediaIntent);
+			if(mAudioManager!=null)
+			{
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+				if (mAudioManager.isMusicActive()) {
+					Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+					mediaIntent.putExtra("command", "next");
+					localContext.sendBroadcast(mediaIntent);
+				}
 			}
 		}
 		catch(Exception e)
@@ -318,11 +352,14 @@ public class ContextAwareFunction {
 		}	
 		try
 		{
-			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-			if (mAudioManager.isMusicActive()) {
-				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-				mediaIntent.putExtra("command", "previous");
-				localContext.sendBroadcast(mediaIntent);
+			if(mAudioManager!=null)
+			{
+				mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+				if (mAudioManager.isMusicActive()) {
+					Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+					mediaIntent.putExtra("command", "previous");
+					localContext.sendBroadcast(mediaIntent);
+				}
 			}
 		}
 		catch(Exception e)

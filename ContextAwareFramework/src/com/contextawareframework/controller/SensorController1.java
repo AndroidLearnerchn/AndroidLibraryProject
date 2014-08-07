@@ -53,14 +53,22 @@ public class SensorController1 {
 	private LightDataListener light;
 	private SensorEventListener accelListener, proximityListener, lightListener;
 	private static final String TAG = "SENSORCONTROLLER1";
+	
+	// User can use different delays to register the sensor
+	public static final int FASTEST = SensorManager.SENSOR_DELAY_FASTEST;
+	public static final int GAME = SensorManager.SENSOR_DELAY_GAME;
+	public static final int NORMAL = SensorManager.SENSOR_DELAY_NORMAL;
+	public final int UI = SensorManager.SENSOR_DELAY_UI;
+	
 	public SensorController1(Context context)
 	{
 		SensorControllerclasscontext = context;
+		
 	}
 	/**
 	 * To register the Accelerometer Service 
 	 */
-	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException // 1st Sensor
+	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp, int sampleRate) throws AccelerometerSensorException // 1st Sensor
 	{
 		accelListener = listenerfromMainApp;
 		
@@ -72,7 +80,7 @@ public class SensorController1 {
 			try
 			{
 				Log.d(TAG,"inside registerAccelerometerListner");
-				accel.enableAccelerometerListener(accelListener, SensorManager.SENSOR_DELAY_NORMAL);
+				accel.enableAccelerometerListener(accelListener, sampleRate);
 			}
 			catch(Exception e)
 			{
@@ -90,7 +98,7 @@ public class SensorController1 {
 	/**
 	 * To register the Proximity Service
 	 */
-	public final void registerProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
+	public final void registerProximityService(SensorEventListener listenerfromMainApp, int sampleRate) throws ProximitySensorException
 	{
 		proximityListener = listenerfromMainApp;
 		
@@ -101,7 +109,7 @@ public class SensorController1 {
 		{						
 			try{
 				Log.d(TAG,"inside registerProximityListener");
-				proximity.enableProximitySensor(proximityListener);
+				proximity.enableProximitySensor(proximityListener, sampleRate);
 			}
 			catch(Exception e)
 			{
@@ -119,7 +127,7 @@ public class SensorController1 {
 	/**
 	 * To register the Light Service
 	 */
-	public final void registerLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
+	public final void registerLightService(SensorEventListener listenerfromMainApp, int sampleRate) throws LightSensorException
 	{	
 		lightListener = listenerfromMainApp;
 		// Create an object of specific service class to  
@@ -130,7 +138,7 @@ public class SensorController1 {
 			try{
 				Log.d(TAG,"inside registerProximityListener");
 				if(lightListener!=null)
-					light.enableLightSensor(lightListener);
+					light.enableLightSensor(lightListener, sampleRate);
 			}
 			catch(Exception e)
 			{

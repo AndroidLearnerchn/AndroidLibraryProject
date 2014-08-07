@@ -99,7 +99,7 @@ public class ProximityDataListener extends CAFService {
 	/**
 	 * Method to enable Proximity Sensor in Android
 	 */
-	public void enableProximitySensor(SensorEventListener listenerFromActivity) {
+	public void enableProximitySensor(SensorEventListener listenerFromActivity, int sampleRate) {
 		listener = listenerFromActivity;
 		if(enableDebugging)
 		{
@@ -125,7 +125,7 @@ public class ProximityDataListener extends CAFService {
 			try 
 			{
 				mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-				mSensorManager.registerListener(listener, mProximity,SensorManager.SENSOR_DELAY_NORMAL);
+				mSensorManager.registerListener(listener, mProximity,sampleRate);
 			}
 			catch (Exception e) 
 			{
