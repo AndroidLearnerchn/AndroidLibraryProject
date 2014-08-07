@@ -21,6 +21,8 @@
 package com.contextawareframework.backgroundservices;
 
 
+import com.contextawareframework.globalvariable.CAFConfig;
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
@@ -50,7 +52,7 @@ public class LightDataListener  extends CAFService{
 	private static final String TAG = "LightDataListener";
 
 	/* To enable / disable Log messages. */
-	private static boolean enableDebugging = false;
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
 
 	/* Class instance variable */
 	private static LightDataListener lightDataListenerInstance;

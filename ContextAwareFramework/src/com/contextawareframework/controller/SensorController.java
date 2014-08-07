@@ -21,7 +21,7 @@
 
 package com.contextawareframework.controller;
 
-import com.contextawareframework.globalvariable.GlobalVariable;
+import com.contextawareframework.globalvariable.CAFConfig;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -31,6 +31,9 @@ import android.util.Log;
 import android.widget.Toast;
 /**
  * This class is the controller part. User can register the sensor listener. 
+ * Presently This class is not being used for registering / un-registering the sensors.
+ * 
+ * @Note : SensorController1 is being used for now.
  */
 
 public class SensorController {
@@ -39,7 +42,7 @@ public class SensorController {
 	private SensorManager sensorManager;
 	
 	// Use this string constant to debug this class
-    private static final String DEBUG_SENSORCONTROLLER = "SensorController";
+    private static final String TAG = "SensorController";
     
 	public SensorController(Context context)
 	{
@@ -52,7 +55,7 @@ public class SensorController {
 	public final void registerProximityService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.isSENSOR_PROXIMITY())
+		if(CAFConfig.isSensorProximity())
 		{
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
 	        Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -90,7 +93,7 @@ public class SensorController {
 	public final void registerLightService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.isSENSOR_LIGHT())
+		if(CAFConfig.isSensorLight())
 		{
 			
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
@@ -129,7 +132,7 @@ public class SensorController {
 	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) 
 	{
 		listener = listenerfromMainApp;
-		if(GlobalVariable.isSENSOR_ACCELEROMETER())
+		if(CAFConfig.isSensorAccelerometer())
 		{
 			
 			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
@@ -170,7 +173,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.setSENSOR_LIGHT(false);
+		CAFConfig.setSensorLight(false);
 		
 	}
 	/*
@@ -180,7 +183,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.setSENSOR_PROXIMITY(false);
+		CAFConfig.setSensorProximity(false);
 		
 	}
 	/*
@@ -190,7 +193,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.setSENSOR_LOCATION(false);
+		CAFConfig.setSensorLocation(false);
 		
 	}
 	/*
@@ -200,7 +203,7 @@ public class SensorController {
 	{
 		listener = listenerfromMainApp;
 		sensorManager.unregisterListener(listener);
-		GlobalVariable.setSENSOR_ACCELEROMETER(false);
+		CAFConfig.setSensorAccelerometer(false);
 		
 	}
 	

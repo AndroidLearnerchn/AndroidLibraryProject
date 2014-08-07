@@ -34,7 +34,7 @@ import com.contextawareframework.exceptions.AccelerometerSensorException;
 import com.contextawareframework.exceptions.GPSSensorException;
 import com.contextawareframework.exceptions.LightSensorException;
 import com.contextawareframework.exceptions.ProximitySensorException;
-import com.contextawareframework.globalvariable.GlobalVariable;
+import com.contextawareframework.globalvariable.CAFConfig;
 
 
 /**
@@ -67,7 +67,7 @@ public class SensorController1 {
 		// Create an object of specific service class to  
 		accel = AccelerometerDataListener.getInstance(SensorControllerclasscontext);
 		
-		if(GlobalVariable.isSENSOR_ACCELEROMETER())
+		if(CAFConfig.isSensorAccelerometer())
 		{
 			try
 			{
@@ -97,7 +97,7 @@ public class SensorController1 {
 		// Create an object of specific service class to  
 		proximity = ProximityDataListener.getInstance(SensorControllerclasscontext);
 		
-		if(GlobalVariable.isSENSOR_PROXIMITY())
+		if(CAFConfig.isSensorProximity())
 		{						
 			try{
 				Log.d(TAG,"inside registerProximityListener");
@@ -124,7 +124,7 @@ public class SensorController1 {
 		lightListener = listenerfromMainApp;
 		// Create an object of specific service class to  
 		light = LightDataListener.getInstance(SensorControllerclasscontext);
-		if(GlobalVariable.isSENSOR_LIGHT())
+		if(CAFConfig.isSensorLight())
 		{
 			
 			try{
@@ -155,7 +155,7 @@ public class SensorController1 {
 		if(listenerfromMainApp!=null)
 		{
 			accel.disableAccelerometerListener(listenerfromMainApp);
-			GlobalVariable.setSENSOR_ACCELEROMETER(false);
+			CAFConfig.setSensorAccelerometer(false);
 			Log.d(TAG,"Unregister Accelerometer Sensor");
 		}
 		else
@@ -172,7 +172,7 @@ public class SensorController1 {
 		if(listenerfromMainApp!=null)
 		{
 			proximity.disableProximitySensor(listenerfromMainApp);
-			GlobalVariable.setSENSOR_PROXIMITY(false);
+			CAFConfig.setSensorProximity(false);
 			Log.d(TAG,"Unregister Proximity Sensor");
 		}
 		else
@@ -188,7 +188,7 @@ public class SensorController1 {
 		if(listenerfromMainApp!=null)
 		{
 			light.disableLightSensor(listenerfromMainApp);
-			GlobalVariable.setSENSOR_LIGHT(false);
+			CAFConfig.setSensorLight(false);
 			Log.d(TAG,"Unregister Light Sensor");
 		}
 		else
@@ -210,7 +210,7 @@ public class SensorController1 {
 	{
 		//gps.stopUsingGPS(); // Change the Listener 
 		
-		GlobalVariable.setSENSOR_LOCATION(false);
+		CAFConfig.setSensorLocation(false);
 		
 		Log.d(TAG,"Unregister Location Service");
 	}

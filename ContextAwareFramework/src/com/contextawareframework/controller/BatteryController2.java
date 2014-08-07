@@ -26,8 +26,9 @@ public abstract class BatteryController2 extends BroadcastReceiver{
 		 * Making it abstract enforce the developer to implement it according to his use. 
 		 * 
 		 */
+		// Can be used if you want to store in database.
+		//Battery battery=new Battery();
 		
-		Battery b1=new Battery();
 		Battery.setLevel(intentFromMainActivity.getIntExtra("level", 0));
 		//int level = intentFromMainActivity.getIntExtra("level", 0);
 		Log.i("level "," level "+Battery.getLevel());

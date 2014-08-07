@@ -2,7 +2,6 @@ package com.example.frameworktestcase;
 
 import com.contextawareframework.controller.SensorController1;
 import com.contextawareframework.exceptions.AccelerometerSensorException;
-import com.contextawareframework.globalvariable.GlobalVariable;
 
 import android.app.Activity;
 import android.hardware.Sensor;

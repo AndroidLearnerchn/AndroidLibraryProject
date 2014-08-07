@@ -2,7 +2,7 @@ package com.example.frameworktestcase;
 
 import com.contextawareframework.controller.SensorController1;
 import com.contextawareframework.exceptions.AccelerometerSensorException;
-import com.contextawareframework.globalvariable.GlobalVariable;
+import com.contextawareframework.globalvariable.CAFConfig;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		try{
-			GlobalVariable.setSENSOR_ACCELEROMETER(true);
+			CAFConfig.setSensorAccelerometer(true);
 			controller.registerAccelerometerService(accelSensorListener);
 			controller.registerAccelerometerService(accelSensorListener1);
 			

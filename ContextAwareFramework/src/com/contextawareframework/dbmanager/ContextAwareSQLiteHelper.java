@@ -20,7 +20,7 @@
 package com.contextawareframework.dbmanager;
 
 import com.contextawareframework.exceptions.SQLiteQueryException;
-import com.contextawareframework.globalvariable.GlobalVariable;
+import com.contextawareframework.globalvariable.CAFConfig;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -178,27 +178,27 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	{
 		try
 		{
-			if(GlobalVariable.isSENSOR_ACCELEROMETER_TABLE())
+			if(CAFConfig.isTableAccelerometer())
 			{
 				database.execSQL(CREATE_TABLE_ACCELEROMETER);
 			}
-			if(GlobalVariable.isSENSOR_BATTERY_TABLE())
+			if(CAFConfig.isTableBattery())
 			{
 				database.execSQL(CREATE_TABLE_BATTERY);
 			}
-			if(GlobalVariable.isSENSOR_LIGHT_TABLE())
+			if(CAFConfig.isTableLight())
 			{
 				database.execSQL(CREATE_TABLE_LIGHT);
 			}
-			if(GlobalVariable.isSENSOR_PROXIMITY_TABLE())
+			if(CAFConfig.isTableProximity())
 			{	
 				database.execSQL(CREATE_TABLE_PROXIMITY);
 			}
-			if(GlobalVariable.isSENSOR_LOCATION_TABLE())
+			if(CAFConfig.isTableLocation())
 			{
 				database.execSQL(CREATE_TABLE_LOCATION);
 			}
-			if(GlobalVariable.isSENSOR_USERINFO_TABLE())
+			if(CAFConfig.isTableUserinfo())
 			{
 				database.execSQL(CREATE_TABLE_USERINFO);
 			}

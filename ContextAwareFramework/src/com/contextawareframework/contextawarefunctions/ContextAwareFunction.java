@@ -21,6 +21,8 @@
 
 package com.contextawareframework.contextawarefunctions;
 
+import com.contextawareframework.globalvariable.CAFConfig;
+
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -35,9 +37,14 @@ import android.widget.Toast;
 
 public class ContextAwareFunction {
 	Context localContext;
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
+
+	private static String TAG = "ContextAwareFuntion";
 
 	AudioManager mAudioManager ;  
+
 	long eventtime;
+
 	public ContextAwareFunction(Context contextFromMainApp)
 	{
 		localContext = contextFromMainApp;
@@ -49,22 +56,36 @@ public class ContextAwareFunction {
 	 */
 	public void volumeIncrease()
 	{
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"VolumeIncrease Method");
+		}	
+		try
+		{
+			AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			if(audioManager!=null)
+			{
+				int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+				int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+				if(curVal <= maxVal)
+					curVal = curVal + 1;
+				if(curVal == maxVal )
+				{
+					Toast.makeText(localContext, "Max volume Reached", Toast.LENGTH_SHORT).show();
+				}
+				// This won't get true at all...
+				if(curVal > maxVal)
+				{
+					curVal = maxVal;
+				}
+				audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+			}
 
-		AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-		int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		if(curVal <= maxVal)
-			curVal = curVal + 1;
-		if(curVal == maxVal )
-		{
-			Toast.makeText(localContext, "Max volume Reached", Toast.LENGTH_SHORT).show();
 		}
-		// This won't get true at all...
-		if(curVal > maxVal)
+		catch(Exception e)
 		{
-			curVal = maxVal;
+			e.printStackTrace();
 		}
-		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
 	}
 
 	/**
@@ -73,20 +94,29 @@ public class ContextAwareFunction {
 	 */
 	public void volumeDecrease()
 	{
-
-		AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		//int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-
-		int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		if(curVal > 0 )
-			curVal = curVal - 1;
-		if( curVal <= 0 )
+		if(CAFConfig.isEnableDebugging())
 		{
-			curVal = 0;
-			Toast.makeText(localContext,"Min volume Reached", Toast.LENGTH_SHORT).show();
-		}
+			Log.d(TAG,"VolumeDecrease Method");
+		}	
+		try{
+			AudioManager audioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			//int maxVal = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
-		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+			int curVal = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+			if(curVal > 0 )
+				curVal = curVal - 1;
+			if( curVal <= 0 )
+			{
+				curVal = 0;
+				Toast.makeText(localContext,"Min volume Reached", Toast.LENGTH_SHORT).show();
+			}
+
+			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curVal, 0);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	// Function to play / pause / nextSong / prevSong of a music player
 	/**
@@ -94,27 +124,38 @@ public class ContextAwareFunction {
 	 */
 	public final void playSong()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		eventtime = SystemClock.uptimeMillis();
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"playSong Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			eventtime = SystemClock.uptimeMillis();
 
-		//mAudioManager.requestAudioFocus(l, streamType, ); here 
-		if(!mAudioManager.isMusicActive())
-		{
-			Log.d("PlaySong11","Check");
-			Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-			KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MUSIC, 0);
-			upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
-			localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
-			Log.d("PlaySong22","Check");
+			//mAudioManager.requestAudioFocus(l, streamType, ); here 
+			if(!mAudioManager.isMusicActive())
+			{
+				Log.d("PlaySong11","Check");
+				Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+				KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MUSIC, 0);
+				upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
+				localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
+				Log.d("PlaySong22","Check");
+			}
+			if(mAudioManager.isMusicActive()) //Check Here
+			{
+				Log.d("PlaySong1","Check");
+				Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+				KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
+				upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
+				localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
+				Log.d("PlaySong2","Check");
+			}
 		}
-		if(mAudioManager.isMusicActive()) //Check Here
+		catch(Exception e)
 		{
-			Log.d("PlaySong1","Check");
-			Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-			KeyEvent upEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
-			upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
-			localContext.sendOrderedBroadcast(upIntent, null); // Check here if correct
-			Log.d("PlaySong2","Check");
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -122,16 +163,27 @@ public class ContextAwareFunction {
 	 */
 	public final void pauseSong()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		eventtime = SystemClock.uptimeMillis();
-		if(mAudioManager.isMusicActive())
+		if(CAFConfig.isEnableDebugging())
 		{
-			Log.d("PauseSong","Check1");
-			Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-			KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE, 0);
-			downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
-			localContext.sendOrderedBroadcast(downIntent, null);
-			Log.d("PauseSong","Check2");
+			Log.d(TAG,"pauseSong Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			eventtime = SystemClock.uptimeMillis();
+			if(mAudioManager.isMusicActive())
+			{
+				Log.d("PauseSong","Check1");
+				Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+				KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE, 0);
+				downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
+				localContext.sendOrderedBroadcast(downIntent, null);
+				Log.d("PauseSong","Check2");
+			}
+		}
+		catch(Exception e)
+		{
+
 		}
 	}
 	/**
@@ -139,28 +191,50 @@ public class ContextAwareFunction {
 	 */
 	public final void playNextSong()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		eventtime = SystemClock.uptimeMillis();
-		if(mAudioManager.isMusicActive())
+		if(CAFConfig.isEnableDebugging())
 		{
-			Intent downIntentnext = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-			KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN,   KeyEvent.KEYCODE_MEDIA_NEXT, 0);
-			downIntentnext.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
-			localContext.sendOrderedBroadcast(downIntentnext, null);
+			Log.d(TAG,"playNextSong Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			eventtime = SystemClock.uptimeMillis();
+			if(mAudioManager.isMusicActive())
+			{
+				Intent downIntentnext = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+				KeyEvent downEvent = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN,   KeyEvent.KEYCODE_MEDIA_NEXT, 0);
+				downIntentnext.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
+				localContext.sendOrderedBroadcast(downIntentnext, null);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}/**
 	 * Description : Method to play previous song. It uses ACTION_MEDIA_BUTTON intent.
 	 */
 	public final void playPrevSong()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
-		eventtime = SystemClock.uptimeMillis();
-		if(mAudioManager.isMusicActive())
+		if(CAFConfig.isEnableDebugging())
 		{
-			Intent downIntentprev = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-			KeyEvent downEventprev = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
-			downIntentprev.putExtra(Intent.EXTRA_KEY_EVENT, downEventprev);
-			localContext.sendOrderedBroadcast(downIntentprev, null);
+			Log.d(TAG,"playPrevSong Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);
+			eventtime = SystemClock.uptimeMillis();
+			if(mAudioManager.isMusicActive())
+			{
+				Intent downIntentprev = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+				KeyEvent downEventprev = new KeyEvent(eventtime, eventtime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
+				downIntentprev.putExtra(Intent.EXTRA_KEY_EVENT, downEventprev);
+				localContext.sendOrderedBroadcast(downIntentprev, null);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	//Another way 
@@ -169,11 +243,22 @@ public class ContextAwareFunction {
 	 */
 	public void play1()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-		if (mAudioManager.isMusicActive()) {
-			Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-			mediaIntent.putExtra("command", "play");
-			localContext.sendBroadcast(mediaIntent);
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"play1 Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+			if (mAudioManager.isMusicActive()) {
+				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+				mediaIntent.putExtra("command", "play");
+				localContext.sendBroadcast(mediaIntent);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -181,11 +266,22 @@ public class ContextAwareFunction {
 	 */
 	public void pause1()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-		if (mAudioManager.isMusicActive()) {
-			Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-			mediaIntent.putExtra("command", "pause");
-			localContext.sendBroadcast(mediaIntent);
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"pause1 Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+			if (mAudioManager.isMusicActive()) {
+				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+				mediaIntent.putExtra("command", "pause");
+				localContext.sendBroadcast(mediaIntent);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -193,11 +289,22 @@ public class ContextAwareFunction {
 	 */
 	public void next1()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-		if (mAudioManager.isMusicActive()) {
-			Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-			mediaIntent.putExtra("command", "next");
-			localContext.sendBroadcast(mediaIntent);
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"next1 Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+			if (mAudioManager.isMusicActive()) {
+				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+				mediaIntent.putExtra("command", "next");
+				localContext.sendBroadcast(mediaIntent);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -205,11 +312,22 @@ public class ContextAwareFunction {
 	 */
 	public void previous1()
 	{
-		mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
-		if (mAudioManager.isMusicActive()) {
-			Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
-			mediaIntent.putExtra("command", "previous");
-			localContext.sendBroadcast(mediaIntent);
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,"previous1 Method");
+		}	
+		try
+		{
+			mAudioManager = (AudioManager)localContext.getSystemService(Context.AUDIO_SERVICE);    
+			if (mAudioManager.isMusicActive()) {
+				Intent mediaIntent = new Intent("com.android.music.musicservicecommand");
+				mediaIntent.putExtra("command", "previous");
+				localContext.sendBroadcast(mediaIntent);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -276,67 +394,81 @@ public class ContextAwareFunction {
 	/**
 	 * Method to give more flexibility to Developers
 	 */
-	
+
 	/**
 	 * Detect Accelerometer Motion, shake in Left for X axis
 	 */
-		public boolean shakeRight(float xAxis,int range)
-		{	//boolean status = false;
-			if(xAxis < -range)
-				return true;
-			else
-				return false; 
-		}
-		/**
-		 * Detect Accelerometer Motion, shake in Right for X axis
-		 */
-		public boolean shakeLeft(float xAxis,int range)
-		{
-			if(xAxis > range)
-				return true;
-			else
-				return false;
-		}
-		/**
-		 * Detect Accelerometer Motion, detects shake in up for Z axis
-		 */
-		public boolean shakeUp(float zAxis,int range)
-		{
-			if(zAxis < -range)
-				return true;
-			else
-				return false;
-		}
-		/**
-		 * Detect Accelerometer Motion, detects shake in down for Z axis
-		 */
-		public boolean shakeDown(float zAxis,int range)
-		{
-			if(zAxis > range)
-				return true;
-			else
-				return false;
-		}
-		/**
-		 * Detect Accelerometer Motion, detects shake in front for Y axis
-		 */
-		public boolean shakeFront(float yAxis,int range)
-		{
-			if(yAxis < -range)
-				return true;
-			else
-				return false;
-		}
-		/**
-		 * Detect Accelerometer Motion,detects shake back for Y axis
-		 */
-		public boolean shakeBack(float yAxis,int range)
-		{
-			if(yAxis > range)
-				return true;
-			else
-				return false;
-		}
+	public boolean shakeRight(float xAxis,int range)
+	{	//boolean status = false;
+		if(xAxis < -range)
+			return true;
+		else
+			return false; 
+	}
+	/**
+	 * Detect Accelerometer Motion, shake in Right for X axis
+	 */
+	public boolean shakeLeft(float xAxis,int range)
+	{
+		if(xAxis > range)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * Detect Accelerometer Motion, detects shake in up for Z axis
+	 */
+	public boolean shakeUp(float zAxis,int range)
+	{
+		if(zAxis < -range)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * Detect Accelerometer Motion, detects shake in down for Z axis
+	 */
+	public boolean shakeDown(float zAxis,int range)
+	{
+		if(zAxis > range)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * Detect Accelerometer Motion, detects shake in front for Y axis
+	 */
+	public boolean shakeFront(float yAxis,int range)
+	{
+		if(yAxis < -range)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * Detect Accelerometer Motion,detects shake back for Y axis
+	 */
+	public boolean shakeBack(float yAxis,int range)
+	{
+		if(yAxis > range)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * @return the enableDebugging
+	 */
+	public static final boolean isEnableDebugging() {
+		return enableDebugging;
+	}
+
+	/**
+	 * @param enableDebugging the enableDebugging to set
+	 */
+	public static final void setEnableDebugging(boolean enableDebugging) {
+		ContextAwareFunction.enableDebugging = enableDebugging;
+	}
 }
 
 //End of File

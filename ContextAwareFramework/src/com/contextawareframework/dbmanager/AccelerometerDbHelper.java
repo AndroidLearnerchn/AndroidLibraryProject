@@ -85,11 +85,11 @@ public class  AccelerometerDbHelper{
 	/**
 	 * Method to delete a row from database.
 	 */
-	/*public void deleteAccelRowData(Accelerometer accel) {
+	public void deleteAccelRowData(Accelerometer accel) {
 		long id = accel.getId();
 		System.out.println("Comment deleted with id: " + id);
 		database.delete(ContextAwareSQLiteHelper.TABLE_ACCEL, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID+ " = " + id, null);
-	}*/
+	}
 	/**
 	 * Method to list all row of the Accelerometer table
 	 */
