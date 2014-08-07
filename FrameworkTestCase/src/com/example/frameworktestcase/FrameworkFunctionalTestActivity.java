@@ -119,7 +119,7 @@ public class FrameworkFunctionalTestActivity extends Activity {
 					{
 						CAFConfig.setSensorProximity(true);
 						Log.d("Debug", " Registering  proximity sensor");
-						controller.registerProximityService(proximitySensorListener);
+						controller.registerProximityService(proximitySensorListener,SensorController1.NORMAL);
 
 					}
 				} 
@@ -156,7 +156,7 @@ public class FrameworkFunctionalTestActivity extends Activity {
 					try
 					{	
 						CAFConfig.setSensorLight(true);
-						controller.registerLightService(lightSensorListener);
+						controller.registerLightService(lightSensorListener,SensorController1.NORMAL);
 					} 
 					catch (LightSensorException e) 
 					{
@@ -190,7 +190,7 @@ public class FrameworkFunctionalTestActivity extends Activity {
 				try
 				{
 					CAFConfig.setSensorAccelerometer(true);
-					controller.registerAccelerometerService(accelSensorListener);
+					controller.registerAccelerometerService(accelSensorListener,SensorController1.NORMAL);
 				} 
 				catch (AccelerometerSensorException e) 
 				{

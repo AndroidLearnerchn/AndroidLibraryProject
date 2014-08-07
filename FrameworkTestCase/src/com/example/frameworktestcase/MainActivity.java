@@ -75,8 +75,8 @@ public class MainActivity extends Activity {
 		}
 		try{
 			CAFConfig.setSensorAccelerometer(true);
-			controller.registerAccelerometerService(accelSensorListener);
-			controller.registerAccelerometerService(accelSensorListener1);
+			controller.registerAccelerometerService(accelSensorListener,SensorController1.NORMAL);
+			controller.registerAccelerometerService(accelSensorListener1,SensorController1.NORMAL);
 			
 		}
 		catch(AccelerometerSensorException e)
