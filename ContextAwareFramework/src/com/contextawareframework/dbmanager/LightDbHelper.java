@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
 
- * @File        LightDBHelper
+ * @File        LightDbHelper
  * @Created:    18.11.2013
  * @author:     Prasenjit
- * Last Change: 28.01.2014 by Prasenjit
+ * Last Change: 11.08.2014 by Prasenjit
  */
 
 package com.contextawareframework.dbmanager;
@@ -24,6 +24,7 @@ package com.contextawareframework.dbmanager;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.contextawareframework.globalvariable.CAFConfig;
 import com.contextawareframework.sensors.environmentsensors.Light;
 
 import android.content.ContentValues;
@@ -31,6 +32,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * This is a database helper class for all CRUD operation on Light Sensor in Android
@@ -40,14 +42,49 @@ public class  LightDbHelper{
 	// Database fields
 	private SQLiteDatabase database;
 	private ContextAwareSQLiteHelper dbHelper;
+	private static LightDbHelper lightDbHelper;
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
+
+	private String TAG =  "LightDbHelper" ;
 	private String[] allColumns = { ContextAwareSQLiteHelper.COLUMN_LIGHT_ID,
 			ContextAwareSQLiteHelper.COLUMN_LIGHT_TIMESTAMP, ContextAwareSQLiteHelper.COLUMN_LIGHT_CUR_READING};
+
+	/**
+	 * Method to enable debugging
+	 * @param boolean
+	 */
+	public void setEnableDebugging(boolean value)
+	{
+		enableDebugging = value;
+	}
+
+	/**
+	 * Method to get the present value of enableDebugging
+	 * @return boolean
+	 */
+	public boolean getEnableDebugging()
+	{
+		return enableDebugging;
+	}
+
 	/**
 	 * Default Constructor
 	 */
-	public LightDbHelper(Context context) {
+	private LightDbHelper(Context context) {
 		dbHelper = new ContextAwareSQLiteHelper(context);
 	}
+
+	/**
+	 * Method to create the class object
+	 */
+	public static synchronized LightDbHelper getInstance(Context context)
+	{
+		if (lightDbHelper == null)
+			lightDbHelper = new LightDbHelper(context);
+
+		return lightDbHelper;
+	}
+
 	/**
 	 * Method to open the database for writing
 	 */
@@ -65,17 +102,29 @@ public class  LightDbHelper{
 	 */
 	public Light createLightRowData(long timestamp,Float light_cur_read){
 		ContentValues values = new ContentValues();
-		values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_TIMESTAMP, timestamp);
-		values.put(ContextAwareSQLiteHelper.COLUMN_LIGHT_CUR_READING, light_cur_read);
+		Light newRow = null;
+		try
+		{
+			values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_TIMESTAMP, timestamp);
+			values.put(ContextAwareSQLiteHelper.COLUMN_LIGHT_CUR_READING, light_cur_read);
 
-		long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_LIGHT, null,
-				values);
-		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_LIGHT,
-				allColumns, ContextAwareSQLiteHelper.COLUMN_LIGHT_ID + " = " + insertId, null,
-				null, null, null);
-		cursor.moveToFirst();
-		Light newRow = cursorToLightRow(cursor);
-		cursor.close();
+			long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_LIGHT, null,
+					values);
+			Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_LIGHT,
+					allColumns, ContextAwareSQLiteHelper.COLUMN_LIGHT_ID + " = " + insertId, null,
+					null, null, null);
+			cursor.moveToFirst();
+			newRow = cursorToLightRow(cursor);
+			cursor.close();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"cursorToAccelRow");
+		}
 		return newRow;
 	}
 	/**
@@ -83,27 +132,41 @@ public class  LightDbHelper{
 	 */
 	public void deleteLightRowData(Light light) {
 		long id = light.getId();
-		System.out.println("Comment deleted with id: " + id);
-		database.delete(ContextAwareSQLiteHelper.TABLE_LIGHT, ContextAwareSQLiteHelper.COLUMN_LIGHT_ID
-				+ " = " + id, null);
+		try{
+			System.out.println("Comment deleted with id: " + id);
+			database.delete(ContextAwareSQLiteHelper.TABLE_LIGHT, ContextAwareSQLiteHelper.COLUMN_LIGHT_ID
+					+ " = " + id, null);
+		}
+		catch(SQLException e)
+		{e.printStackTrace();}
 	}
 	/**
 	 * Method to list all row of the Light table
 	 */
 	public List<Light> getAllComments() {
 		List<Light> lightRowData = new ArrayList<Light>();
+		try
+		{
+			Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_LIGHT,
+					allColumns, null, null, null, null, null);
 
-		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_LIGHT,
-				allColumns, null, null, null, null, null);
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			Light light = cursorToLightRow(cursor);
-			lightRowData.add(light);
-			cursor.moveToNext();
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Light light = cursorToLightRow(cursor);
+				lightRowData.add(light);
+				cursor.moveToNext();
+			}
+			// Make sure to close the cursor
+			cursor.close();
 		}
-		// Make sure to close the cursor
-		cursor.close();
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"cursorToAccelRow");
+		}
 		return lightRowData;
 	}
 	/**
@@ -111,9 +174,19 @@ public class  LightDbHelper{
 	 */
 	private Light cursorToLightRow(Cursor cursor) {
 		Light lightpojo = new Light();
-		lightpojo.setTimestamp(cursor.getLong(0));
-		lightpojo.setCurrentReading(cursor.getFloat(1));
-
+		try
+		{
+			lightpojo.setTimestamp(cursor.getLong(0));
+			lightpojo.setCurrentReading(cursor.getFloat(1));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"cursorToAccelRow");
+		}
 		return lightpojo;
 	}
 } 

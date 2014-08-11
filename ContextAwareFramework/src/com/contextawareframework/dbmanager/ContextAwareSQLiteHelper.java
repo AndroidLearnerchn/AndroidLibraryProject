@@ -15,7 +15,7 @@
  * @File        ContextAwareSQLiteHelper
  * @Created:    18.11.2013
  * @author:     Prasenjit
- * Last Change: 28.01.2014 by Prasenjit
+ * Last Change: 11.08.2014 by Prasenjit
  */
 package com.contextawareframework.dbmanager;
 
@@ -34,18 +34,18 @@ import android.util.Log;
  * new table.
  */
 public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
-	
+
 	// Database name for all sensor (context data) data 
 	private static final String DATABASE_NAME = "contextAwareFramework.db";
 	private static final int DATABASE_VERSION = 1;
 	private static final String TAG = "ContextAwareSQLiteHelper";
-	
+
 	//Added 4.8.14 Prasenjit
 	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
-	
+
 	private ContextAwareSQLiteHelper  contextAwareSQLiteHelper;
 	private Context mContext;
-	
+
 	//------------------------------------Table for Storing user Information-----------------------------------//
 	public static final String TABLE_USERINFO = "UserInfo";
 	public static final String COLUMN_USER_EMAIL = null;
@@ -55,12 +55,12 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_USER_ID = null; // unique ( appid + useremail )
 	public static final String COLUMN_USER_AUTH_STATUS = "false"; // To check if its true then user can query the server
 	//---------------------------------------------------------------------------------------------------------//
-	
+
 	//-------------------------------------Table for Accelerometer-------------------------------------------------//
 	public static final String TABLE_ACCEL = "Accelerometer";
 	public static final String COLUMN_ACCEL_ID = "_id";
 	public static final String COLUMN_ACCEL_TIMESTAMP = "Time_Stamp";
-	
+
 	//Accelerometer Table Column(Properties)
 	public static final String COLUMN_ACCEL_X= "x_value";
 	public static final String COLUMN_ACCEL_Y= "y_value";
@@ -72,7 +72,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_BATTERY = "Battery";
 	public static final String COLUMN_BATTERY_ID = "_id";
 	public static final String COLUMN_BATTERY_TIMESTAMP = "Time_Stamp";
-	
+
 	//Accelerometer Table Column(Properties)
 	public static final String COLUMN_BATTERY_X= "x_value";
 	public static final String COLUMN_BATTERY_y= "y_value";
@@ -80,26 +80,26 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	//-------------------------------------Table for Battery End here-------------------------------------------------//
 
 	//-------------------------------------Table for Light Sensor-------------------------------------------------//
-	
+
 	//LightSensor Table Column(Properties)
 	public static final String TABLE_LIGHT = "Light";
 	public static final String COLUMN_LIGHT_ID = "_id";
 	public static final String COLUMN_LIGHT_TIMESTAMP = "Time_Stamp";
 	public static final String COLUMN_LIGHT_CUR_READING= "Currebnt_Reading";
-	
+
 	//-------------------------------------Table for Light Sensor ends here-------------------------------------------------//
 
 	//-------------------------------------Table for Proximity Sensor-------------------------------------------------//
-	
+
 	//Proximity Table Column(Properties)
 	public static final String TABLE_PROXIMITY = "Proximity";
 	public static final String COLUMN_PROXIMITY_ID = "_id";
 	public static final String COLUMN_PROXIMITY_TIMESTAMP = "Time_Stamp";
 	public static final String COLUMN_PROXIMITY_NEAR= "Near";
 	public static final String COLUMN_PROXIMITY_FAR= "Far";
-	
+
 	//-------------------------------------Table for Proximity Sensor ends here-------------------------------------------------//
-	
+
 	//-------------------------------------Table for Location Sensor-------------------------------------------------//
 
 	//Location Table Column(Properties)
@@ -110,9 +110,9 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_LOCATION_LONGINTUDE= "long_value";
 	public static final String COLUMN_LOCATION_PLACE= "place_name";
 	public static final String COLUMN_HANGOUT_INFO= "hangout_info";	
-	
+
 	// Changed on 4.3.14 Mam Code integration Above code. 
-	
+
 	/*public static final String TABLE_LOCATION = "Location";
 	public static final String COLUMN_LOCATION_ID = "_id";
 	public static final String COLUMN_LOCATION_TIMESTAMP = "Time_Stamp";
@@ -121,7 +121,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_LOCATION_LONGINTUDE= "long_value";
 	public static final String COLUMN_LOCATION_PLACE= "z_value"; // To get the place information we may need to use the Geolocation class*/ 
 	//-------------------------------------Table for Location Sensor-------------------------------------------------//
-	
+
 
 	// Database creation sql statement
 	// UserInfo Table Added 06.06.14
@@ -129,15 +129,15 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 			+ TABLE_USERINFO + "(" + COLUMN_USER_EMAIL
 			+ " text not null, " + COLUMN_USER_ID
 			+ " text primary key," + COLUMN_DEV_EMAIL + " text not null, "   +  COLUMN_DEVICE_ID  + " text not null, " +  COLUMN_APP_ID + " text not null " + COLUMN_USER_AUTH_STATUS + " text not null " + " ); ";
-	
-	
+
+
 	// Accelerometer Table create statement
 	private static final String CREATE_TABLE_ACCELEROMETER = "create table "
 			+ TABLE_ACCEL + "(" + COLUMN_ACCEL_ID
 			+ " integer primary key autoincrement, " + COLUMN_ACCEL_TIMESTAMP
 			+ " text not null," + COLUMN_ACCEL_X + " integer, "   +  COLUMN_ACCEL_Y  + " integer, " +  COLUMN_ACCEL_Z + " integer " + " ); ";
-	
-	
+
+
 	// Battery Table create statement. This is sample table, should not be used as column names are not
 	// defined as per actual entity attribute(s).
 	// For Battery there are lots of field, So which fields have to be stored is not yet fixed.
@@ -145,32 +145,32 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 			+ TABLE_BATTERY + "(" + COLUMN_BATTERY_ID
 			+ " integer primary key autoincrement, " + COLUMN_BATTERY_TIMESTAMP
 			+ " text not null," + COLUMN_BATTERY_X + " integer, "   +  COLUMN_BATTERY_y  + " integer, " +  COLUMN_BATTERY_Z + " integer " + " ); ";
-	
+
 	// Light Table create statement
 	private static final String CREATE_TABLE_LIGHT = "create table "
 			+ TABLE_LIGHT + "(" + COLUMN_LIGHT_ID
 			+ " integer primary key autoincrement, " + COLUMN_LIGHT_TIMESTAMP
 			+ " text not null," + COLUMN_LIGHT_CUR_READING + " integer" + " ); ";
-	
+
 	// Proximity Table create statement
 	private static final String CREATE_TABLE_PROXIMITY = "create table "
 			+ TABLE_PROXIMITY + "(" + COLUMN_PROXIMITY_ID
 			+ " integer primary key autoincrement, " + COLUMN_PROXIMITY_TIMESTAMP
 			+ " text not null," + COLUMN_PROXIMITY_NEAR + " integer, "   + COLUMN_PROXIMITY_FAR   + " integer " + " ); ";
-	
+
 	// Location Table create statement
 	//Date modified 3.3 14
-	
+
 	private static final String CREATE_TABLE_LOCATION = "create table " + TABLE_LOCATION + "(" + COLUMN_LOCATION_ID + " integer primary key autoincrement, " + COLUMN_LOCATION_TIMESTAMP
 			+ " text not null," + COLUMN_LOCATION_LATITUDE + " text not null, " + COLUMN_LOCATION_LONGINTUDE   + " text not null, " + COLUMN_LOCATION_PLACE + " text not null, " + COLUMN_HANGOUT_INFO + " text not null "  +  " ); ";
-	
-	
+
+
 	/*private static final String CREATE_TABLE_LOCATION = "create table "
 			+ TABLE_LOCATION + "(" + COLUMN_LOCATION_ID
 			+ " integer primary key autoincrement, " + COLUMN_LOCATION_TIMESTAMP
 			+ " text not null," + COLUMN_LOCATION_LATITUDE + " integer, "   + COLUMN_LOCATION_LONGINTUDE   + " integer " + " ); ";
-	*/
-	
+	 */
+
 	public ContextAwareSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -230,8 +230,8 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERINFO);
 		onCreate(db);
 	}
-	
-	
+
+
 	/**
 	 * Method to enable debugging
 	 * @param boolean 
@@ -248,17 +248,17 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	{
 		return enableDebugging;
 	}
-	
-	
+
+
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context
 	 */
-	
-//	private  ContextAwareSQLiteHelper(Context context)
-//	{
-//		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//	}
+
+	//	private  ContextAwareSQLiteHelper(Context context)
+	//	{
+	//		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	//	}
 	/**
 	 * Description : Method to create an instance of AccelerometerDataListener Class.
 	 * @param  context Calling Activity context

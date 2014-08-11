@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  * 
- * @File        ProximityDBHelper
+ * @File        ProximityDbHelper
  * @Created:    18.11.2013
  * @author:     Prasenjit
- * Last Change: 18.11.2013 by Prasenjit
+ * Last Change: 11.08.2014 by Prasenjit
  */
+
 package com.contextawareframework.dbmanager;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 /**
  * This is a database helper class for all CRUD operation on Accelerometer Sensor in Android
  */
@@ -39,16 +42,27 @@ public class  ProximityDbHelper{
 	// Database fields
 	private SQLiteDatabase database;
 	private ContextAwareSQLiteHelper dbHelper;
+	private String TAG =  "ProximityDbHelper" ;
+	private static ProximityDbHelper proximityDbHelper;
 	private boolean enableDebugging = CAFConfig.isEnableDebugging();
-	
+
 	private String[] allColumns = { ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID,
 			ContextAwareSQLiteHelper.COLUMN_PROXIMITY_TIMESTAMP, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_NEAR, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_FAR};
 	/**
 	 * Default Constructor
 	 */
-	public ProximityDbHelper(Context context) {
+	private ProximityDbHelper(Context context) {
 		dbHelper = new ContextAwareSQLiteHelper(context);
 	}
+
+	public static synchronized ProximityDbHelper getInstance(Context context)
+	{
+		if (proximityDbHelper == null)
+			proximityDbHelper = new ProximityDbHelper(context);
+
+		return proximityDbHelper;
+	}
+
 	/**
 	 * Method to open the database for writing
 	 */
@@ -65,49 +79,78 @@ public class  ProximityDbHelper{
 	/**
 	 * Method to create insert a row of data into the database
 	 */
-	public Proximity createProximiytRowData(long timestamp,float near, float far){
+	public Proximity createProximiytRowData(long timestamp,float near, float far)
+	{
 		ContentValues values = new ContentValues();
-		values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_TIMESTAMP, timestamp);
-		values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_NEAR,near);
-		values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_FAR, far);
+		Proximity newRow = null;
+		try{
+			values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_TIMESTAMP, timestamp);
+			values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_NEAR,near);
+			values.put(ContextAwareSQLiteHelper.COLUMN_PROXIMITY_FAR, far);
 
-		long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_PROXIMITY, null,
-				values);
-		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_PROXIMITY,
-				allColumns, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID + " = " + insertId, null,
-				null, null, null);
-		cursor.moveToFirst();
-		Proximity newComment = cursorToProximityRow(cursor);
-		cursor.close();
-		return newComment;
+			long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_PROXIMITY, null,
+					values);
+			Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_PROXIMITY,
+					allColumns, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID + " = " + insertId, null,
+					null, null, null);
+			cursor.moveToFirst();
+			newRow = cursorToProximityRow(cursor);
+			cursor.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"createAccelRowDataMethod");
+		}
+		return newRow;
 	}
 
 	/**
 	 * Method to delete a row from database
 	 */
 	public void deleteProximityRowData(Proximity proximity) {
-		long id = proximity.getId();
-		System.out.println("Comment deleted with id: " + id);
-		database.delete(ContextAwareSQLiteHelper.TABLE_PROXIMITY, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID
-				+ " = " + id, null);
+		try
+		{
+			long id = proximity.getId();
+			System.out.println("Comment deleted with id: " + id);
+			database.delete(ContextAwareSQLiteHelper.TABLE_PROXIMITY, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID
+					+ " = " + id, null);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Method to list all row of the Proximity table
 	 */
 	public List<Proximity> getAllComments() {
 		List<Proximity> proximityRow = new ArrayList<Proximity>();
+		try
+		{
+			Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_PROXIMITY,
+					allColumns, null, null, null, null, null);
 
-		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_PROXIMITY,
-				allColumns, null, null, null, null, null);
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			Proximity proximity = cursorToProximityRow(cursor);
-			proximityRow.add(proximity);
-			cursor.moveToNext();
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Proximity proximity = cursorToProximityRow(cursor);
+				proximityRow.add(proximity);
+				cursor.moveToNext();
+			}
+			// Make sure to close the cursor
+			cursor.close();
 		}
-		// Make sure to close the cursor
-		cursor.close();
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"createAccelRowDataMethod");
+		}
 		return proximityRow;
 	}
 	/**
@@ -115,12 +158,23 @@ public class  ProximityDbHelper{
 	 */
 	private Proximity cursorToProximityRow(Cursor cursor) {
 		Proximity proximityRow = new Proximity();
-		proximityRow.setTimestamp(cursor.getLong(0));
-		proximityRow.setNear(cursor.getFloat(1));
-		proximityRow.setFar(cursor.getFloat(2));
-
+		try
+		{
+			proximityRow.setTimestamp(cursor.getLong(0));
+			proximityRow.setNear(cursor.getFloat(1));
+			proximityRow.setFar(cursor.getFloat(2));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"createAccelRowDataMethod");
+		}
 		return proximityRow;
 	}
+
 	/**
 	 * Method to enable debugging
 	 * @param boolean
@@ -129,7 +183,7 @@ public class  ProximityDbHelper{
 	{
 		enableDebugging = value;
 	}
-	
+
 	/**
 	 * Method to get the present value of enableDebugging
 	 * @return boolean
