@@ -20,7 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 /*******************************************************************************************
  * This is a database helper class for all CRUD operation on Accelerometer Sensor in Android
  *******************************************************************************************/
-//NOTE NOT IN WORKING FORM
+//NOTE : NOT IN WORKING FORM
 public class  BatteryDbHelper{
 
   // Database fields

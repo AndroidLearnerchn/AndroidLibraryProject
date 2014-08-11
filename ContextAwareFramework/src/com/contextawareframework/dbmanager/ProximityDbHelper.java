@@ -23,6 +23,7 @@ package com.contextawareframework.dbmanager;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.contextawareframework.globalvariable.CAFConfig;
 import com.contextawareframework.sensors.positionsensors.Proximity;
 
 import android.content.ContentValues;
@@ -38,6 +39,8 @@ public class  ProximityDbHelper{
 	// Database fields
 	private SQLiteDatabase database;
 	private ContextAwareSQLiteHelper dbHelper;
+	private boolean enableDebugging = CAFConfig.isEnableDebugging();
+	
 	private String[] allColumns = { ContextAwareSQLiteHelper.COLUMN_PROXIMITY_ID,
 			ContextAwareSQLiteHelper.COLUMN_PROXIMITY_TIMESTAMP, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_NEAR, ContextAwareSQLiteHelper.COLUMN_PROXIMITY_FAR};
 	/**
@@ -117,5 +120,22 @@ public class  ProximityDbHelper{
 		proximityRow.setFar(cursor.getFloat(2));
 
 		return proximityRow;
+	}
+	/**
+	 * Method to enable debugging
+	 * @param boolean
+	 */
+	public void setEnableDebugging(boolean value)
+	{
+		enableDebugging = value;
+	}
+	
+	/**
+	 * Method to get the present value of enableDebugging
+	 * @return boolean
+	 */
+	public boolean getEnableDebugging()
+	{
+		return enableDebugging;
 	}
 } 

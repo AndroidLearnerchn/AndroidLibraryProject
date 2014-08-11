@@ -47,7 +47,9 @@ public class FrameworkFunctionalTestActivity extends Activity {
 		CAFConfig.setTableLight(true);
 		dbHelper=  new ContextAwareSQLiteHelper(this);
 
-		accelDbHelper =  new AccelerometerDbHelper(this);
+		// Using Singleton Pattern for creating the DbHelper Object
+		accelDbHelper =   AccelerometerDbHelper.getInstance(this);
+		
 		lightDbHelper =  new LightDbHelper(this);
 		proximityDbHelper = new ProximityDbHelper(this);
 

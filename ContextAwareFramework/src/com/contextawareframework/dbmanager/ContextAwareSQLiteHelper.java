@@ -38,9 +38,11 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	// Database name for all sensor (context data) data 
 	private static final String DATABASE_NAME = "contextAwareFramework.db";
 	private static final int DATABASE_VERSION = 1;
+	private static final String TAG = "ContextAwareSQLiteHelper";
 	
 	//Added 4.8.14 Prasenjit
-	private static boolean enableDebugging = false;
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
+	
 	private ContextAwareSQLiteHelper  contextAwareSQLiteHelper;
 	private Context mContext;
 	
@@ -176,6 +178,10 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase database)
 	{
+		if(enableDebugging)
+		{
+			Log.d(TAG,"OnCreate Method Called");
+		}
 		try
 		{
 			if(CAFConfig.isTableAccelerometer())
@@ -211,9 +217,10 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.w(ContextAwareSQLiteHelper.class.getName(),
-				"Upgrading database from version " + oldVersion + " to "
-						+ newVersion + ", which will destroy all old data");
+		if(enableDebugging)
+		{
+			Log.w(TAG +" : "+ContextAwareSQLiteHelper.class.getName(),"Upgrading database from version " + oldVersion + " to "+ newVersion + ", which will destroy all old data");
+		}
 		// If database version updated then it will delete all tables with its database and create a new empty one
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCEL);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_BATTERY);
@@ -241,6 +248,8 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	{
 		return enableDebugging;
 	}
+	
+	
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context

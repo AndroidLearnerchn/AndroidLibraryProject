@@ -45,7 +45,7 @@ import com.contextawareframework.globalvariable.CAFConfig;
  */
 public class SensorController1 {
 
-	public Context SensorControllerclasscontext;
+	public Context contextFromActivity;
 	private SensorManager sensorManager;
 	private GPSTracker gps;
 	private AccelerometerDataListener accel;
@@ -62,7 +62,7 @@ public class SensorController1 {
 	
 	public SensorController1(Context context)
 	{
-		SensorControllerclasscontext = context;
+		contextFromActivity = context;
 		
 	}
 	/**
@@ -73,7 +73,7 @@ public class SensorController1 {
 		accelListener = listenerfromMainApp;
 		
 		// Create an object of specific service class to  
-		accel = AccelerometerDataListener.getInstance(SensorControllerclasscontext);
+		accel = AccelerometerDataListener.getInstance(contextFromActivity);
 		
 		if(CAFConfig.isSensorAccelerometer())
 		{
@@ -103,7 +103,7 @@ public class SensorController1 {
 		proximityListener = listenerfromMainApp;
 		
 		// Create an object of specific service class to  
-		proximity = ProximityDataListener.getInstance(SensorControllerclasscontext);
+		proximity = ProximityDataListener.getInstance(contextFromActivity);
 		
 		if(CAFConfig.isSensorProximity())
 		{						
@@ -131,7 +131,7 @@ public class SensorController1 {
 	{	
 		lightListener = listenerfromMainApp;
 		// Create an object of specific service class to  
-		light = LightDataListener.getInstance(SensorControllerclasscontext);
+		light = LightDataListener.getInstance(contextFromActivity);
 		if(CAFConfig.isSensorLight())
 		{
 			

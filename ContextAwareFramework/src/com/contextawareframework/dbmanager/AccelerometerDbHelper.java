@@ -24,6 +24,8 @@ package com.contextawareframework.dbmanager;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.contextawareframework.backgroundservices.AccelerometerDataListener;
+import com.contextawareframework.globalvariable.CAFConfig;
 import com.contextawareframework.sensors.motionsensors.Accelerometer;
 
 import android.content.ContentValues;
@@ -31,6 +33,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 /**
  * This is a database helper class for all CRUD operation on Accelerometer Sensor in Android
  */
@@ -39,20 +42,59 @@ public class  AccelerometerDbHelper{
 	// Database fields
 	private SQLiteDatabase database;
 	private ContextAwareSQLiteHelper dbHelper;
+	private static AccelerometerDbHelper accelerometerDbHelper;
+	
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
+	private String TAG =  "AccelerometerDbHelper" ;
 	private String[] allColumns = { ContextAwareSQLiteHelper.COLUMN_ACCEL_ID,
 			ContextAwareSQLiteHelper.COLUMN_ACCEL_TIMESTAMP, ContextAwareSQLiteHelper.COLUMN_ACCEL_X, ContextAwareSQLiteHelper.COLUMN_ACCEL_Y, ContextAwareSQLiteHelper.COLUMN_ACCEL_Z
 	};
+	
+	/**
+	 * Method to enable debugging
+	 * @param boolean
+	 */
+	public void setEnableDebugging(boolean value)
+	{
+		enableDebugging = value;
+	}
+	
+	/**
+	 * Method to get the present value of enableDebugging
+	 * @return boolean
+	 */
+	public boolean getEnableDebugging()
+	{
+		return enableDebugging;
+	}
+	
 	/**
 	 * Default Constructor
 	 */
-	public AccelerometerDbHelper(Context context) {
+	private AccelerometerDbHelper(Context context) {
 		dbHelper = new ContextAwareSQLiteHelper(context);
 	}
+	
+	public static synchronized AccelerometerDbHelper getInstance(Context context)
+	{
+		if (accelerometerDbHelper == null)
+			accelerometerDbHelper = new AccelerometerDbHelper(context);
+
+		return accelerometerDbHelper;
+	}
+	
 	/**
 	 * Method to open the database for writing
 	 */
 	public void open() throws SQLException {
+		try{
 		database = dbHelper.getWritableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 	/**
 	 * Method to close the database connection
@@ -61,24 +103,35 @@ public class  AccelerometerDbHelper{
 		dbHelper.close();
 	}
 
-	//prasen
 	/**
 	 * Method to create insert a row of data into the database
 	 */
 	public Accelerometer createAccelRowData(long timestamp,Float x, Float y, Float z){
-		ContentValues values = new ContentValues();
-		values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_TIMESTAMP, timestamp);
-		values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_X,x);
-		values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_Y, y);
-		values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_Z, z);
-		long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_ACCEL, null,
+		Accelerometer newRow = null ;
+		try
+		{
+			ContentValues values = new ContentValues();
+			values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_TIMESTAMP, timestamp);
+			values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_X,x);
+			values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_Y, y);
+			values.put(ContextAwareSQLiteHelper.COLUMN_ACCEL_Z, z);
+			long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_ACCEL, null,
 				values);
 		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_ACCEL,
 				allColumns, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID + " = " + insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
-		Accelerometer newRow = cursorToAccelRow(cursor);
+		 newRow = cursorToAccelRow(cursor);
 		cursor.close();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"createAccelRowDataMethod");
+		}
 		return newRow;
 	}
 
@@ -86,17 +139,26 @@ public class  AccelerometerDbHelper{
 	 * Method to delete a row from database.
 	 */
 	public void deleteAccelRowData(Accelerometer accel) {
+		try{
 		long id = accel.getId();
 		System.out.println("Comment deleted with id: " + id);
 		database.delete(ContextAwareSQLiteHelper.TABLE_ACCEL, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID+ " = " + id, null);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
 	}
+	
 	/**
 	 * Method to list all row of the Accelerometer table
 	 */
 	public List<Accelerometer> getAllRows() {
 		List<Accelerometer> accelRows = new ArrayList<Accelerometer>();
-
-		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_ACCEL,
+		Cursor cursor;
+		try
+		{
+			cursor = database.query(ContextAwareSQLiteHelper.TABLE_ACCEL,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
@@ -107,6 +169,15 @@ public class  AccelerometerDbHelper{
 		}
 		// Make sure to close the cursor
 		cursor.close();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"getAllRows");
+		}
 		return accelRows;
 	}
 	/**
@@ -114,10 +185,20 @@ public class  AccelerometerDbHelper{
 	 */
 	private Accelerometer cursorToAccelRow(Cursor cursor) {
 		Accelerometer accelRow = new Accelerometer();
+		try{
 		accelRow.setTimestamp(cursor.getLong(0));
 		accelRow.setX(cursor.getFloat(1));
 		accelRow.setY(cursor.getFloat(2));
 		accelRow.setZ(cursor.getFloat(3));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		if(enableDebugging)
+		{
+			Log.d(TAG,"cursorToAccelRow");
+		}
 		return accelRow;
 	}
 } 

@@ -3,23 +3,31 @@
  * @File        Notification
  * @Created:    21.07.2014
  * @author:     Divya
- * Last Change: 22.07.2014 by Divya
+ * Last Change: 06.08.2014 by Divya
  ******************************************************************/
-package com.contextawareframework.notificationService;
 
+package com.contextawareframework.notificationService;
+import com.contextawareframework.backgroundservices.Text2Speech;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-/**********************************************************************************
+/**
  *This class will issue notification.The developer can set Title,icon,Ticker text,
  *Content Text,Content Title by just passing the value to the startAlert() 
-***********************************************************************************/
+*/
 public class IssueNotification {
 
 	private Context context;
-	public IssueNotification(Context mcontext){
-		context=mcontext;//Passes the context of the application component 
+	private boolean readNotification = false;
+	public IssueNotification(Context mContext, boolean enableReadNotification){
+		
+		//Passes the context of the application component
+		context=mContext; 
+		
+		//the value of check is true if developer wants the notifications to be read out
+		readNotification=enableReadNotification;
 	}
 /**
  * Method to issue notification,the developer just requires to pass the PendingIntent object,Resource id 
@@ -27,31 +35,46 @@ public class IssueNotification {
  * the first line of text in the platform notification template,Text which has to be set as the second
  * line of text in the platform notification template.
  * @param pintent
- * @param icon2
+ * @param icon
  * @param tickerText
  * @param contentTitle
  * @param contentText
  */
-	public void startAlert(PendingIntent pintent,int icon2,CharSequence tickerText,CharSequence contentTitle,CharSequence contentText)//(View view)
+	public void startAlert(PendingIntent pintent,int icon,CharSequence tickerText,CharSequence contentTitle,CharSequence contentText,int id)//(View view)
 	{ 
 		try{
-			NotificationCompat.Builder noti=new NotificationCompat.Builder(context);
+			NotificationCompat.Builder notification = new NotificationCompat.Builder(context);
+			
 			//Sets the second line of text in the platform notification template.
-			noti.setContentTitle(contentTitle);
+			notification.setContentTitle(contentTitle);
+			
 			//Sets the first line of text in the platform notification template.
-			noti.setContentText(contentText);
+			notification.setContentText(contentText);
+			
 			//Sets the icon 
-			noti.setSmallIcon(icon2);
+			notification.setSmallIcon(icon);
+			
 			//Sets the text to scroll on the status bar
-			noti.setTicker(tickerText);
+			notification.setTicker(tickerText);
+			
 			//Supply a PendingIntent to be sent when the notification is clicked.
-			noti.setContentIntent(pintent);
+			notification.setContentIntent(pintent);
+			
 			//Notification automatically dismissed when user touches it
-			noti.setAutoCancel(true);
+			notification.setAutoCancel(true);
+			
 			//Obtain a handle to Notification Service
 			NotificationManager nmgr=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+			
 			//Post notification on the status bar
-			nmgr.notify(0,noti.build());
+			nmgr.notify(id,notification.build());
+			
+			//Check if user wants the notification to be read out
+				if(readNotification){
+					Intent intent=new Intent(context,Text2Speech.class);
+					intent.putExtra("From",contentTitle);
+					context.startService(intent);
+				}
 
 		}
 	
