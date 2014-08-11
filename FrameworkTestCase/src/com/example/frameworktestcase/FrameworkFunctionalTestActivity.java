@@ -50,8 +50,8 @@ public class FrameworkFunctionalTestActivity extends Activity {
 		// Using Singleton Pattern for creating the DbHelper Object
 		accelDbHelper =   AccelerometerDbHelper.getInstance(this);
 		
-		lightDbHelper =  new LightDbHelper(this);
-		proximityDbHelper = new ProximityDbHelper(this);
+		lightDbHelper =  LightDbHelper.getInstance(this);
+		proximityDbHelper = ProximityDbHelper.getInstance(this);
 
 		accelDbHelper.open();
 		proximityDbHelper.open();
@@ -133,10 +133,13 @@ public class FrameworkFunctionalTestActivity extends Activity {
 				else
 				{
 
-					Log.d("Debug", " Un-Registering  proximity sensor");
+					Log.d(TAG, " Un-Registering  proximity sensor");
 					try{
-						controller.unregisterProximityService(proximitySensorListener);
-						CAFConfig.setSensorProximity(false);
+						if(proximitySensorListener!=null)
+						{
+							controller.unregisterProximityService(proximitySensorListener);
+							CAFConfig.setSensorProximity(false);
+						}
 					}
 					catch(ProximitySensorException e)
 					{
@@ -170,8 +173,11 @@ public class FrameworkFunctionalTestActivity extends Activity {
 
 					Log.d(TAG, " Un-Registering  Light sensor");
 					try{
-						controller.unregisterLightService(lightSensorListener);
-						CAFConfig.setSensorLight(false);
+						if(lightSensorListener!=null)
+						{
+							controller.unregisterLightService(lightSensorListener);
+							CAFConfig.setSensorLight(false);
+						}
 					}
 					catch(LightSensorException e)
 					{
@@ -204,8 +210,12 @@ public class FrameworkFunctionalTestActivity extends Activity {
 
 					Log.d(TAG, " Un-Registering  Accelerometer sensor");
 					try{
-						controller.unregisterAccelerometerService(accelSensorListener);
-						CAFConfig.setSensorAccelerometer(false);
+						if(accelSensorListener!=null)
+						{
+							
+							controller.unregisterAccelerometerService(accelSensorListener);
+							CAFConfig.setSensorAccelerometer(false);
+						}
 					}
 					catch(AccelerometerSensorException e)
 					{
