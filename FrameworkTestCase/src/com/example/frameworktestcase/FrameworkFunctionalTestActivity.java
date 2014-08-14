@@ -41,7 +41,8 @@ public class FrameworkFunctionalTestActivity extends Activity {
 		chkAccel = (CheckBox) findViewById(R.id.chkBoxAccelerometer);
 		chkProximity = (CheckBox) findViewById(R.id.chkBoxProximity);
 		chkLight = (CheckBox) findViewById(R.id.chkBoxLight);
-		controller = new SensorController1(this);
+		controller = SensorController1.getInstance(this);
+		
 		CAFConfig.setTableAccelerometer(true);
 		CAFConfig.setTableProximity(true);
 		CAFConfig.setTableLight(true);

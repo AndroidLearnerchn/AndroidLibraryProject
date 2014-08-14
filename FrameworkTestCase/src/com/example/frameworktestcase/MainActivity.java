@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
-		controller = new SensorController1(this);
+		controller = SensorController1.getInstance(this);
 		try
 		{
 			
