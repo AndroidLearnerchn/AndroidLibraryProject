@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2013 by CDAC Chennai 
-<<<<<<< .mine
+
  *	
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
  * limitations under the License.
  * 
  * @File        Text2Speech
-=======
- * @File        TextToSpeech
->>>>>>> .r47
  * @Created:    04.08.2014
  * @author:     Divya
  * Last Change: 05.08.2014 by Divya

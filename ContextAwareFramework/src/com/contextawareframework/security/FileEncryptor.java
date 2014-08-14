@@ -29,6 +29,7 @@ import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.spec.SecretKeySpec;
+
 /**
  * To encrypt / decrypt any file. User has to pass the algo name and path where
  * the encrypted file / decrypted file has to be created. In case user is creating 
@@ -40,29 +41,33 @@ public class FileEncryptor{
 
 	private String algo;
 	private File file;
+	private String secretKey;
 	/**
 	 * Description : Custom Constructor
 	 */
-	public FileEncryptor(String algo,String path) {
-		this.algo=algo; //setting algo
+	public FileEncryptor(String path) {
+		this.algo="DES/ECB/PKCS5Padding"; //setting algo DES/ECB/PKCS5Padding
 		this.file=new File(path); //setting file
+		//this.secretKey = secretKey;  
 	}
 
-	//To encrypt any file
 	/**
 	 * Description : To encrypt a given file with the provided algo
 	 */
-	public void encrypt() throws Exception{
+	public void encrypt(String secretKey) throws Exception{
 
 		//opening streams
 		FileInputStream fis =new FileInputStream(file);
 		file=new File(file.getAbsolutePath()+".enc");
 		FileOutputStream fos =new FileOutputStream(file);
+
 		//         BASE64Decoder decoder = new BASE64Decoder();
 		//         BASE64Encoder encoder = new BASE64Encoder();
 		//generating key
-		byte k[] = "HignDlPs".getBytes();   
 
+		//byte k[] = "HignDlPs".getBytes();   
+
+		byte k[] = secretKey.getBytes();
 		SecretKeySpec key = new SecretKeySpec(k,algo.split("/")[0]);  //SecretKeySpec(k,algo.split("n")[0]);
 		if (key != null) 
 		{  
@@ -74,13 +79,14 @@ public class FileEncryptor{
 
 		//creating and initialising cipher and cipher streams
 		Cipher encrypt =  Cipher.getInstance(algo); 
-		System.out.println("Key - " + key);
+		//System.out.println("Key - " + key);
 		encrypt.init(Cipher.ENCRYPT_MODE, key);  
-		System.out.println("Key - " + encrypt);
+		//System.out.println("Key - " + encrypt);
 		CipherOutputStream cout=new CipherOutputStream(fos, encrypt);
 
 		byte[] buf = new byte[1024];
 		int read;
+
 		while((read=fis.read(buf))!=-1)  //reading data
 			cout.write(buf,0,read);  //writing encrypted data
 
@@ -89,11 +95,11 @@ public class FileEncryptor{
 		cout.flush();
 		cout.close();
 	}
-	// Method to decrypt the  encrypted file
+
 	/**
 	 * Description : To decrypt a given file with the provided algo
 	 */
-	public void decrypt() throws Exception{
+	public void decrypt(String secretKey) throws Exception{
 
 		//opening streams
 		FileInputStream fis =new FileInputStream(file);
@@ -101,7 +107,8 @@ public class FileEncryptor{
 		FileOutputStream fos =new FileOutputStream(file);               
 
 		//generating same key
-		byte k[] = "HignDlPs".getBytes();   
+		//byte k[] = "HignDlPs".getBytes();   
+		byte k[] = secretKey.getBytes();
 		SecretKeySpec key = new SecretKeySpec(k,algo.split("/")[0]);  
 
 		//creating and initialising cipher and cipher streams

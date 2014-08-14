@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * @File        GPSTracker (Original file from Google Sample Code)
+ * @File        GPSTracker (Modified ( Original file, GPSTracker) from Google Sample Code)
  * @Created:    20.11.2013
  * @author:     Rekha
  * Last Change: 24.03.2014 by Rekha
