@@ -392,7 +392,7 @@ public class ContextAwareFunction {
 	 */
 	public boolean shakeUp(float zAxis)
 	{
-		if(zAxis < -12)
+		if(zAxis < -15)
 			return true;
 		else
 			return false;
@@ -402,7 +402,7 @@ public class ContextAwareFunction {
 	 */
 	public boolean shakeDown(float zAxis)
 	{
-		if(zAxis > 12)
+		if(zAxis > 15)
 			return true;
 		else
 			return false;

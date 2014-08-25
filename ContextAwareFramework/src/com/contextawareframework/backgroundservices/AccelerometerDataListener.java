@@ -16,7 +16,7 @@
  * @File        AccelerometerDataListener
  * @Created:    20.11.2013
  * @author:     Prasenjit
- * Last Change: 24.07.2014 by Prasenjit
+ * Last Change: 22.08.2014 by Prasenjit
  */
 
 package com.contextawareframework.backgroundservices;
@@ -37,30 +37,30 @@ import android.widget.Toast;
  * 				 the package name inside service tag of your Android manifest file
  */
 public class AccelerometerDataListener extends CAFService {
-	
+
 	/** Android SensorManager object to work with sensors. This variable is not 
 	 * exposed to user.
 	 * */
 	private SensorManager mSensorManager;
-	
+
 	/* Local variable to select the type of sensor.*/
 	private Sensor mAccelerometer;
 
-    /* Local variable to store the context of the calling activity.*/
+	/* Local variable to store the context of the calling activity.*/
 	private Context mContext = null ;
-	
+
 	/* Local variable to store the SensorEventListener from the calling / implementing Activity. */
 	private SensorEventListener listener;
-	
+
 	/* Tag for debugging the class */
 	private final String TAG = "AccelerometerDataListener";
-	
+
 	/* To enable / disable Log messages. */
 	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
-	
+
 	/* Class variable */
 	private static AccelerometerDataListener accelDataListenerInstance;
-	
+
 	/**
 	 * Method to enable debugging
 	 * @param boolean
@@ -69,7 +69,7 @@ public class AccelerometerDataListener extends CAFService {
 	{
 		enableDebugging = value;
 	}
-	
+
 	/**
 	 * Method to get the present value of enableDebugging
 	 * @return boolean
@@ -78,7 +78,7 @@ public class AccelerometerDataListener extends CAFService {
 	{
 		return enableDebugging;
 	}
-	
+
 	/**
 	 * Description : Private constructor. Singleton Pattern to create the class object
 	 * @param context Calling Activity context
@@ -87,7 +87,7 @@ public class AccelerometerDataListener extends CAFService {
 	{
 		mContext = context;
 	}
-	
+
 	/**
 	 * Description : Method to create an instance of AccelerometerDataListener Class.
 	 * @param context Calling Activity context
@@ -100,7 +100,7 @@ public class AccelerometerDataListener extends CAFService {
 
 		return accelDataListenerInstance;
 	}
-	
+
 	/**
 	 * Method to enable Accelerometer Sensor in Android
 	 * @param listenerFromActiity : User has to implement the SensorEventListener and pass it 
@@ -108,9 +108,19 @@ public class AccelerometerDataListener extends CAFService {
 	 */
 	public void enableAccelerometerListener(SensorEventListener listenerFromActivity,int sampleRate)
 	{
-		listener = listenerFromActivity;
-		if(CAFConfig.isEnableDebugging())
-			Log.d(TAG,"enableAccelerometer Method");
+		if(listenerFromActivity!=null)
+		{	
+			listener = listenerFromActivity;
+		}
+		else			
+		{	
+			if(CAFConfig.isEnableDebugging())
+			{
+				Log.d(TAG,"enableAccelerometer Method");
+				Log.d(TAG,"listenerFromActivity is null");
+			}
+
+		}
 		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
 		if(mSensorManager == null)
 		{
@@ -138,19 +148,25 @@ public class AccelerometerDataListener extends CAFService {
 			}
 		}
 	}
-	
+
 	/**
 	 * Method to enable disable Accelerometer Sensor in Android
 	 */
-	public void disableAccelerometerListener(SensorEventListener listenerFromMain)
+	public void disableAccelerometerListener(SensorEventListener listenerFromActivity)
 	{	
-		if(enableDebugging)
+		try
 		{
-			Log.d(TAG,"disableAccelerometer Method Called");
+			if(listenerFromActivity!=null)
+				mSensorManager.unregisterListener(listenerFromActivity);
+			else
+			{
+				if(enableDebugging)
+					Log.d(TAG,"listenerFromActivity is null");
+			}
 		}
-		if(mSensorManager != null)
+		catch(NullPointerException e)
 		{
-			mSensorManager.unregisterListener(listenerFromMain);
+			e.printStackTrace();
 		}
 	}
 

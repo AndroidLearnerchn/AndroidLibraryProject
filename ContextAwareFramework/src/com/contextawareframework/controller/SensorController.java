@@ -13,199 +13,297 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * @File        SensorController
- * @Created:    25.11.2013
+ * @File        SensorController1
+ * @Created:    19.11.2013
  * @author:     Prasenjit
- * Last Change: 26.11.2013 by Prasenjit
+ * Last Change: 12.08.2014 by Prasenjit
  */
 
 package com.contextawareframework.controller;
 
-import com.contextawareframework.globalvariable.CAFConfig;
-
 import android.content.Context;
-import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.contextawareframework.backgroundservices.AccelerometerDataListener;
+import com.contextawareframework.backgroundservices.GPSTracker;
+import com.contextawareframework.backgroundservices.LightDataListener;
+import com.contextawareframework.backgroundservices.ProximityDataListener;
+import com.contextawareframework.exceptions.AccelerometerSensorException;
+import com.contextawareframework.exceptions.GPSSensorException;
+import com.contextawareframework.exceptions.LightSensorException;
+import com.contextawareframework.exceptions.ProximitySensorException;
+import com.contextawareframework.globalvariable.CAFConfig;
+
+
 /**
- * This class is the controller part. User can register the sensor listener. 
- * Presently This class is not being used for registering / un-registering the sensors.
+ * Register / unregister the sensor listener using the specific methods. To use 
+ * this class, create an object of the class, pass the localcontext, assign the 
+ * specific sensor global variable true, call the method written here
  * 
- * @Note : SensorController1 is being used for now.
+ * Sample Code : 
+ * ---------------------------------------------------------------------------------
+ * SensorController1 controller = SensorController1.getInstance(getApplicationContext);
+ * 
+ * CAFConfig.setSensor[Name of Sensor](true);
+ * 																			Delay
+ * controller.register[SensorName]Service(sensorListener,SensorController1.NORMAL);
+ * ----------------------------------------------------------------------------------
  */
-
 public class SensorController {
-	public Context SensorControllerclasscontext;
-	private SensorEventListener listener;
-	private SensorManager sensorManager;
+
+	private Context contextFromActivity;
 	
-	// Use this string constant to debug this class
-    private static final String TAG = "SensorController";
-    
-	public SensorController(Context context)
-	{
-		SensorControllerclasscontext = context;
-	}
+	/* GPSTracker Class reference variable */
+	private GPSTracker gps;
+	
+	/* AccelerometerDataListener Class reference variable */
+	private AccelerometerDataListener accel;
+	
+	/* ProximityDataListener Class reference variable */
+	private ProximityDataListener proximity;
+	
+	/* LightDataListerner Class reference variable*/
+	private LightDataListener light;
+	
+	/* SensorEventListener Class reference variable*/
+	private SensorEventListener accelListener, proximityListener, lightListener;
+	
+	/* Tag for debugging information*/
+	private static final String TAG = "SENSORCONTROLLER1";
+
+
 	/**
-	 * Method to register the Proximity Sensor listener. Listener will be implemented on
-	 * Main Application level. For storing the data aslo user will mention in the listener
+	 * Set sensor delay to SENSOR_DELAY_FASTEST
 	 */
-	public final void registerProximityService(SensorEventListener listenerfromMainApp) 
+	public static final int FASTEST = SensorManager.SENSOR_DELAY_FASTEST;
+
+	/**
+	 * Set sensor delay to SENSOR_DELAY_GAME
+	 */
+	public static final int GAME = SensorManager.SENSOR_DELAY_GAME;
+
+	/**
+	 * Set sensor delay to SENSOR_DELAY_NORMAL
+	 */
+	public static final int NORMAL = SensorManager.SENSOR_DELAY_NORMAL;
+
+	/**
+	 * Set sensor delay to SENSOR_DELAY_UI
+	 */
+	public static final int UI = SensorManager.SENSOR_DELAY_UI;
+
+	/* To enable / disable Log messages. */
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
+
+	/* Class reference variable */
+	private static SensorController controller;
+
+	/**
+	 * Method to enable debugging
+	 * @param boolean
+	 */
+	public void setEnableDebugging(boolean value)
 	{
-		listener = listenerfromMainApp;
-		if(CAFConfig.isSensorProximity())
-		{
-			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
-	        Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-	        if (proximitySensor == null){
-	            Toast.makeText(SensorControllerclasscontext,
-	              "No Proximity Sensor! quit-",
-	              Toast.LENGTH_LONG).show();
-	           }
-	        
-	        else
-	        {
-	        	
-	            float max =  proximitySensor.getMaximumRange();
-	            Toast.makeText(SensorControllerclasscontext,
-	  	              "Proximity Sensor found! value = " + max,
-	  	              Toast.LENGTH_LONG).show();
-	            Log.d("Debug","max value = " + max);
-	            
-	            sensorManager.registerListener(listener,
-	            		proximitySensor,
-		                SensorManager.SENSOR_DELAY_NORMAL);//proximitySensorEventListener
-	         }
-	    }
-		else
-		{
-			//Else part
-			
-		}
+		enableDebugging = value;
 	}
 
 	/**
-	 * Method to register the Proximity Sensor listener. Listener will be implemented on
-	 * Main Application level. For storing the data aslo user will mention in the listener
+	 * Method to get the present value of enableDebugging
+	 * @return boolean
 	 */
-	public final void registerLightService(SensorEventListener listenerfromMainApp) 
+	public boolean getEnableDebugging()
 	{
-		listener = listenerfromMainApp;
-		if(CAFConfig.isSensorLight())
-		{
-			
-			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
-	        Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-	        if (lightSensor == null){
-	            Toast.makeText(SensorControllerclasscontext,
-	              "No Light Sensor! quit-",
-	              Toast.LENGTH_LONG).show();
-	           }
-	        
-	        else
-	        {
-	        	
-	            float max =  lightSensor.getMaximumRange();
-	            Toast.makeText(SensorControllerclasscontext,
-	  	              "Light Sensor found! value = " + max,
-	  	              Toast.LENGTH_LONG).show();
-	            Log.d("Debug","max value = " + max);
-	            
-	            sensorManager.registerListener(listener,
-	            		lightSensor,
-		                SensorManager.SENSOR_DELAY_NORMAL);//proximitySensorEventListener
-	            
-	         }
-	    }
-		else
-		{
-			//Else part when GLobal vairable fasle
-			
-		}
+		return enableDebugging;
 	}
+
 	/**
-	 * Method to register the Proximity Sensor listener. Listener will be implemented on
-	 * Main Application level. For storing the data aslo user will mention in the listener
+	 * Description : Private constructor. Singleton Pattern to create the class object
+	 * @param context Calling Activity context
 	 */
-	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp) 
+	private SensorController(Context context)
 	{
-		listener = listenerfromMainApp;
+		contextFromActivity = context;
+	}
+
+	/**
+	 * Description : Method to create an instance of AccelerometerDataListener Class.
+	 * @param context Calling Activity context
+	 * @return AccelerometerDataListener Class instance
+	 */
+	public static synchronized SensorController getInstance(Context context)
+	{
+		if (controller == null)
+			controller = new SensorController(context);
+
+		return controller;
+	}
+
+	/**
+	 * To register the Accelerometer Service 
+	 */
+	public final void registerAccelerometerService(SensorEventListener listenerfromMainApp, int sampleRate) throws AccelerometerSensorException // 1st Sensor
+	{
+		accelListener = listenerfromMainApp;
+
+		// Create an object of specific service class to  
+		accel = AccelerometerDataListener.getInstance(contextFromActivity);
+
 		if(CAFConfig.isSensorAccelerometer())
 		{
-			
-			sensorManager = (SensorManager)SensorControllerclasscontext.getSystemService(Context.SENSOR_SERVICE);
-	        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-	        if (accelerometerSensor == null){
-	            Toast.makeText(SensorControllerclasscontext,
-	              "No Accelerometer Sensor! quit-",
-	              Toast.LENGTH_LONG).show();
-	           }
-	        
-	        else
-	        {
-	        	
-	            float max =  accelerometerSensor.getMaximumRange();
-	            Toast.makeText(SensorControllerclasscontext,
-	  	              "Accelerometer Sensor found! value = " + max,
-	  	              Toast.LENGTH_LONG).show();
-	            Log.d("Debug","max value = " + max);
-	            
-	            sensorManager.registerListener(listener,
-	            		accelerometerSensor,
-		                SensorManager.SENSOR_DELAY_NORMAL);//proximitySensorEventListener
-	         }
-	    }
+			try
+			{	
+				if(enableDebugging)
+					Log.d(TAG,"inside registerAccelerometerListner");
+				accel.enableAccelerometerListener(accelListener, sampleRate);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 		else
-		{
-			//Else part
-			
+		{			
+			if(enableDebugging)
+				Log.d(TAG,"SENSOR_ACCELEROMETER is false");
+			accel.disableAccelerometerListener(accelListener);
+
 		}
 	}
-	// Here No need of all these function, only one will suffice the requirement as we are passing
-	// listener to the unregister method, we just have to write a switch statement to set the global
-	// Variable true or false. 
-	/*
-	 * To Unregister the Light Listener
-	 * */
-	public final void unregisterLightService(SensorEventListener listenerfromMainApp)
+	/**
+	 * To register the Proximity Service
+	 */
+	public final void registerProximityService(SensorEventListener listenerfromMainApp, int sampleRate) throws ProximitySensorException
 	{
-		listener = listenerfromMainApp;
-		sensorManager.unregisterListener(listener);
-		CAFConfig.setSensorLight(false);
-		
+		proximityListener = listenerfromMainApp;
+
+		// Create an object of specific service class to  
+		proximity = ProximityDataListener.getInstance(contextFromActivity);
+
+		if(CAFConfig.isSensorProximity())
+		{						
+			try
+			{
+				if(enableDebugging)
+					Log.d(TAG,"inside registerProximityListener");
+				proximity.enableProximitySensor(proximityListener, sampleRate);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			if(enableDebugging)
+				Log.d(TAG,"SENSOR_PROXIMITY is false");
+			proximity.disableProximitySensor(proximityListener);
+		}
 	}
-	/*
-	 * To Unregister the Proximity Listener
-	 * */
-	public final void unregisterProximityService(SensorEventListener listenerfromMainApp)
-	{
-		listener = listenerfromMainApp;
-		sensorManager.unregisterListener(listener);
-		CAFConfig.setSensorProximity(false);
+
+	/**
+	 * To register the Light Service
+	 */
+	public final void registerLightService(SensorEventListener listenerfromMainApp, int sampleRate) throws LightSensorException
+	{	
+		lightListener = listenerfromMainApp;
 		
+		// Create an object of specific service class to  
+		light = LightDataListener.getInstance(contextFromActivity);
+		if(CAFConfig.isSensorLight())
+		{
+
+			try
+			{
+				if(enableDebugging)
+					Log.d(TAG,"inside registerProximityListener");
+				if(lightListener!=null)
+					light.enableLightSensor(lightListener, sampleRate);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			if(enableDebugging)
+				Log.d(TAG,"SENSOR_LIGHT is false");
+			light.disableLightSensor(lightListener);
+
+		}
 	}
-	/*
-	 * To Unregister the Location Listener
-	 * */
-	public final void unregisterLocationService(SensorEventListener listenerfromMainApp)
+
+	/**
+	 * To un-register the Accelerometer 
+	 */
+	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
 	{
-		listener = listenerfromMainApp;
-		sensorManager.unregisterListener(listener);
+		//sensorManager.unregisterListener(lightSensorEventListener); // Change the Listener
+		if(listenerfromMainApp!=null)
+		{
+			accel.disableAccelerometerListener(listenerfromMainApp);
+			CAFConfig.setSensorAccelerometer(false);
+			if(enableDebugging)
+				Log.d(TAG,"Unregister Accelerometer Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+
+	}
+	/**
+	 * To un-register the Proximity Service
+	 */
+	public final void unregisterProximityService(SensorEventListener listenerfromMainApp) throws ProximitySensorException
+	{
+		if(listenerfromMainApp!=null)
+		{
+			proximity.disableProximitySensor(listenerfromMainApp);
+			CAFConfig.setSensorProximity(false);
+			if(enableDebugging)
+				Log.d(TAG,"Unregister Proximity Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+	}
+	/**
+	 * To un-register the Light sensor Service
+	 */
+	public final void unregisterLightService(SensorEventListener listenerfromMainApp) throws LightSensorException
+	{
+		if(listenerfromMainApp!=null)
+		{
+			light.disableLightSensor(listenerfromMainApp);
+			CAFConfig.setSensorLight(false);
+			if(enableDebugging)
+				Log.d(TAG,"Unregister Light Sensor");
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+	}
+	/**
+	 * To un-register the Battery Service
+	 */
+	public final void unregisterBatteryService() 
+	{
+
+	}
+	/**
+	 * To un-register the Location Service
+	 */
+	public final void unregisterLocationService() throws GPSSensorException
+	{
+		//gps.stopUsingGPS(); // Change the Listener 
+
 		CAFConfig.setSensorLocation(false);
-		
+		if(enableDebugging)
+			Log.d(TAG,"Unregister Location Service");
 	}
-	/*
-	 * To Unregister the Accelerometer Listener
-	 * */
-	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp)
-	{
-		listener = listenerfromMainApp;
-		sensorManager.unregisterListener(listener);
-		CAFConfig.setSensorAccelerometer(false);
-		
-	}
-	
-	
 }

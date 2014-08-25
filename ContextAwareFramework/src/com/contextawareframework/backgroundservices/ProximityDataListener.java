@@ -16,7 +16,7 @@
  * @File        ProximityDataListener
  * @Created:    20.11.2013
  * @author:     Prasenjit
- * Last Change: 24.07.2014 by Prasenjit
+ * Last Change: 22.08.2014 by Prasenjit
  */
 package com.contextawareframework.backgroundservices;
 
@@ -99,11 +99,20 @@ public class ProximityDataListener extends CAFService {
 	/**
 	 * Method to enable Proximity Sensor in Android
 	 */
-	public void enableProximitySensor(SensorEventListener listenerFromActivity, int sampleRate) {
-		listener = listenerFromActivity;
-		if(enableDebugging)
+	public void enableProximitySensor(SensorEventListener listenerFromActivity, int sampleRate) 
+	{
+
+		if(listenerFromActivity!=null)
 		{
-			Log.d(TAG, "enableProximity method");
+			listener = listenerFromActivity;
+		}
+		else			
+		{
+			if(CAFConfig.isEnableDebugging())
+			{
+				Log.d(TAG,"enableProximitySensor Method");
+				Log.d(TAG,"listenerFromActivity is null");
+			}
 		}
 		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
 		if (mSensorManager == null) 
@@ -137,16 +146,22 @@ public class ProximityDataListener extends CAFService {
 	/**
 	 * Method to disable Proximity Sensor in Android
 	 */
-	public void disableProximitySensor(SensorEventListener listenerFromMain) {
-		try 
+	public void disableProximitySensor(SensorEventListener listenerFromActivity)
+	{
+		try
 		{			
-			Log.d(TAG, "disableProximity Method");
-			if (mSensorManager != null)
+			if(mSensorManager != null)
 			{
-				mSensorManager.unregisterListener(listenerFromMain);
+				if(listenerFromActivity!=null)
+					mSensorManager.unregisterListener(listenerFromActivity);
+				else
+				{
+					if(enableDebugging)
+						Log.d(TAG,"listenerFromActivity is null");
+				}
 			}
-		} 
-		catch (Exception e) 
+		}
+		catch(NullPointerException e)
 		{
 			e.printStackTrace();
 		}

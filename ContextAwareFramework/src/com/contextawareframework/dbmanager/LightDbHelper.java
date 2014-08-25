@@ -143,7 +143,7 @@ public class  LightDbHelper{
 	/**
 	 * Method to list all row of the Light table
 	 */
-	public List<Light> getAllComments() {
+	public List<Light> getAlRows() {
 		List<Light> lightRowData = new ArrayList<Light>();
 		try
 		{

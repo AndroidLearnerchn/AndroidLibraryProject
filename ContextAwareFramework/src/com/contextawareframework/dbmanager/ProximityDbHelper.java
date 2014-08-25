@@ -35,7 +35,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * This is a database helper class for all CRUD operation on Accelerometer Sensor in Android
+ * This is a database helper class for all CRUD operation on Proximity Sensor in Android
  */
 public class  ProximityDbHelper{
 
@@ -127,7 +127,7 @@ public class  ProximityDbHelper{
 	/**
 	 * Method to list all row of the Proximity table
 	 */
-	public List<Proximity> getAllComments() {
+	public List<Proximity> getAllRows() {
 		List<Proximity> proximityRow = new ArrayList<Proximity>();
 		try
 		{

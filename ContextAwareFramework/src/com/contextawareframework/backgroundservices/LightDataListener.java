@@ -16,7 +16,7 @@
  * @File         LightDataListener
  * @Created:     20.11.2013
  * @author:      Prasenjit
- * Last Changed: 24.07.2014 by Prasenjit
+ * Last Changed: 22.08.2014 by Prasenjit
  */
 package com.contextawareframework.backgroundservices;
 
@@ -102,9 +102,20 @@ public class LightDataListener  extends CAFService{
 	 * */
 	public void enableLightSensor(SensorEventListener listenerFromActivity, int sampleRate)
 	{
-		listener = listenerFromActivity;
-		if(enableDebugging)
-			Log.d(TAG,"enableLightSensor method");
+
+		if(listenerFromActivity!=null)
+		{
+			listener = listenerFromActivity;
+		}
+		else			
+		{	
+			if(CAFConfig.isEnableDebugging())
+			{
+				Log.d(TAG,"enableLightSensor Method");
+				Log.d(TAG,"listenerFromActivity is null");
+			}
+
+		}
 		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
 		if(mSensorManager == null)
 		{
@@ -138,9 +149,22 @@ public class LightDataListener  extends CAFService{
 	 * */
 	public void disableLightSensor(SensorEventListener listenerFromActivity)
 	{
-		if(mSensorManager != null)
+		try
 		{
-			mSensorManager.unregisterListener(listenerFromActivity);
+			if(mSensorManager != null)
+			{
+				if(listenerFromActivity!=null)
+					mSensorManager.unregisterListener(listenerFromActivity);
+				else
+				{
+					if(enableDebugging)
+						Log.d(TAG,"listenerFromActivity is null");
+				}
+			}
+		}
+		catch(NullPointerException e)
+		{
+			e.printStackTrace();
 		}
 	}
 

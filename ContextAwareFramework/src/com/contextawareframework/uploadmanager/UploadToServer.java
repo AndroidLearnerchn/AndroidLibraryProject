@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2013 by CDAC Chennai
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,12 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Copyright (c) 2013 by CDAC Chennai 
+ *  
  * @File        UploadToServer
  * @Created:    01.01.2014
  * @author:     Prasenjit
- * Last Change: 13.01.2014 by Prasenjit
+ * Last Change: 22.08.2014 by Prasenjit
  */
 package com.contextawareframework.uploadmanager;
 
@@ -41,10 +42,10 @@ import android.widget.Toast;
  */
 public class UploadToServer {
     
-    TextView messageText;
-    Button uploadButton;
+   // TextView messageText;
+   // Button uploadButton;
     int serverResponseCode = 0;
-    ProgressDialog dialog = null;
+    //ProgressDialog dialog = null;
        
     String upLoadServerUri = null;
     
