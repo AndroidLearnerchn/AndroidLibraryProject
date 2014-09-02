@@ -266,14 +266,14 @@ public class Csvfilewriter {
 		try
 		{
 			//file.createNewFile();     
-			String  tableName = tablename ; 
+			String  tableName = tablename; 
 			Log.d("Debug",tablename);
 
 			SQLiteDatabase db = dbhelper.getReadableDatabase();
 			//select _id from Accelerometer where _id <= (select  max(_id)-10 from Accelerometer);
 			//String query = "select * from Accelerometer";//where _id <= (select  max(_id)-10 from Accelerometer)"; //select * from "+ tablename +" where _id > max(_id)-10 ";// + curRowCount;
 			Log.d("Debug","PrevRowCount = " + prevRowCount);
-			String query = "select * from Accelerometer where _id > " + prevRowCount  ;
+			String query = "select * from "+ tableName +" where _id > " + prevRowCount;
 			String queryForgetCount = " select * from Accelerometer "; 
 			Cursor getcolumnCount = db.rawQuery(queryForgetCount, null);
 			totalRowCount = getcolumnCount.getCount();
@@ -294,7 +294,7 @@ public class Csvfilewriter {
 				writer.append(data+"\n");
 
 
-				Log.d("Debug","Data from sursor to write function");
+				Log.d("Debug","Data from cursor to write function");
 				//String arrStr[] ={curCSV.getString(0),curCSV.getString(1), curCSV.getString(2),curCSV.getString(3),curCSV.getString(4)};
 				//System.out.println("All val = " + arrStr[i]);
 				//csvWrite.writeNext(arrStr);
