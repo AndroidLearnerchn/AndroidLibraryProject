@@ -224,7 +224,7 @@ public class CsvFileWriter {
 				String query = "select * from "+ tableName +" where _id > " + prevRowCount;
 
 				//To get the row count
-				String queryForgetCount = " select * from Accelerometer ";
+				String queryForgetCount = " select * from  " + tableName ;
 
 				// Execute the query 
 				Cursor getcolumnCount = database.rawQuery(queryForgetCount, null);
