@@ -28,6 +28,7 @@ import android.util.Log;
 
 import com.contextawareframework.backgroundservices.AccelerometerDataListener;
 import com.contextawareframework.backgroundservices.GPSTracker;
+import com.contextawareframework.backgroundservices.GyroscopeDataListener;
 import com.contextawareframework.backgroundservices.LightDataListener;
 import com.contextawareframework.backgroundservices.ProximityDataListener;
 import com.contextawareframework.exceptions.AccelerometerSensorException;
@@ -61,6 +62,9 @@ public class SensorController {
 	/* AccelerometerDataListener Class reference variable */
 	private AccelerometerDataListener accel;
 	
+	/* GyroscopeDataListener Class reference variable */
+	private GyroscopeDataListener gyroscope;
+	
 	/* ProximityDataListener Class reference variable */
 	private ProximityDataListener proximity;
 	
@@ -68,10 +72,10 @@ public class SensorController {
 	private LightDataListener light;
 	
 	/* SensorEventListener Class reference variable*/
-	private SensorEventListener accelListener, proximityListener, lightListener;
+	private SensorEventListener accelListener, proximityListener, lightListener, gyroscopeListener;
 	
 	/* Tag for debugging information*/
-	private static final String TAG = "SENSORCONTROLLER1";
+	private static final String TAG = "SENSORCONTROLLER";
 
 
 	/**
@@ -235,18 +239,49 @@ public class SensorController {
 		}
 	}
 
-	/**
-	 * To un-register the Accelerometer 
-	 */
-	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
+	public final void registerGyroscopeService(SensorEventListener listenerfromMainApp, int sampleRate) throws AccelerometerSensorException // 1st Sensor
 	{
-		//sensorManager.unregisterListener(lightSensorEventListener); // Change the Listener
-		if(listenerfromMainApp!=null)
+		gyroscopeListener = listenerfromMainApp;
+
+		// Create an object of specific service class to  
+		gyroscope = GyroscopeDataListener.getInstance(contextFromActivity);
+
+		if(CAFConfig.isSensorGyroscope())
 		{
-			accel.disableAccelerometerListener(listenerfromMainApp);
-			CAFConfig.setSensorAccelerometer(false);
+			try
+			{	
+				if(enableDebugging)
+					Log.d(TAG,"inside registerGyroscopeListner");
+				gyroscope.enableAccelerometerListener(gyroscopeListener, sampleRate);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{			
 			if(enableDebugging)
-				Log.d(TAG,"Unregister Accelerometer Sensor");
+				Log.d(TAG,"SENSOR_GYROSCOPE is false");
+			gyroscope.disableGyroscopeListener(gyroscopeListener);
+
+		}
+	}
+	
+	/**
+	 * To un-register the Gyroscope 
+	 */
+	public final void unregisterGyroscopeService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
+	{		
+		if(listenerfromMainApp!=null)
+		{	
+			if(gyroscope!=null)
+			{
+				gyroscope.disableGyroscopeListener(listenerfromMainApp);
+				CAFConfig.setSensorGyroscope(false);
+				if(enableDebugging)
+					Log.d(TAG,"Unregister Gyroscope Sensor");
+			}
 		}
 		else
 		{
@@ -254,6 +289,29 @@ public class SensorController {
 		}
 
 	}
+	
+	/**
+	 * To un-register the Accelerometer 
+	 */
+	public final void unregisterAccelerometerService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
+	{		
+		if(listenerfromMainApp!=null)
+		{	
+			if(accel!=null)
+			{
+				accel.disableAccelerometerListener(listenerfromMainApp);
+				CAFConfig.setSensorAccelerometer(false);
+				if(enableDebugging)
+					Log.d(TAG,"Unregister Accelerometer Sensor");
+			}
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+
+	}
+	
 	/**
 	 * To un-register the Proximity Service
 	 */
@@ -261,10 +319,13 @@ public class SensorController {
 	{
 		if(listenerfromMainApp!=null)
 		{
-			proximity.disableProximitySensor(listenerfromMainApp);
-			CAFConfig.setSensorProximity(false);
-			if(enableDebugging)
-				Log.d(TAG,"Unregister Proximity Sensor");
+			if(proximity!=null)
+			{
+					proximity.disableProximitySensor(listenerfromMainApp);
+					CAFConfig.setSensorProximity(false);
+					if(enableDebugging)
+						Log.d(TAG,"Unregister Proximity Sensor");
+			}
 		}
 		else
 		{
@@ -278,10 +339,13 @@ public class SensorController {
 	{
 		if(listenerfromMainApp!=null)
 		{
-			light.disableLightSensor(listenerfromMainApp);
-			CAFConfig.setSensorLight(false);
-			if(enableDebugging)
-				Log.d(TAG,"Unregister Light Sensor");
+			if(light!=null)
+			{
+				light.disableLightSensor(listenerfromMainApp);
+				CAFConfig.setSensorLight(false);
+				if(enableDebugging)
+					Log.d(TAG,"Unregister Light Sensor");
+			}
 		}
 		else
 		{

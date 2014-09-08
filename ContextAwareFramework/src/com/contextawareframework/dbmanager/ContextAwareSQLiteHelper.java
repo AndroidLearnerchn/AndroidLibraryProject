@@ -56,16 +56,29 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_USER_AUTH_STATUS = "false"; // To check if its true then user can query the server
 	//---------------------------------------------------------------------------------------------------------//
 
+	//-------------------------------------Table for Gyroscope-------------------------------------------------//
+	// Tabel Name
+	public static final String TABLE_GYRO = "Gyroscope";
+	
+	// Gyroscope Table Column(Properties)
+	public static final String COLUMN_GYRO_ID = "_id";
+	public static final String COLUMN_GYRO_TIMESTAMP = "Time_Stamp";
+	public static final String COLUMN_GYRO_X= "x_value";
+	public static final String COLUMN_GYRO_Y= "y_value";
+	public static final String COLUMN_GYRO_Z= "z_value";
+	//------------------------------------- Table for Gyroscope Sensor ends here -------------------------------------------------//
+	
 	//-------------------------------------Table for Accelerometer-------------------------------------------------//
+	// Table Name
 	public static final String TABLE_ACCEL = "Accelerometer";
+
+	//Accelerometer Table Column(Properties)	
 	public static final String COLUMN_ACCEL_ID = "_id";
 	public static final String COLUMN_ACCEL_TIMESTAMP = "Time_Stamp";
-
-	//Accelerometer Table Column(Properties)
 	public static final String COLUMN_ACCEL_X= "x_value";
 	public static final String COLUMN_ACCEL_Y= "y_value";
 	public static final String COLUMN_ACCEL_Z= "z_value";
-	//------------------------------------- Table for Accelerometer Sensor ends here -------------------------------------------------//
+		//------------------------------------- Table for Accelerometer Sensor ends here -------------------------------------------------//
 
 	//-------------------------------------Table for Battery-------------------------------------------------//
 	// Not in working state, database not been designed for Battery information
@@ -137,6 +150,11 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 			+ " integer primary key autoincrement, " + COLUMN_ACCEL_TIMESTAMP
 			+ " text not null," + COLUMN_ACCEL_X + " integer, "   +  COLUMN_ACCEL_Y  + " integer, " +  COLUMN_ACCEL_Z + " integer " + " ); ";
 
+	// Gyroscope Table create statement
+	private static final String CREATE_TABLE_GYROMETER = "create table "
+				+ TABLE_GYRO + "(" + COLUMN_GYRO_ID
+				+ " integer primary key autoincrement, " + COLUMN_GYRO_TIMESTAMP
+				+ " text not null," + COLUMN_GYRO_X + " integer, "   +  COLUMN_GYRO_Y  + " integer, " +  COLUMN_GYRO_Z + " integer " + " ); ";
 
 	// Battery Table create statement. This is sample table, should not be used as column names are not
 	// defined as per actual entity attribute(s).
@@ -208,6 +226,10 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 			{
 				database.execSQL(CREATE_TABLE_USERINFO);
 			}
+			if(CAFConfig.isTableGyroscope())
+			{
+				database.execSQL(CREATE_TABLE_GYROMETER);
+			}
 		}
 		catch(SQLiteQueryException e)
 		{
@@ -228,6 +250,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROXIMITY);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATION);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERINFO);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GYRO);
 		onCreate(db);
 	}
 

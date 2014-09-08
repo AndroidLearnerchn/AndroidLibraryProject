@@ -26,10 +26,10 @@ package com.contextawareframework.sensors.motionsensors;
  */
 
 public class Accelerometer {
-	private long timestamp;
-	private double x;
-	private double y;
-	private double z;
+	private long timeStamp;
+	private double xAxis;
+	private double yAxis;
+	private double zAxis;
 	private int id;
 	private String comment;
 
@@ -37,20 +37,20 @@ public class Accelerometer {
 	 * Default Constructor
 	 */
 	public Accelerometer(){
-		x=0;
-		y=0;
-		z=0;
-		timestamp = 0;
+		xAxis = 0;
+		yAxis = 0;
+		zAxis = 0;
+		timeStamp = 0;
 	}
 
 	/**
 	 * Custom Constructor
 	 */
 	public Accelerometer(long timestamp, double x, double y, double z) {
-		this.timestamp = timestamp;
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		timeStamp = timestamp;
+		xAxis = x;
+		yAxis = y;
+		zAxis = z;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Accelerometer {
 	 * @return
 	 */
 	public long getTimestamp() {
-		return timestamp;
+		return timeStamp;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Accelerometer {
 	 * @param timestamp
 	 */
 	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
+		this.timeStamp = timestamp;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class Accelerometer {
 	 * @return
 	 */
 	public double getX() {
-		return x;
+		return xAxis;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Accelerometer {
 	 * @param x
 	 */
 	public void setX(double x) {
-		this.x = x;
+		this.xAxis = x;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Accelerometer {
 	 * @return
 	 */
 	public double getY() {
-		return y;
+		return yAxis;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class Accelerometer {
 	 * @param y
 	 */
 	public void setY(double y) {
-		this.y = y;
+		this.yAxis = y;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Accelerometer {
 	 * @return
 	 */
 	public double getZ() {
-		return z;
+		return zAxis;
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Accelerometer {
 	 * @param z
 	 */
 	public void setZ(double z) {
-		this.z = z;
+		this.zAxis = z;
 	}
 
 	/**
@@ -153,6 +153,6 @@ public class Accelerometer {
 	 */
 	public String toString()
 	{
-		return "t="+timestamp+", x="+x+", y="+y+", z="+z;
+		return "t="+timeStamp+", x="+xAxis+", y="+yAxis+", z="+zAxis;
 	}
 }

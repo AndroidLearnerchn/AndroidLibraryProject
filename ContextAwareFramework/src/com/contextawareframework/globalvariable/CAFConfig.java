@@ -34,6 +34,7 @@ public class CAFConfig {
 	private static  boolean SensorProximity = false;
 	private static  boolean sensorLight = false;
 	private static  boolean sensorLocation = false;
+	private static  boolean sensorGyroscope = false;
 	private static  boolean batteryStatus = false;
 	
 	// Presently not in use.
@@ -45,6 +46,7 @@ public class CAFConfig {
 	private static 	boolean tableProximity = false;
 	private static 	boolean tableLocation = false;
 	private static	boolean tableLight = false;
+	private static	boolean tableGyroscope = false;
 	private static	boolean tableBattery = false;
 	private static 	boolean tableUserinfo = false;
 	private static  boolean enableDebugging = false;
@@ -271,6 +273,34 @@ public class CAFConfig {
 	 */
 	public static final void setEnableDebugging(boolean enableDebugging) {
 		CAFConfig.enableDebugging = enableDebugging;
+	}
+
+	/**
+	 * @return the sensorGyroscope
+	 */
+	public static final boolean isSensorGyroscope() {
+		return sensorGyroscope;
+	}
+
+	/**
+	 * @param sensorGyroscope the sensorGyroscope to set
+	 */
+	public static final void setSensorGyroscope(boolean sensorGyroscope) {
+		CAFConfig.sensorGyroscope = sensorGyroscope;
+	}
+
+	/**
+	 * @return the tableGyroscope
+	 */
+	public static final boolean isTableGyroscope() {
+		return tableGyroscope;
+	}
+
+	/**
+	 * @param tableGyroscope the tableGyroscope to set
+	 */
+	public static final void setTableGyroscope(boolean tableGyroscope) {
+		CAFConfig.tableGyroscope = tableGyroscope;
 	}
 	
 
