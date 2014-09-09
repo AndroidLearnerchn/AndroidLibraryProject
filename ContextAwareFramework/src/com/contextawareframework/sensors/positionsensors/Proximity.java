@@ -32,7 +32,7 @@ public class Proximity {
 	private int id;
 
 	/**
-	 * 
+	 * Public Constructor
 	 */
 	public Proximity()
 	{
@@ -40,31 +40,31 @@ public class Proximity {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Method to get value of near field
+	 * @return float value 
 	 */
 	public float isNear() {
 		return near;
 	}
 
 	/**
-	 * 
-	 * @param near
+	 * Method to Assign float value to "near" class attribute
+	 * @param near 
 	 */
 	public void setNear(float near) {
 		this.near = near;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Method to get the value of "far" class attribute
+	 * @return far
 	 */
 	public float isFar() {
 		return far;
 	}
 
 	/**
-	 * 
+	 * Method to set the "far" class attribute
 	 * @param far
 	 */
 	public void setFar(float far) {
@@ -72,15 +72,15 @@ public class Proximity {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Method to get the timestamp value
+	 * @return timestamp
 	 */
 	public long getTimestamp() {
 		return timestamp;
 	}
 
 	/**
-	 * 
+	 * Method to set the timestamp value
 	 * @param timestamp
 	 */
 	public void setTimestamp(long timestamp) {
@@ -88,15 +88,15 @@ public class Proximity {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Method to get the "id" class attribute
+	 * @return id
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * 
+	 * Method to set the "id" class attribute 
 	 * @param id
 	 */
 	public void setId(int id) {

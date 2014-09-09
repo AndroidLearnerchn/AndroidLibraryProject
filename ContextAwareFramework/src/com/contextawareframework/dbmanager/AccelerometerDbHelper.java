@@ -74,7 +74,6 @@ public class  AccelerometerDbHelper{
 	private AccelerometerDbHelper(Context context) {
 		dbHelper = new ContextAwareSQLiteHelper(context);
 	}
-
 	public static synchronized AccelerometerDbHelper getInstance(Context context)
 	{
 		if (accelerometerDbHelper == null)
@@ -96,6 +95,21 @@ public class  AccelerometerDbHelper{
 		}
 
 	}
+	
+	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Method to close the database connection
 	 */
@@ -107,7 +121,7 @@ public class  AccelerometerDbHelper{
 	 * Method to create insert a row of data into the database
 	 */
 	public Accelerometer createAccelRowData(long timestamp,Float x, Float y, Float z){
-		Accelerometer newRow = null ;
+		Accelerometer newAccelRow = null ;
 		try
 		{
 			ContentValues values = new ContentValues();
@@ -121,7 +135,7 @@ public class  AccelerometerDbHelper{
 					allColumns, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID + " = " + insertId, null,
 					null, null, null);
 			cursor.moveToFirst();
-			newRow = cursorToAccelRow(cursor);
+			newAccelRow = cursorToAccelRow(cursor);
 			cursor.close();
 		}
 		catch(SQLException e)
@@ -132,7 +146,7 @@ public class  AccelerometerDbHelper{
 		{
 			Log.d(TAG,"createAccelRowDataMethod");
 		}
-		return newRow;
+		return newAccelRow;
 	}
 
 	/**
@@ -140,7 +154,7 @@ public class  AccelerometerDbHelper{
 	 */
 	public void deleteAccelRowData(Accelerometer accel) {
 		try{
-			long id = accel.getId();
+			int id = accel.getId();
 			System.out.println("Comment deleted with id: " + id);
 			database.delete(ContextAwareSQLiteHelper.TABLE_ACCEL, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID+ " = " + id, null);
 		}
@@ -181,7 +195,7 @@ public class  AccelerometerDbHelper{
 		return accelRows;
 	}
 	/**
-	 * Method to intialize a Accelerometer POJO object
+	 * Method to initialize a Accelerometer POJO object
 	 */
 	private Accelerometer cursorToAccelRow(Cursor cursor) {
 		Accelerometer accelRow = new Accelerometer();

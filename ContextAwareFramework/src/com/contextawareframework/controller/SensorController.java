@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by CDAC Chennai 
+ * Copyright (c) 2014 by CDAC Chennai 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,16 @@ package com.contextawareframework.controller;
 import android.content.Context;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationListener;
 import android.util.Log;
 
 import com.contextawareframework.backgroundservices.AccelerometerDataListener;
-import com.contextawareframework.backgroundservices.GPSTracker;
+import com.contextawareframework.backgroundservices.LocationDataListener;
 import com.contextawareframework.backgroundservices.GyroscopeDataListener;
 import com.contextawareframework.backgroundservices.LightDataListener;
 import com.contextawareframework.backgroundservices.ProximityDataListener;
 import com.contextawareframework.exceptions.AccelerometerSensorException;
+import com.contextawareframework.exceptions.CAFException;
 import com.contextawareframework.exceptions.GPSSensorException;
 import com.contextawareframework.exceptions.LightSensorException;
 import com.contextawareframework.exceptions.ProximitySensorException;
@@ -45,11 +47,11 @@ import com.contextawareframework.globalvariable.CAFConfig;
  * 
  * Sample Code : 
  * ---------------------------------------------------------------------------------
- * SensorController1 controller = SensorController1.getInstance(getApplicationContext);
+ * SensorController controller = SensorController.getInstance(getApplicationContext);
  * 
  * CAFConfig.setSensor[Name of Sensor](true);
  * 																			Delay
- * controller.register[SensorName]Service(sensorListener,SensorController1.NORMAL);
+ * controller.register[SensorName]Service(sensorListener,SensorController.NORMAL);
  * ----------------------------------------------------------------------------------
  */
 public class SensorController {
@@ -57,7 +59,7 @@ public class SensorController {
 	private Context contextFromActivity;
 	
 	/* GPSTracker Class reference variable */
-	private GPSTracker gps;
+	private LocationDataListener gps;
 	
 	/* AccelerometerDataListener Class reference variable */
 	private AccelerometerDataListener accel;
@@ -68,11 +70,15 @@ public class SensorController {
 	/* ProximityDataListener Class reference variable */
 	private ProximityDataListener proximity;
 	
+	/* ProximityDataListener Class reference variable */
+	private LocationDataListener locationDataListener;
+	
 	/* LightDataListerner Class reference variable*/
 	private LightDataListener light;
 	
 	/* SensorEventListener Class reference variable*/
 	private SensorEventListener accelListener, proximityListener, lightListener, gyroscopeListener;
+	private LocationListener locationListener;
 	
 	/* Tag for debugging information*/
 	private static final String TAG = "SENSORCONTROLLER";
@@ -238,8 +244,45 @@ public class SensorController {
 
 		}
 	}
+	/**
+	 * To register the Proximity Service
+	 */
+	public final void registerLocationService(String provider, long minTime, float minDistance, LocationListener locationListener) throws GPSSensorException
+	{
+		this.locationListener = locationListener;
 
-	public final void registerGyroscopeService(SensorEventListener listenerfromMainApp, int sampleRate) throws AccelerometerSensorException // 1st Sensor
+		// Create an object of specific service class to  
+		locationDataListener = LocationDataListener.getInstance(contextFromActivity);
+
+		if(CAFConfig.isSensorLocation())
+		{						
+			try
+			{
+				if(enableDebugging)
+					Log.d(TAG,"inside registerLocationListener");
+				// User need to pass the Provider details, minTime and minDistance for location update and the locationListener to be implemented by the user 
+				locationDataListener.enableLocationListener(provider, minTime, minDistance, locationListener);   
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			if(enableDebugging)
+				Log.d(TAG,"SENSOR_LOCATION is false");
+			locationDataListener.disableLocationListener(locationListener);
+		}
+	}
+
+	/**
+	 * Method to register Gyroscope sensor listening
+	 * @param listenerfromMainApp
+	 * @param sampleRate
+	 * @throws Exception
+	 */
+	public final void registerGyroscopeService(SensorEventListener listenerfromMainApp, int sampleRate)  
 	{
 		gyroscopeListener = listenerfromMainApp;
 
@@ -252,7 +295,7 @@ public class SensorController {
 			{	
 				if(enableDebugging)
 					Log.d(TAG,"inside registerGyroscopeListner");
-				gyroscope.enableAccelerometerListener(gyroscopeListener, sampleRate);
+				gyroscope.enableGyroscopeListener(gyroscopeListener, sampleRate);
 			}
 			catch(Exception e)
 			{
@@ -362,11 +405,17 @@ public class SensorController {
 	/**
 	 * To un-register the Location Service
 	 */
-	public final void unregisterLocationService() throws GPSSensorException
+	public final void unregisterLocationService(LocationListener locationListener) throws GPSSensorException
 	{
-		//gps.stopUsingGPS(); // Change the Listener 
-
-		CAFConfig.setSensorLocation(false);
+		if(gps!=null)
+		{	
+			gps.stopUsingGPS(locationListener); // Change the Listener 
+			CAFConfig.setSensorLocation(false);
+		}
+		else
+		{
+			Log.d(TAG,"gps is null");
+		}
 		if(enableDebugging)
 			Log.d(TAG,"Unregister Location Service");
 	}

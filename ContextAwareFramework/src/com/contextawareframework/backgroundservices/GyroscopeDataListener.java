@@ -104,7 +104,7 @@ public class GyroscopeDataListener extends CAFService {
 	 * @param listenerFromActiity : User has to implement the SensorEventListener and pass it 
 	 * 							    to the calling method
 	 */
-	public void enableAccelerometerListener(SensorEventListener listenerFromActivity,int sampleRate)
+	public void enableGyroscopeListener(SensorEventListener listenerFromActivity,int sampleRate)
 	{
 		if(listenerFromActivity!=null)
 		{	

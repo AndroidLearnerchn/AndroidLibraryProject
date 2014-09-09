@@ -47,7 +47,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	private Context mContext;
 
 	//------------------------------------Table for Storing user Information-----------------------------------//
-	public static final String TABLE_USERINFO = "UserInfo";
+	public static final String TABLE_USERINFO = "userinfo";
 	public static final String COLUMN_USER_EMAIL = null;
 	public static final String COLUMN_DEV_EMAIL = null;
 	public static final String COLUMN_DEVICE_ID = null;
@@ -58,71 +58,71 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 
 	//-------------------------------------Table for Gyroscope-------------------------------------------------//
 	// Tabel Name
-	public static final String TABLE_GYRO = "Gyroscope";
+	public static final String TABLE_GYRO = "gyroscope";
 	
 	// Gyroscope Table Column(Properties)
-	public static final String COLUMN_GYRO_ID = "_id";
-	public static final String COLUMN_GYRO_TIMESTAMP = "Time_Stamp";
-	public static final String COLUMN_GYRO_X= "x_value";
-	public static final String COLUMN_GYRO_Y= "y_value";
-	public static final String COLUMN_GYRO_Z= "z_value";
+	public static final String COLUMN_GYRO_ID = "id";
+	public static final String COLUMN_GYRO_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_GYRO_X= "x_axis";
+	public static final String COLUMN_GYRO_Y= "y_axis";
+	public static final String COLUMN_GYRO_Z= "z_axis";
 	//------------------------------------- Table for Gyroscope Sensor ends here -------------------------------------------------//
 	
 	//-------------------------------------Table for Accelerometer-------------------------------------------------//
 	// Table Name
-	public static final String TABLE_ACCEL = "Accelerometer";
+	public static final String TABLE_ACCEL = "accelerometer";
 
 	//Accelerometer Table Column(Properties)	
-	public static final String COLUMN_ACCEL_ID = "_id";
-	public static final String COLUMN_ACCEL_TIMESTAMP = "Time_Stamp";
-	public static final String COLUMN_ACCEL_X= "x_value";
-	public static final String COLUMN_ACCEL_Y= "y_value";
-	public static final String COLUMN_ACCEL_Z= "z_value";
+	public static final String COLUMN_ACCEL_ID = "id";
+	public static final String COLUMN_ACCEL_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_ACCEL_X= "x_axis";
+	public static final String COLUMN_ACCEL_Y= "y_axis";
+	public static final String COLUMN_ACCEL_Z= "z_axis";
 		//------------------------------------- Table for Accelerometer Sensor ends here -------------------------------------------------//
 
 	//-------------------------------------Table for Battery-------------------------------------------------//
 	// Not in working state, database not been designed for Battery information
-	public static final String TABLE_BATTERY = "Battery";
+	public static final String TABLE_BATTERY = "battery";
 	public static final String COLUMN_BATTERY_ID = "_id";
-	public static final String COLUMN_BATTERY_TIMESTAMP = "Time_Stamp";
+	public static final String COLUMN_BATTERY_TIMESTAMP = "time_stamp";
 
 	//Accelerometer Table Column(Properties)
-	public static final String COLUMN_BATTERY_X= "x_value";
-	public static final String COLUMN_BATTERY_y= "y_value";
-	public static final String COLUMN_BATTERY_Z= "z_value";
+	public static final String COLUMN_BATTERY_X= "x_axis";
+	public static final String COLUMN_BATTERY_y= "y_axis";
+	public static final String COLUMN_BATTERY_Z= "z_axis";
 	//-------------------------------------Table for Battery End here-------------------------------------------------//
 
 	//-------------------------------------Table for Light Sensor-------------------------------------------------//
 
 	//LightSensor Table Column(Properties)
-	public static final String TABLE_LIGHT = "Light";
-	public static final String COLUMN_LIGHT_ID = "_id";
-	public static final String COLUMN_LIGHT_TIMESTAMP = "Time_Stamp";
-	public static final String COLUMN_LIGHT_CUR_READING= "Currebnt_Reading";
+	public static final String TABLE_LIGHT = "light";
+	public static final String COLUMN_LIGHT_ID = "id";
+	public static final String COLUMN_LIGHT_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_LIGHT_CUR_READING= "current_reading";
 
 	//-------------------------------------Table for Light Sensor ends here-------------------------------------------------//
 
 	//-------------------------------------Table for Proximity Sensor-------------------------------------------------//
 
 	//Proximity Table Column(Properties)
-	public static final String TABLE_PROXIMITY = "Proximity";
-	public static final String COLUMN_PROXIMITY_ID = "_id";
-	public static final String COLUMN_PROXIMITY_TIMESTAMP = "Time_Stamp";
-	public static final String COLUMN_PROXIMITY_NEAR= "Near";
-	public static final String COLUMN_PROXIMITY_FAR= "Far";
+	public static final String TABLE_PROXIMITY = "proximity";
+	public static final String COLUMN_PROXIMITY_ID = "id";
+	public static final String COLUMN_PROXIMITY_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_PROXIMITY_NEAR= "near";
+	public static final String COLUMN_PROXIMITY_FAR= "far";
 
 	//-------------------------------------Table for Proximity Sensor ends here-------------------------------------------------//
 
 	//-------------------------------------Table for Location Sensor-------------------------------------------------//
 
 	//Location Table Column(Properties)
-	public static final String TABLE_LOCATION = "Location";
-	public static final String COLUMN_LOCATION_ID = "_id";
-	public static final String COLUMN_LOCATION_TIMESTAMP = "Time_Stamp";
-	public static final String COLUMN_LOCATION_LATITUDE= "lat_value";
-	public static final String COLUMN_LOCATION_LONGINTUDE= "long_value";
-	public static final String COLUMN_LOCATION_PLACE= "place_name";
-	public static final String COLUMN_HANGOUT_INFO= "hangout_info";	
+	public static final String TABLE_LOCATION = "location";
+	public static final String COLUMN_LOCATION_ID = "id";
+	public static final String COLUMN_LOCATION_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_LOCATION_LATITUDE= "latitude";
+	public static final String COLUMN_LOCATION_LONGINTUDE= "longitude";
+	public static final String COLUMN_LOCATION_PLACENAME= "place_name";
+	public static final String COLUMN_LOCATION_PLACEINFO= "place_info";	
 
 	// Changed on 4.3.14 Mam Code integration Above code. 
 
@@ -180,7 +180,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	//Date modified 3.3 14
 
 	private static final String CREATE_TABLE_LOCATION = "create table " + TABLE_LOCATION + "(" + COLUMN_LOCATION_ID + " integer primary key autoincrement, " + COLUMN_LOCATION_TIMESTAMP
-			+ " text not null," + COLUMN_LOCATION_LATITUDE + " text not null, " + COLUMN_LOCATION_LONGINTUDE   + " text not null, " + COLUMN_LOCATION_PLACE + " text not null, " + COLUMN_HANGOUT_INFO + " text not null "  +  " ); ";
+			+ " text not null," + COLUMN_LOCATION_LATITUDE + " text not null, " + COLUMN_LOCATION_LONGINTUDE   + " text not null, " + COLUMN_LOCATION_PLACENAME + " text not null, " + COLUMN_LOCATION_PLACEINFO + " text not null "  +  " ); ";
 
 
 	/*private static final String CREATE_TABLE_LOCATION = "create table "

@@ -36,7 +36,7 @@ import android.util.Log;
 /**
  * 
  * Description : Class to create CSV File either from database or to directly store the 
- *               sensor / context data in csv file.
+ *               sensor / context data in csv file.[This file to be used]
  */
 public class CsvFileWriter {
 
@@ -194,7 +194,11 @@ public class CsvFileWriter {
 
 
 		}
-		Log.d(TAG,""+ strbuilder);
+		if(CAFConfig.isEnableDebugging())
+		{
+			Log.d(TAG,""+ strbuilder);
+		}
+		
 		return strbuilder.toString();
 	}
 	/**
@@ -242,12 +246,12 @@ public class CsvFileWriter {
 				while(curCSV.moveToNext())
 				{
 					//One row, each column data delimited with "," in form of single string
-					data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));//saveAccelData(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));
+					data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));
 
 
 					// writeData(data, writer);
 					writer.append(data+"\n");
-					Log.d("Debug","Data from cursor to write function");
+					//Log.d("Debug","Data from cursor to write function");
 
 
 				}

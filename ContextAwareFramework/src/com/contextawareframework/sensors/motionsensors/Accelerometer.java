@@ -56,7 +56,7 @@ public class Accelerometer {
 	/**
 	 * Description : Getter and Setter method for each attribute
 	 */
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
