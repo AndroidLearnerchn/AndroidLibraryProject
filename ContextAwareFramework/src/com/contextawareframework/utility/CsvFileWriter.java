@@ -48,16 +48,19 @@ public class CsvFileWriter {
 
 	// To store the last row count in an application life cycle.
 	public static int prevRowCount;
-
+	
+	/* Cursor to a row */
+	public static Cursor curCSV;
+	
 	// Total row count of the queried table at present
 	public static int totalRowCount;
 
 	/* To enable / disable Log messages. */
 	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
-
-	/*
-	 * Default Constructor
-	 */
+		
+	/**
+	 * Constructor 
+	 * */
 	public CsvFileWriter(Context context)
 	{
 		localContext= context;
@@ -225,7 +228,7 @@ public class CsvFileWriter {
 				//Log.d("Debug","PrevRowCount = " + prevRowCount);
 
 				// Query to get the newly inserted data in the table
-				String query = "select * from "+ tableName +" where _id > " + prevRowCount;
+				String query = "select * from "+ tableName +" where id > " + prevRowCount;
 
 				//To get the row count
 				String queryForgetCount = " select * from  " + tableName ;
@@ -237,18 +240,43 @@ public class CsvFileWriter {
 				totalRowCount = getcolumnCount.getCount();
 
 				// Get the newly added rows in the table
-				Cursor curCSV = database.rawQuery(query,null);//new String [] {checkCondition});
+				curCSV = database.rawQuery(query,null);//new String [] {checkCondition});
 
 				curRowCount =  curCSV.getCount();
 				prevRowCount = prevRowCount + curRowCount;
 				//Log.d("Debug","CurRowCount = " + curRowCount+ "Total = " + totalRowCount);
+				
 				int i =0;
+				
+				int columnCount = curCSV.getColumnCount();
+				
 				while(curCSV.moveToNext())
 				{
-					//One row, each column data delimited with "," in form of single string
-					data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));
-
-
+					if(tableName.equals("accelerometer"))
+					{
+						//One row, each column data delimited with "," in form of single string
+						data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));
+					}
+					else if(tableName.equals("location"))
+					{
+						data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4),curCSV.getString(5));
+					}
+					else if(tableName.equals("light"))
+					{
+						data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2));
+					}
+					else if(tableName.equals("proximity"))
+					{
+						data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3));
+					}
+					else if(tableName.equals("gyroscope"))
+					{
+						data = dataToWrite(curCSV.getInt(0),curCSV.getLong(1),curCSV.getFloat(2),curCSV.getFloat(3),curCSV.getFloat(4));
+					}
+					else
+					{
+						Log.d(TAG,"No table found");
+					}
 					// writeData(data, writer);
 					writer.append(data+"\n");
 					//Log.d("Debug","Data from cursor to write function");

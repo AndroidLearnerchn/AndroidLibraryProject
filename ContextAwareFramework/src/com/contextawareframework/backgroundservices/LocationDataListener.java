@@ -122,8 +122,7 @@ public class LocationDataListener extends CAFService{
     }
 	public Location getLocation(String provider, long minTime, float minDistance, LocationListener locationListener) {
 		try {
-			locationManager = (LocationManager) mContext
-					.getSystemService(LOCATION_SERVICE);
+			locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
 
 			// getting GPS status
 			isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -146,7 +145,7 @@ public class LocationDataListener extends CAFService{
 					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,minTime, minDistance, locationListener); // Now this will be implemented in user level
 					Log.d("Network", "Network");
 					if (locationManager != null) {
-						location = locationManager.getLastKnownLocation(provider);
+						location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 						if (location != null) {
 							latitude = location.getLatitude();
 							longitude = location.getLongitude();

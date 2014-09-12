@@ -148,13 +148,13 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_ACCELEROMETER = "create table "
 			+ TABLE_ACCEL + "(" + COLUMN_ACCEL_ID
 			+ " integer primary key autoincrement, " + COLUMN_ACCEL_TIMESTAMP
-			+ " text not null," + COLUMN_ACCEL_X + " integer, "   +  COLUMN_ACCEL_Y  + " integer, " +  COLUMN_ACCEL_Z + " integer " + " ); ";
+			+ " integer not null," + COLUMN_ACCEL_X + " real, "   +  COLUMN_ACCEL_Y  + " real, " +  COLUMN_ACCEL_Z + " real " + " ); ";
 
 	// Gyroscope Table create statement
 	private static final String CREATE_TABLE_GYROMETER = "create table "
 				+ TABLE_GYRO + "(" + COLUMN_GYRO_ID
 				+ " integer primary key autoincrement, " + COLUMN_GYRO_TIMESTAMP
-				+ " text not null," + COLUMN_GYRO_X + " integer, "   +  COLUMN_GYRO_Y  + " integer, " +  COLUMN_GYRO_Z + " integer " + " ); ";
+				+ " integer not null," + COLUMN_GYRO_X + " real, "   +  COLUMN_GYRO_Y  + " real, " +  COLUMN_GYRO_Z + " real " + " ); ";
 
 	// Battery Table create statement. This is sample table, should not be used as column names are not
 	// defined as per actual entity attribute(s).
@@ -168,19 +168,19 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_LIGHT = "create table "
 			+ TABLE_LIGHT + "(" + COLUMN_LIGHT_ID
 			+ " integer primary key autoincrement, " + COLUMN_LIGHT_TIMESTAMP
-			+ " text not null," + COLUMN_LIGHT_CUR_READING + " integer" + " ); ";
+			+ " real not null," + COLUMN_LIGHT_CUR_READING + " real" + " ); ";
 
 	// Proximity Table create statement
 	private static final String CREATE_TABLE_PROXIMITY = "create table "
 			+ TABLE_PROXIMITY + "(" + COLUMN_PROXIMITY_ID
 			+ " integer primary key autoincrement, " + COLUMN_PROXIMITY_TIMESTAMP
-			+ " text not null," + COLUMN_PROXIMITY_NEAR + " integer, "   + COLUMN_PROXIMITY_FAR   + " integer " + " ); ";
+			+ " real not null," + COLUMN_PROXIMITY_NEAR + " real, "   + COLUMN_PROXIMITY_FAR   + " real " + " ); ";
 
 	// Location Table create statement
 	//Date modified 3.3 14
 
 	private static final String CREATE_TABLE_LOCATION = "create table " + TABLE_LOCATION + "(" + COLUMN_LOCATION_ID + " integer primary key autoincrement, " + COLUMN_LOCATION_TIMESTAMP
-			+ " text not null," + COLUMN_LOCATION_LATITUDE + " text not null, " + COLUMN_LOCATION_LONGINTUDE   + " text not null, " + COLUMN_LOCATION_PLACENAME + " text not null, " + COLUMN_LOCATION_PLACEINFO + " text not null "  +  " ); ";
+			+ " real not null," + COLUMN_LOCATION_LATITUDE + " real not null, " + COLUMN_LOCATION_LONGINTUDE   + " real not null, " + COLUMN_LOCATION_PLACENAME + " text not null, " + COLUMN_LOCATION_PLACEINFO + " text not null "  +  " ); ";
 
 
 	/*private static final String CREATE_TABLE_LOCATION = "create table "

@@ -245,7 +245,7 @@ public class SensorController {
 		}
 	}
 	/**
-	 * To register the Proximity Service
+	 * To register the Location Service
 	 */
 	public final void registerLocationService(String provider, long minTime, float minDistance, LocationListener locationListener) throws GPSSensorException
 	{
@@ -409,6 +409,8 @@ public class SensorController {
 	{
 		if(gps!=null)
 		{	
+			if(enableDebugging)
+				Log.d(TAG,"Unregister Location Service");
 			gps.stopUsingGPS(locationListener); // Change the Listener 
 			CAFConfig.setSensorLocation(false);
 		}
@@ -416,7 +418,6 @@ public class SensorController {
 		{
 			Log.d(TAG,"gps is null");
 		}
-		if(enableDebugging)
-			Log.d(TAG,"Unregister Location Service");
+		
 	}
 }
