@@ -58,15 +58,27 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 
 	//-------------------------------------Table for Gyroscope-------------------------------------------------//
 	// Tabel Name
-	public static final String TABLE_GYRO = "gyroscope";
+	public static final String TABLE_MAGNETOMETER = "magnetometer";
 	
 	// Gyroscope Table Column(Properties)
-	public static final String COLUMN_GYRO_ID = "id";
-	public static final String COLUMN_GYRO_TIMESTAMP = "time_stamp";
-	public static final String COLUMN_GYRO_X= "x_axis";
-	public static final String COLUMN_GYRO_Y= "y_axis";
-	public static final String COLUMN_GYRO_Z= "z_axis";
-	//------------------------------------- Table for Gyroscope Sensor ends here -------------------------------------------------//
+	public static final String COLUMN_MAG_ID = "id";
+	public static final String COLUMN_MAG_TIMESTAMP = "time_stamp";
+	public static final String COLUMN_MAG_X= "x_axis";
+	public static final String COLUMN_MAG_Y= "y_axis";
+	public static final String COLUMN_MAG_Z= "z_axis";
+	//------------------------------------- Table for Magnetometer Sensor ends here -------------------------------------------------//
+	
+	//-------------------------------------Table for Gyroscope-------------------------------------------------//
+		// Tabel Name
+		public static final String TABLE_GYRO = "gyroscope";
+		
+		// Gyroscope Table Column(Properties)
+		public static final String COLUMN_GYRO_ID = "id";
+		public static final String COLUMN_GYRO_TIMESTAMP = "time_stamp";
+		public static final String COLUMN_GYRO_X= "x_axis";
+		public static final String COLUMN_GYRO_Y= "y_axis";
+		public static final String COLUMN_GYRO_Z= "z_axis";
+		//------------------------------------- Table for Gyroscope Sensor ends here -------------------------------------------------//
 	
 	//-------------------------------------Table for Accelerometer-------------------------------------------------//
 	// Table Name
@@ -156,6 +168,12 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 				+ " integer primary key autoincrement, " + COLUMN_GYRO_TIMESTAMP
 				+ " integer not null," + COLUMN_GYRO_X + " real, "   +  COLUMN_GYRO_Y  + " real, " +  COLUMN_GYRO_Z + " real " + " ); ";
 
+	// Magnetometer Table create statement
+	private static final String CREATE_TABLE_MAGNETOMETER = "create table "
+				+ TABLE_MAGNETOMETER + "(" + COLUMN_MAG_ID
+				+ " integer primary key autoincrement, " + COLUMN_MAG_TIMESTAMP
+				+ " integer not null," + COLUMN_MAG_X + " real, "   +  COLUMN_MAG_Y  + " real, " +  COLUMN_MAG_Z + " real " + " ); ";
+	
 	// Battery Table create statement. This is sample table, should not be used as column names are not
 	// defined as per actual entity attribute(s).
 	// For Battery there are lots of field, So which fields have to be stored is not yet fixed.
@@ -229,6 +247,10 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 			if(CAFConfig.isTableGyroscope())
 			{
 				database.execSQL(CREATE_TABLE_GYROMETER);
+			}
+			if(CAFConfig.isTableMagnetometer())
+			{
+				database.execSQL(CREATE_TABLE_MAGNETOMETER);
 			}
 		}
 		catch(SQLiteQueryException e)

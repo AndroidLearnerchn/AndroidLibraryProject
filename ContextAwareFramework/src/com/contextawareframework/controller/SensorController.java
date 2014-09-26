@@ -31,12 +31,12 @@ import com.contextawareframework.backgroundservices.AccelerometerDataListener;
 import com.contextawareframework.backgroundservices.LocationDataListener;
 import com.contextawareframework.backgroundservices.GyroscopeDataListener;
 import com.contextawareframework.backgroundservices.LightDataListener;
+import com.contextawareframework.backgroundservices.MagnetometerDataListener;
 import com.contextawareframework.backgroundservices.ProximityDataListener;
-import com.contextawareframework.exceptions.AccelerometerSensorException;
-import com.contextawareframework.exceptions.CAFException;
-import com.contextawareframework.exceptions.GPSSensorException;
-import com.contextawareframework.exceptions.LightSensorException;
-import com.contextawareframework.exceptions.ProximitySensorException;
+
+import com.contextawareframework.exceptions.SensorException;
+import com.contextawareframework.exceptions.SensorException.*;
+
 import com.contextawareframework.globalvariable.CAFConfig;
 
 
@@ -76,8 +76,12 @@ public class SensorController {
 	/* LightDataListerner Class reference variable*/
 	private LightDataListener light;
 	
+	/* MagnetometerDataListerner Class reference variable*/
+	private MagnetometerDataListener magnetometer;
+	
 	/* SensorEventListener Class reference variable*/
-	private SensorEventListener accelListener, proximityListener, lightListener, gyroscopeListener;
+	private SensorEventListener accelListener, proximityListener, lightListener, gyroscopeListener, magnetometerListener;
+	
 	private LocationListener locationListener;
 	
 	/* Tag for debugging information*/
@@ -309,6 +313,64 @@ public class SensorController {
 			gyroscope.disableGyroscopeListener(gyroscopeListener);
 
 		}
+	}
+	
+
+	/**
+	 * Method to register Magnetometer sensor listening
+	 * @param listenerfromMainApp
+	 * @param sampleRate
+	 * @throws Exception
+	 */
+	public final void registerMagnetometerService(SensorEventListener listenerfromMainApp, int sampleRate)  
+	{
+		magnetometerListener = listenerfromMainApp;
+
+		// Create an object of specific service class to  
+		magnetometer = MagnetometerDataListener.getInstance(contextFromActivity);
+
+		if(CAFConfig.isSensorMagnetometer())
+		{
+			try
+			{	
+				if(enableDebugging)
+					Log.d(TAG,"inside registerMagnetometerListner");
+				magnetometer.enableMagnetometerListener(magnetometerListener, sampleRate);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{			
+			if(enableDebugging)
+				Log.d(TAG,"SENSOR_MAGNETOMETER is false");
+			magnetometer.disableMagnetometerListener(magnetometerListener);
+
+		}
+	}
+	
+	/**
+	 * To un-register the Gyroscope 
+	 */
+	public final void unregisterMagnetometerService(SensorEventListener listenerfromMainApp) throws MagnetometerSensorException
+	{		
+		if(listenerfromMainApp!=null)
+		{	
+			if(gyroscope!=null)
+			{
+				gyroscope.disableGyroscopeListener(listenerfromMainApp);
+				CAFConfig.setSensorGyroscope(false);
+				if(enableDebugging)
+					Log.d(TAG,"Unregister Gyroscope Sensor");
+			}
+		}
+		else
+		{
+			Log.d(TAG,"listenerfromMainApp is null");
+		}
+
 	}
 	
 	/**

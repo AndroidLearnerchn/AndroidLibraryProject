@@ -35,6 +35,7 @@ public class CAFConfig {
 	private static  boolean sensorLight = false;
 	private static  boolean sensorLocation = false;
 	private static  boolean sensorGyroscope = false;
+	private static  boolean sensorMagnetometer = false;
 	private static  boolean batteryStatus = false;
 	
 	// Presently not in use.
@@ -47,6 +48,7 @@ public class CAFConfig {
 	private static 	boolean tableLocation = false;
 	private static	boolean tableLight = false;
 	private static	boolean tableGyroscope = false;
+	private static 	boolean tableMagnetometer = false;
 	private static	boolean tableBattery = false;
 	private static 	boolean tableUserinfo = false;
 	private static  boolean enableDebugging = false;
@@ -301,6 +303,34 @@ public class CAFConfig {
 	 */
 	public static final void setTableGyroscope(boolean tableGyroscope) {
 		CAFConfig.tableGyroscope = tableGyroscope;
+	}
+
+	/**
+	 * @return the sensorMagnetometer
+	 */
+	public static final boolean isSensorMagnetometer() {
+		return sensorMagnetometer;
+	}
+
+	/**
+	 * @param sensorMagnetometer the sensorMagnetometer to set
+	 */
+	public static final void setSensorMagnetometer(boolean sensorMagnetometer) {
+		CAFConfig.sensorMagnetometer = sensorMagnetometer;
+	}
+
+	/**
+	 * @return the tableMagnetometer
+	 */
+	public static final boolean isTableMagnetometer() {
+		return tableMagnetometer;
+	}
+
+	/**
+	 * @param tableMagnetometer the tableMagnetometer to set
+	 */
+	public static final void setTableMagnetometer(boolean tableMagnetometer) {
+		CAFConfig.tableMagnetometer = tableMagnetometer;
 	}
 	
 
