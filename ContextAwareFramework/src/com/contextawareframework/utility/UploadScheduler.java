@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2013-14 by CDAC Chennai 
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,11 +17,9 @@
  * @Created:    20.11.2013
  * @author:     Prasenjit
  * Last Change: 28.11.2013 by Prasenjit
+ */
  
- 
- // Moved to utility package
- 
-package com.contextawareframework.automatescript;
+package com.contextawareframework.utility;
 
 
 import java.util.Calendar;
@@ -34,10 +34,10 @@ import android.content.Intent;
 import android.util.Log;
 import static java.util.concurrent.TimeUnit.*;
 
-*//**
+/**
  * Description : This class is useful if the user wants to schedule the task
  *
- *//*
+ */
 
 
 public class UploadScheduler {
@@ -45,10 +45,10 @@ public class UploadScheduler {
 							// service class.
 	Object serviceClassName;// Wrtie the service with the functionality you
 							// wanted to automate
-	*//**
+	/**
 	 * 
-	 *//*
-	int interval;// Time interval in seconds
+	 */
+	int interval; // Time interval in seconds
 
 	// Constructor to initialize the class variables
 	public UploadScheduler(Context contextFromMain, Class serviceclass,
@@ -59,9 +59,9 @@ public class UploadScheduler {
 
 	}
 
-	*//**
+	/**
 	 * Description : Method to be called to automate the task
-	 *//*
+	 */
 	public void scheduleUpload() {
 		Log.d("Debug", "automate part start");
 		Calendar cal = Calendar.getInstance();
@@ -69,8 +69,7 @@ public class UploadScheduler {
 
 		Intent intent = new Intent(localcontext, serviceClassName.getClass());
 
-		PendingIntent pintent = PendingIntent.getService(localcontext, 0,
-				intent, 0);
+		PendingIntent pintent = PendingIntent.getService(localcontext, 0, intent, 0);
 
 		AlarmManager alarm = (AlarmManager) localcontext
 				.getSystemService(Context.ALARM_SERVICE);
@@ -81,30 +80,3 @@ public class UploadScheduler {
 		Log.d("Debug", "automate part end");
 	}
 }
-
-------------------------------------------------------------------------------------------------
- *public class BackupScheduler  {
- private final ScheduledExecutorService scheduler =
- Executors.newScheduledThreadPool(1);
-
- public void beepForAnHour() {
- final Runnable beeper = new Runnable() {
- public void run() { System.out.println("beep"); 
- }};
- final ScheduledFuture beeperHandle =
- scheduler.scheduleAtFixedRate(beeper, 10, 10, SECONDS);
- scheduler.schedule(new Runnable() {
- public void run() { beeperHandle.cancel(true); }
- }, 60 * 60, SECONDS);
-
- }
- }
-
-
- * 
- * 
- * 
- * 
- * ----------------------------------------------------------------------------------------------
- * 
-*/

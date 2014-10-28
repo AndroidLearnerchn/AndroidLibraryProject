@@ -1,10 +1,12 @@
-/*****************************************************************
+// NOT IN USE
+/*
+*//*****************************************************************
  * Copyright (c) 2013 by CDAC Chennai 
  * @File        BatteryDBHelper
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 18.11.2013 by Prasenjit
- ******************************************************************/
+ ******************************************************************//*
 package com.contextawareframework.dbmanager;
 
 import java.util.ArrayList;
@@ -17,9 +19,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-/*******************************************************************************************
+*//*******************************************************************************************
  * This is a database helper class for all CRUD operation on Accelerometer Sensor in Android
- *******************************************************************************************/
+ *******************************************************************************************//*
 //NOTE : NOT IN WORKING FORM
 public class  BatteryDbHelper{
 
@@ -108,3 +110,4 @@ public class  BatteryDbHelper{
     return accel;
   }
 } 
+*/

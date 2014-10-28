@@ -22,11 +22,11 @@ package com.contextawareframework.controller;
 //import com.contextawareframework.backgroundservices.GPSTracker;
 //import com.contextawareframework.backgroundservices.ProximityDataListener;
 ////import com.contextawareframework.backgroundservices.ProximityDataListener;
-//import com.contextawareframework.exceptions.AccelerometerSensorException;
+//import com.contextawareframework.exceptions.AccelerometerSensorExceptionbck;
 //import com.contextawareframework.exceptions.BatteryException;
-//import com.contextawareframework.exceptions.GPSSensorException;
-//import com.contextawareframework.exceptions.LightSensorException;
-//import com.contextawareframework.exceptions.ProximitySensorException;
+//import com.contextawareframework.exceptions.GPSSensorExceptionbkp;
+//import com.contextawareframework.exceptions.LightSensorExceptionbkp;
+//import com.contextawareframework.exceptions.ProximitySensorExceptionbkp;
 //
 //
 ///****************************************************************************
@@ -49,7 +49,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To register the Accelerometer Service for database insertion
 //	 * */
-//	public final void registerAccelerometerService() throws AccelerometerSensorException // 1st Sensor
+//	public final void registerAccelerometerService() throws AccelerometerSensorExceptionbck // 1st Sensor
 //	{
 //		
 //		if(GlobalVariable.SENSOR_ACCELEROMETER == true)
@@ -75,7 +75,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To register the Proximity Service for database insertion
 //	 * */
-//	public final void registerProximityService() throws ProximitySensorException
+//	public final void registerProximityService() throws ProximitySensorExceptionbkp
 //	{
 //		if(GlobalVariable.SENSOR_PROXIMITY == true)
 //		{
@@ -98,7 +98,7 @@ package com.contextawareframework.controller;
 //		}
 //	}
 //	//date 27th feb 2014 Prasenjit
-////	public final void registerProximityService() throws ProximitySensorException // 2nd Sensor
+////	public final void registerProximityService() throws ProximitySensorExceptionbkp // 2nd Sensor
 ////	{
 ////		if(GlobalVariable.SENSOR_PROXIMITY == true)
 ////		{
@@ -176,7 +176,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To register the Light Service for database insertion
 //	 * */
-//	public final void registerLightService() throws LightSensorException // 3rd Sensor
+//	public final void registerLightService() throws LightSensorExceptionbkp // 3rd Sensor
 //	{
 //		if(GlobalVariable.SENSOR_LIGHT == true)
 //		{
@@ -252,7 +252,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To register the Location Service for database insertion
 //	 * */
-//	public final void registerLocationService() throws GPSSensorException // 4th Sensor
+//	public final void registerLocationService() throws GPSSensorExceptionbkp // 4th Sensor
 //	{
 //		
 //		if(GlobalVariable.SENSOR_LOCATION == true)
@@ -291,7 +291,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To un-register the Accelerometer Service for database insertion
 //	 * */
-//	public final void unregisterAccelerometerService() throws AccelerometerSensorException
+//	public final void unregisterAccelerometerService() throws AccelerometerSensorExceptionbck
 //	{
 //		//sensorManager.unregisterListener(lightSensorEventListener); // Change the Listener
 //		accel.disableAccelerometerListener(accelListener);
@@ -300,7 +300,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To un-register the Proximity Service for database insertion
 //	 * */
-//	public final void unregisterProximityService() throws ProximitySensorException
+//	public final void unregisterProximityService() throws ProximitySensorExceptionbkp
 //	{
 //		sensorManager.unregisterListener(proximityListener); // check this 
 //		
@@ -318,7 +318,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To un-register the Light sensor Service for database insertion
 //	 * */
-//	public final void unregisterLightService() throws LightSensorException
+//	public final void unregisterLightService() throws LightSensorExceptionbkp
 //	{
 //		sensorManager.unregisterListener(lightSensorEventListener);
 //		GlobalVariable.SENSOR_LIGHT = false;
@@ -334,7 +334,7 @@ package com.contextawareframework.controller;
 //	/*
 //	 * To un-register the Location Service for database insertion
 //	 * */
-//	public final void unregisterLocationService() throws GPSSensorException
+//	public final void unregisterLocationService() throws GPSSensorExceptionbkp
 //	{
 //		gps.stopUsingGPS(); // Change the Listener 
 //		GlobalVariable.SENSOR_LOCATION = false;

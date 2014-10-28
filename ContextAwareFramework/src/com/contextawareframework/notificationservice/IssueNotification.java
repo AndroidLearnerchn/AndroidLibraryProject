@@ -6,7 +6,7 @@
  * Last Change: 06.08.2014 by Divya
  ******************************************************************/
 
-package com.contextawareframework.notificationService;
+package com.contextawareframework.notificationservice;
 import com.contextawareframework.backgroundservices.Text2Speech;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

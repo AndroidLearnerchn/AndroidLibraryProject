@@ -17,7 +17,7 @@
  * @File        Text2Speech
  * @Created:    04.08.2014
  * @author:     Divya
- * Last Change: 05.08.2014 by Divya
+ * Last Change: 15.10.2014 by Prasenjit
  */
 
 package com.contextawareframework.backgroundservices;
@@ -29,10 +29,24 @@ import android.os.IBinder;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
-public class Text2Speech extends Service implements OnInitListener{
 
+/**
+ * This class can be used for enabling TTS support in the application.  
+ * 
+ *
+ */
+
+public class Text2Speech extends Service implements OnInitListener{
+	
+	private Locale language;
+	private String message = null;
 	private TextToSpeech ttsObj=null;
 	
+	public Text2Speech(String message, Locale language)
+	{
+		this.message = message;
+		this.language = language;
+	}
 	@Override
 	public void onInit(int status){
 		// Check if Text to speech engine has been successfully instantiated
@@ -55,11 +69,14 @@ public class Text2Speech extends Service implements OnInitListener{
 	public int onStartCommand(Intent intent,int flags, int startId){
 		try{
 			Bundle extras=intent.getExtras();
+			
 			//Get the language in which to speak
-			Locale language=(Locale)extras.get("Language");
+			language=(Locale)extras.get("Language"); // Change here
+			
 			//Sets the language
 			int result=ttsObj.setLanguage(language);
-			//Checks if language data is missing or  language is not supported
+			
+			    //Checks if language data is missing or  language is not supported
 				if(result==TextToSpeech.LANG_MISSING_DATA || result==TextToSpeech.LANG_NOT_SUPPORTED){
 					Log.d("TTS","Language not supported");
 				}
@@ -68,9 +85,17 @@ public class Text2Speech extends Service implements OnInitListener{
 				}
 				
 				if(ttsObj!=null && extras!=null){
-					String from=(String)extras.get("From");
-					ttsObj.speak(from, TextToSpeech.QUEUE_ADD, null);
-					Log.d("onStart","Inside it");
+					
+					//String from=(String)extras.get("From");// Change here
+					if(message!=null)
+					{	
+						ttsObj.speak(message, TextToSpeech.QUEUE_ADD, null); // Changed from to message
+						Log.d("onStart","Inside it");
+					}
+					else 
+					{
+						Log.d("onStart", "Message is null");
+					}
 				}
 			
 			
@@ -95,6 +120,34 @@ public class Text2Speech extends Service implements OnInitListener{
 	@Override
 	public IBinder onBind(Intent intent){
 		return null;
+	}
+	// May get removed as present these has to be initialized in the constructor. 
+	/**
+	 * @return the language
+	 */
+	public final Locale getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language the language to set
+	 */
+	public final void setLanguage(Locale language) {
+		this.language = language;
+	}
+
+	/**
+	 * @return the message
+	 */
+	public final String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public final void setMessage(String message) {
+		this.message = message;
 	} 
 	
 }

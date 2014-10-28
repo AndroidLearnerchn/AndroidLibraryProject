@@ -1,10 +1,11 @@
+// NOT IN USE
 /*****************************************************************
  * Copyright (c) 2013 by CDAC Chennai 
- * @File        Battery
+ * @File        CsvFileWriter
  * @Created:    28.01.2014
  * @author:     Prasenjit
  * Last Change: 29.01.2014 by Prasenjit
- ******************************************************************/
+ ******************************************************************//*
 package com.contextawareframework.utility;
 
 import java.io.BufferedWriter;
@@ -25,10 +26,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 import au.com.bytecode.opencsv.CSVWriter;
-/************************************************************************
+*//************************************************************************
  * Class to generate Accelerometer table csv file on sdcard (Using 3rd party
  * library) Presently not in use.
- ************************************************************************/
+ ************************************************************************//*
 public class CsvFileWriterold{
 	private Context localcontext;
 	public CsvFileWriterold(Context contextFromMain)
@@ -70,4 +71,4 @@ public class CsvFileWriterold{
 			Log.e("ERROR in Csv FileWriter", sqlEx.getMessage(), sqlEx);
 		}
 	}
-}
+}*/

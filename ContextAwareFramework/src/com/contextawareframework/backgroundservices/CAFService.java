@@ -24,7 +24,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-
+/**
+ * This class is the base class for each class defined in the com.contextawareframework.
+ * backgroundservices. It extends Service class of Android. If the user mention it as service 
+ * in the android manifest file, then it can be started as service which can run in background. 
+ */
 public class CAFService extends Service{
 
 	/** indicates how to behave if the service is killed */
@@ -43,14 +47,14 @@ public class CAFService extends Service{
 	/**
 	 * Method to start debugging, all log tags in this class will be printed
 	 */
-	protected void setEnableDebugging(boolean value)
+	public void setEnableDebugging(boolean value)
 	{
 		enableDebugging = value;
 	}
 	/**
 	 * Method to stop debugging.
 	 */
-	protected boolean getEnableDebugging()
+	public boolean getEnableDebugging()
 	{
 		return enableDebugging;		  
 	}

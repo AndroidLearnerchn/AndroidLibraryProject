@@ -1,4 +1,5 @@
-package com.contextawareframework.hardware.media;
+// NOT IN USE
+/*package com.contextawareframework.hardware.media;
 
 public class Wifi {
 	//Wifi_Sensor Data
@@ -98,3 +99,4 @@ public class Wifi {
 
 }
 
+*/

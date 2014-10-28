@@ -1,5 +1,7 @@
-package com.contextawareframework.hardware.media;
+// NOT IN USE
+/*package com.contextawareframework.hardware.media;
 
 public class SDCard {
 
 }
+*/

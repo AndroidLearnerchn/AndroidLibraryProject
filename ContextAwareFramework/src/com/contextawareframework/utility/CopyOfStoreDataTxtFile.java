@@ -1,9 +1,9 @@
-package com.contextawareframework.utility;
+/*package com.contextawareframework.utility;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+// NOT IN USE
 public class CopyOfStoreDataTxtFile {
 
 	///----------------------To save any sensor data in simple text file-------------------//
@@ -175,3 +175,4 @@ public class CopyOfStoreDataTxtFile {
 	}
 	//End------------------------------------------------To store GPS Location Sensor data------------------//
 }
+*/

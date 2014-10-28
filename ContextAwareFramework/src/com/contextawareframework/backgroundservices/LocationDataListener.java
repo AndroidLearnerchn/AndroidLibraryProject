@@ -35,8 +35,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 /**
- * This clas is listener class for GPS Sensor, can be used just 
- * to register the GPS / Location listener only.
+ * This clas is listener class for GPS Sensor, can be used just to register the GPS / Location 
+ * listener only. If GPS enabled then will try to get the lat / long from GPS else it will try 
+ * to get the location details from Network Provider (If the phone has network coverage) 
  * */
 public class LocationDataListener extends CAFService{
 
@@ -80,9 +81,9 @@ public class LocationDataListener extends CAFService{
 	}
 
 	/**
-	 * Description : Method to create an instance of GyroscopeDataListener Class.
+	 * Description : Method to create an instance of LocationDataListener Class.
 	 * @param context Calling Activity context
-	 * @return GyroscopeDataListener Class instance
+	 * @return LocationDataListener Class instance
 	 */
 	public static synchronized LocationDataListener getInstance(Context context)
 	{

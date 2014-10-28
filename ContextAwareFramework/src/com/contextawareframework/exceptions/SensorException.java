@@ -22,6 +22,10 @@ package com.contextawareframework.exceptions;
 
 public class SensorException extends CAFException{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Default Constructor 
 	 */
 	public SensorException()
@@ -37,7 +41,7 @@ public class SensorException extends CAFException{
 	}
 
 
-	public class AccelerometerSensorException extends CAFException{
+	public class AccelerometerSensorException extends SensorException{
 		/**
 		 * Can be used if any error caused while using Accelerometer Sensor 
 		 */

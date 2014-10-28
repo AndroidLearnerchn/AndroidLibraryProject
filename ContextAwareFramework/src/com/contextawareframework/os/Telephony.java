@@ -1,4 +1,5 @@
-package com.contextawareframework.os;
+// NOT IN USE
+/*package com.contextawareframework.os;
 
 public class Telephony {
 	//	_ID: database entry ID
@@ -31,3 +32,4 @@ public class Telephony {
 	//GSM_Neighbors_Data
 	//-------------------
 }
+*/

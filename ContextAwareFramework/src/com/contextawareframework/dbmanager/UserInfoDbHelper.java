@@ -69,10 +69,10 @@ public class  UserInfoDbHelper{
 			long insertId = database.insert(ContextAwareSQLiteHelper.TABLE_USERINFO, null,
 					values);
 			Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_USERINFO,
-					allColumns, ContextAwareSQLiteHelper.COLUMN_ACCEL_ID + " = " + insertId, null,
+					allColumns, ContextAwareSQLiteHelper.COLUMN_USER_ID + " = " + insertId, null,
 					null, null, null);
 			cursor.moveToFirst();
-			newRow = cursorToComment(cursor);
+			newRow = getUserDetails(cursor);
 			cursor.close();
 		}
 		catch(SQLException e)
@@ -118,7 +118,7 @@ public class  UserInfoDbHelper{
 
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
-				UserInfo userinfo = cursorToComment(cursor);
+				UserInfo userinfo = getUserDetails(cursor);
 				comments.add(userinfo);
 				cursor.moveToNext();
 			}
@@ -138,7 +138,7 @@ public class  UserInfoDbHelper{
 	/**
 	 * Method to intialize a UserInfo POJO object
 	 */
-	private UserInfo cursorToComment(Cursor cursor) {
+	private UserInfo getUserDetails(Cursor cursor) {
 		UserInfo userinfo = new UserInfo();
 		try
 		{

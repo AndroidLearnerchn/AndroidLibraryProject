@@ -224,7 +224,7 @@
     <position height="-1" width="-1" x="1224" y="1015"/>    
     <display autosize="true" stereotype="true" accessors="true"/>  
   </package>  
-  <class id="27" language="java" name="com.contextawareframework.exceptions.ProximitySensorException" 
+  <class id="27" language="java" name="com.contextawareframework.exceptions.ProximitySensorExceptionbkp" 
     project="ContextAwareFramework" 
     file="/ContextAwareFramework/src/com/contextawareframework/exceptions/ProximitySensorException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -235,7 +235,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="com.contextawareframework.exceptions.GPSSensorException" 
+  <class id="28" language="java" name="com.contextawareframework.exceptions.GPSSensorExceptionbkp" 
     project="ContextAwareFramework" 
     file="/ContextAwareFramework/src/com/contextawareframework/exceptions/GPSSensorException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -268,7 +268,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="com.contextawareframework.exceptions.LightSensorException" 
+  <class id="31" language="java" name="com.contextawareframework.exceptions.LightSensorExceptionbkp" 
     project="ContextAwareFramework" 
     file="/ContextAwareFramework/src/com/contextawareframework/exceptions/LightSensorException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -279,7 +279,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="com.contextawareframework.exceptions.AccelerometerSensorException" 
+  <class id="32" language="java" name="com.contextawareframework.exceptions.AccelerometerSensorExceptionbck" 
     project="ContextAwareFramework" 
     file="/ContextAwareFramework/src/com/contextawareframework/exceptions/AccelerometerSensorException.java" 
     binary="false" corner="BOTTOM_RIGHT">    

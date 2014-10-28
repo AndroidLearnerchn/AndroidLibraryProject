@@ -1,4 +1,5 @@
-package com.contextawareframework.sensors.environmentsensors;
+// NOT IN USE
+/*package com.contextawareframework.sensors.environmentsensors;
 
 public class Temparature {
 //	_ID: database entry ID
@@ -122,3 +123,4 @@ public class Temparature {
 	
 	
 }
+*/

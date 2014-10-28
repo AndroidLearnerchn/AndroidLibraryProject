@@ -1,10 +1,11 @@
+// NOT IN USE
 /*****************************************************************
  * Copyright (c) 2013 by CDAC Chennai 
  * @File        Csvfilewriter
  * @Created:    28.01.2014
  * @author:     Prasenjit
  * Last Change: 29.01.2014 by Prasenjit
- ******************************************************************/
+ ******************************************************************//*
 package com.contextawareframework.utility;
 
 import java.io.File;
@@ -19,11 +20,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
-/************************************************************************************
+*//************************************************************************************
  * Class to generate csv file from sql query on the database. CSV file 
  * is created on sdcard so read / write permission has to be mentioned
  * in the android manifest file
- ***********************************************************************************/
+ ***********************************************************************************//*
 public class Csvfilewriter {
 	
 	private Context localcontext;
@@ -32,17 +33,17 @@ public class Csvfilewriter {
 	public static int prevRowCount;
 	public static int totalRowCount;
 	//Default Constructor
-	/******************************************************************
+	*//******************************************************************
 	 * Description : Constructor
-	 ******************************************************************/
+	 ******************************************************************//*
 	public Csvfilewriter(Context context)
 	{
 		localcontext = context;
 	}
 	///----------------------To save any sensor data in simple text file-------------------//
-	/******************************************************************
+	*//******************************************************************
 	 * Description : To save any sensor data in simple text file
-	 ******************************************************************/
+	 ******************************************************************//*
 	public void saveAllSensorData(long timestamp,float x, float y, float z,float latitude,float longitude )
 	{
 		String data;
@@ -75,11 +76,11 @@ public class Csvfilewriter {
 
 	}
 	// Method to create file to insert data
-	/******************************************************************
+	*//******************************************************************
 	 * Description : Method to create file to store data from database 
 	 * to an external file on SD card. Need to mention Read / Write Permission 
 	 * in the Android Manifest file.
-	 ******************************************************************/
+	 ******************************************************************//*
 	public FileWriter createFile() throws IOException
 	{	
 		FileWriter writer;
@@ -106,9 +107,9 @@ public class Csvfilewriter {
 		return writer;
 	}
 	// Method to write data
-	/******************************************************************
+	*//******************************************************************
 	 * Description : Method to write data on the newly created file
-	 ******************************************************************/
+	 ******************************************************************//*
 	public void writeData(String data, FileWriter writer) throws FileNotFoundException,IOException
 	{
 		//FileWriter writer = new FileWriter(fileName,true);
@@ -117,9 +118,9 @@ public class Csvfilewriter {
 		writer.close();
 	}
 	///----------------------To save any sensor data in simple text file-------------------//
-	/******************************************************************
+	*//******************************************************************
 	 * Description : To save Accelerometer sensor data in simple CSV file
-	 ******************************************************************/
+	 ******************************************************************//*
 	public String saveAccelData(int id, long timestamp, float x, float y, float z)
 	{
 		String data= null;
@@ -136,22 +137,22 @@ public class Csvfilewriter {
 			data = id + "," +x + "," + y + "," + z + "," + timestamp  ;
 
 			//Date 3rd Feb
-			/* File root = new File(android.os.Environment.getExternalStorageDirectory(), "Notes");
+			 File root = new File(android.os.Environment.getExternalStorageDirectory(), "Notes");
 	        if (!root.exists()) {
 	            root.mkdirs();
 	        }
-	        File gpxfile = new File(root,"sensorLog.csv");*/
-			/*if(!gpxfile.exists())
+	        File gpxfile = new File(root,"sensorLog.csv");
+			if(!gpxfile.exists())
 	        {
 	        	data= "This is test         x  ||        y     ||    z    ||   time   "  ;
-	        }*/
-			/*  FileWriter writer = new FileWriter(gpxfile,true);
+	        }
+			  FileWriter writer = new FileWriter(gpxfile,true);
 	        Log.d("query Result ", "Res = " + data);
 	      // writer.write(data+"\n");
 	        writer.append(data + "\n");
 
 	        writer.flush();
-	        writer.close();*/
+	        writer.close();
 			//Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 
 		}
@@ -164,9 +165,9 @@ public class Csvfilewriter {
 		return data;
 	}
 	//-----Start-------------------------------------------To store Proximity Sensor data------------------//
-	/******************************************************************
+	*//******************************************************************
 	 * Description : To save Accelerometer sensor data in simple CSV file
-	 ******************************************************************/
+	 ******************************************************************//*
 	public void saveProximityData(float x, float y, float z, long timestamp)
 	{
 		String data;
@@ -256,13 +257,13 @@ public class Csvfilewriter {
 	public void getDataFromTable(String tablename)
 	{
 		ContextAwareSQLiteHelper dbhelper = new ContextAwareSQLiteHelper(localcontext);
-		/*File exportDir = new File(Environment.getExternalStorageDirectory(), "");       
+		File exportDir = new File(Environment.getExternalStorageDirectory(), "");       
 			if (!exportDir.exists())
 			{
 				exportDir.mkdirs();
 			}
 
-			File file = new File(exportDir, "Accelerometerdb.csv");*/
+			File file = new File(exportDir, "Accelerometerdb.csv");
 		try
 		{
 			//file.createNewFile();     
@@ -312,3 +313,4 @@ public class Csvfilewriter {
 		}
 	}
 }
+*/
