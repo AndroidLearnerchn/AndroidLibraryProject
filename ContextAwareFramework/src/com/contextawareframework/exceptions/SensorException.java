@@ -21,9 +21,7 @@
 package com.contextawareframework.exceptions;
 
 public class SensorException extends CAFException{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Default Constructor 
@@ -33,113 +31,113 @@ public class SensorException extends CAFException{
 		super(" Sensor Not Available");
 	}
 	/**
-	 * Custom Constructor
+	 * Custom Constructor, can be used to show user defined exception messages
 	 */
 	public SensorException(String message)
 	{
 		super(message);
 	}
 
-
+/*
 	public class AccelerometerSensorException extends SensorException{
-		/**
+		*//**
 		 * Can be used if any error caused while using Accelerometer Sensor 
-		 */
+		 *//*
 		private static final long serialVersionUID = 1L;
-		/**
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public AccelerometerSensorException()
 		{
 			super("Accelerometer Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor
-		 */
+		 *//*
 		public AccelerometerSensorException(String message)
 		{
 			super(message);
 		}
 	}
 
-	public class GPSSensorException extends CAFException{
-		/**
+	public class GPSSensorException extends SensorException{
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public GPSSensorException() {
 			super("GPS Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor 
-		 */
+		 *//*
 		public GPSSensorException(String message)
 		{
 			super(message);
 		}
 
 	}
-	public class LightSensorException extends CAFException{
-		/**
+	public class LightSensorException extends SensorException{
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public LightSensorException() {
 			super("Light Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor 
-		 */
+		 *//*
 		public LightSensorException(String message)
 		{
 			super(message);
 		}
 
 	}
-	public class ProximitySensorException extends CAFException{
-		/**
+	public class ProximitySensorException extends SensorException{
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public ProximitySensorException()
 		{
 			super("Proximity Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor 
-		 */
+		 *//*
 		public ProximitySensorException(String message)
 		{
 			super(message);
 		}
 	}
-	public class GyroscopeSensorException extends CAFException{
-		/**
+	public class GyroscopeSensorException extends SensorException{
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public GyroscopeSensorException()
 		{
 			super("Gyroscope Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor 
-		 */
+		 *//*
 		public GyroscopeSensorException(String message)
 		{
 			super(message);
 		}
 	}
-	public class MagnetometerSensorException extends CAFException{
-		/**
+	public class MagnetometerSensorException extends SensorException{
+		*//**
 		 * Default Constructor 
-		 */
+		 *//*
 		public MagnetometerSensorException()
 		{
 			super("Magnetometer Sensor Not Available");
 		}
-		/**
+		*//**
 		 * Custom Constructor 
-		 */
+		 *//*
 		public MagnetometerSensorException(String message)
 		{
 			super(message);
 		}
-	}
+	}*/
 }

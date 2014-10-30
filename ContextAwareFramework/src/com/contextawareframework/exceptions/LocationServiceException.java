@@ -12,30 +12,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *   
- * @File        SDCardException
+ * 
+ * @File        LocationServiceException
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 30.10.2014 by Prasenjit
  */
 package com.contextawareframework.exceptions;
 /**
- * Can be used if any error caused while using SD card 
+ * This class can be used to report errors when using GPS sensor.
  */
-public class SDCardException extends CAFException{
-
+public class LocationServiceException extends SensorException{
 	/**
 	 * Default Constructor 
 	 */
-	public SDCardException()
-	{
-		super("SD Card Not Available");
+	public LocationServiceException() {
+		super("GPS Sensor Not Available");
 	}
 	/**
 	 * Custom Constructor 
 	 */
-	public SDCardException(String message)
+	public LocationServiceException(String message)
 	{
 		super(message);
 	}
+
 }

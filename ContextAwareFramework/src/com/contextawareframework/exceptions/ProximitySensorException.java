@@ -12,29 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *   
- * @File        SDCardException
+ *  
+ * @File        ProximitySensorException
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 30.10.2014 by Prasenjit
  */
 package com.contextawareframework.exceptions;
 /**
- * Can be used if any error caused while using SD card 
+ * Can be used if any error caused while using Proximity Sensor 
  */
-public class SDCardException extends CAFException{
-
+public class ProximitySensorException extends SensorException{
 	/**
 	 * Default Constructor 
 	 */
-	public SDCardException()
+	public ProximitySensorException()
 	{
-		super("SD Card Not Available");
+		super("Proximity Sensor Not Available");
 	}
 	/**
 	 * Custom Constructor 
 	 */
-	public SDCardException(String message)
+	public ProximitySensorException(String message)
 	{
 		super(message);
 	}

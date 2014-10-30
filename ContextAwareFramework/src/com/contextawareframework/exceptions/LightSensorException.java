@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 by CDAC Chennai 
+ * Copyright (c) 2013 by CDAC Chennai 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,30 +12,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *   
- * @File        SDCardException
+ * 
+ * @File        LightSensorException
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 30.10.2014 by Prasenjit
  */
 package com.contextawareframework.exceptions;
 /**
- * Can be used if any error caused while using SD card 
+ * Can be used if any error caused while using Light Sensor 
  */
-public class SDCardException extends CAFException{
-
+public class LightSensorException extends SensorException{
 	/**
 	 * Default Constructor 
 	 */
-	public SDCardException()
-	{
-		super("SD Card Not Available");
+	public LightSensorException() {
+		super("Light Sensor Not Available");
 	}
 	/**
 	 * Custom Constructor 
 	 */
-	public SDCardException(String message)
+	public LightSensorException(String message)
 	{
 		super(message);
 	}
+
 }

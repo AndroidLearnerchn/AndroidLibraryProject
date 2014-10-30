@@ -11,31 +11,30 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- *   
- * @File        SDCardException
+ * limitations under the License. 
+ * 
+ * @File        GyrometerSensorException
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 30.10.2014 by Prasenjit
  */
 package com.contextawareframework.exceptions;
 /**
- * Can be used if any error caused while using SD card 
- */
-public class SDCardException extends CAFException{
-
+* Can be used if any error caused while using Light Sensor 
+*/
+public class GyrometerSensorException extends SensorException{
 	/**
 	 * Default Constructor 
 	 */
-	public SDCardException()
-	{
-		super("SD Card Not Available");
+	public GyrometerSensorException() {
+			super("Gyrometer Sensor Not Available");
 	}
 	/**
 	 * Custom Constructor 
 	 */
-	public SDCardException(String message)
+	public GyrometerSensorException(String message)
 	{
 		super(message);
 	}
+	
 }

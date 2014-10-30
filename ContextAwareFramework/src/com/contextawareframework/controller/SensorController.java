@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * @File        SensorController1
+ * @File        SensorController
  * @Created:    19.11.2013
  * @author:     Prasenjit
  * Last Change: 12.08.2014 by Prasenjit
@@ -34,8 +34,12 @@ import com.contextawareframework.backgroundservices.LightDataListener;
 import com.contextawareframework.backgroundservices.MagnetometerDataListener;
 import com.contextawareframework.backgroundservices.ProximityDataListener;
 
-import com.contextawareframework.exceptions.SensorException;
-import com.contextawareframework.exceptions.SensorException.*;
+import com.contextawareframework.exceptions.AccelerometerSensorException;
+import com.contextawareframework.exceptions.GyrometerSensorException;
+import com.contextawareframework.exceptions.LightSensorException;
+import com.contextawareframework.exceptions.LocationServiceException;
+import com.contextawareframework.exceptions.MagnetometerSensorException;
+import com.contextawareframework.exceptions.ProximitySensorException;
 
 import com.contextawareframework.globalvariable.CAFConfig;
 
@@ -50,7 +54,7 @@ import com.contextawareframework.globalvariable.CAFConfig;
  * SensorController controller = SensorController.getInstance(getApplicationContext);
  * 
  * CAFConfig.setSensor[Name of Sensor](true);
- * 																			Delay
+ * 																		  Delay
  * controller.register[SensorName]Service(sensorListener,SensorController.NORMAL);
  * ----------------------------------------------------------------------------------
  */
@@ -251,7 +255,7 @@ public class SensorController {
 	/**
 	 * To register the Location Service
 	 */
-	public final void registerLocationService(String provider, long minTime, float minDistance, LocationListener locationListener) throws GPSSensorException
+	public final void registerLocationService(String provider, long minTime, float minDistance, LocationListener locationListener) throws LocationServiceException
 	{
 		this.locationListener = locationListener;
 
@@ -322,7 +326,7 @@ public class SensorController {
 	 * @param sampleRate
 	 * @throws Exception
 	 */
-	public final void registerMagnetometerService(SensorEventListener listenerfromMainApp, int sampleRate)  
+	public final void registerMagnetometerService(SensorEventListener listenerfromMainApp, int sampleRate)  throws MagnetometerSensorException
 	{
 		magnetometerListener = listenerfromMainApp;
 
@@ -376,7 +380,7 @@ public class SensorController {
 	/**
 	 * To un-register the Gyroscope 
 	 */
-	public final void unregisterGyroscopeService(SensorEventListener listenerfromMainApp) throws AccelerometerSensorException
+	public final void unregisterGyroscopeService(SensorEventListener listenerfromMainApp) throws GyrometerSensorException
 	{		
 		if(listenerfromMainApp!=null)
 		{	
@@ -467,7 +471,7 @@ public class SensorController {
 	/**
 	 * To un-register the Location Service
 	 */
-	public final void unregisterLocationService(LocationListener locationListener) throws GPSSensorException
+	public final void unregisterLocationService(LocationListener locationListener) throws LocationServiceException
 	{
 		if(gps!=null)
 		{	

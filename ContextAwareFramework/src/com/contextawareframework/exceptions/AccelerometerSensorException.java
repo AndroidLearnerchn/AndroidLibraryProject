@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 by CDAC Chennai 
+ * Copyright (c) 2013 by CDAC Chennai 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,30 +12,32 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *   
- * @File        SDCardException
+ * 
+ * @File        AccelerometerSensorException
  * @Created:    18.11.2013
  * @author:     Prasenjit
  * Last Change: 30.10.2014 by Prasenjit
  */
 package com.contextawareframework.exceptions;
-/**
- * Can be used if any error caused while using SD card 
- */
-public class SDCardException extends CAFException{
 
+public class AccelerometerSensorException extends SensorException{
+	/**
+	 * This class Can be used if any error caused while using Accelerometer Sensor 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Default Constructor 
 	 */
-	public SDCardException()
+	public AccelerometerSensorException()
 	{
-		super("SD Card Not Available");
+		super("Accelerometer Sensor Not Available");
 	}
 	/**
-	 * Custom Constructor 
+	 * Custom Constructor
 	 */
-	public SDCardException(String message)
+	public AccelerometerSensorException(String message)
 	{
 		super(message);
 	}
+	// Defince other errors which can be thrown by this device
 }
