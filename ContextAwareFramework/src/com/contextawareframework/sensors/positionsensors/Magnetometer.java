@@ -29,7 +29,13 @@ public class Magnetometer {
 	private double yAxis;
 	private double zAxis;
 	private int id;
-	
+	/**
+	 * Default constructor
+	 */
+	public Magnetometer()
+	{
+		
+	}
 	/**
 	 * @return the timeStamp
 	 */

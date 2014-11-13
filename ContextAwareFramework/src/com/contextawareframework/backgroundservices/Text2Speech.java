@@ -32,8 +32,6 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 
 /**
  * This class can be used for enabling TTS support in the application.  
- * 
- *
  */
 
 public class Text2Speech extends Service implements OnInitListener{
@@ -68,10 +66,10 @@ public class Text2Speech extends Service implements OnInitListener{
 	@Override
 	public int onStartCommand(Intent intent,int flags, int startId){
 		try{
-			Bundle extras=intent.getExtras();
+			//Bundle extras=intent.getExtras();
 			
 			//Get the language in which to speak
-			language=(Locale)extras.get("Language"); // Change here
+			language=(Locale)getLanguage();//extras.get("Language"); // Change here 28.10.14
 			
 			//Sets the language
 			int result=ttsObj.setLanguage(language);
@@ -84,8 +82,8 @@ public class Text2Speech extends Service implements OnInitListener{
 				Log.d("TTS","Language supported");
 				}
 				
-				if(ttsObj!=null && extras!=null){
-					
+				//if(ttsObj!=null && extras!=null){ change here 28.10.14
+				if(ttsObj!=null){
 					//String from=(String)extras.get("From");// Change here
 					if(message!=null)
 					{	

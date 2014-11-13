@@ -263,7 +263,7 @@ public class ContextAwareSQLiteHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if(enableDebugging)
 		{
-			Log.w(TAG +" : "+ContextAwareSQLiteHelper.class.getName(),"Upgrading database from version " + oldVersion + " to "+ newVersion + ", which will destroy all old data");
+			Log.d(TAG +" : "+ContextAwareSQLiteHelper.class.getName(),"Upgrading database from version " + oldVersion + " to "+ newVersion + ", which will destroy all old data");
 		}
 		// If database version updated then it will delete all tables with its database and create a new empty one
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCEL);

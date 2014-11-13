@@ -19,7 +19,7 @@
  * Last Change: 28.11.2013 by Prasenjit
  */
  
-package com.contextawareframework.utility;
+package com.contextawareframework.uploadmanager;
 
 
 import java.util.Calendar;
@@ -51,7 +51,7 @@ public class UploadScheduler {
 	int interval; // Time interval in seconds
 
 	// Constructor to initialize the class variables
-	public UploadScheduler(Context contextFromMain, Class serviceclass,
+	public UploadScheduler(Context contextFromMain, Object serviceclass,
 			int delay) {
 		localcontext = contextFromMain;
 		serviceClassName = serviceclass;

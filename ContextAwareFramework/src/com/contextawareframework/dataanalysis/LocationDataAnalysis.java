@@ -23,13 +23,14 @@
 package com.contextawareframework.dataanalysis;
 
 import java.util.Calendar;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
-import android.media.AudioManager;
+//import android.content.Context;
+//import android.location.Location;
+//import android.location.LocationManager;
+//import android.net.ConnectivityManager;
+//import android.net.NetworkInfo;
+
+//import android.media.AudioManager;
 
 
 

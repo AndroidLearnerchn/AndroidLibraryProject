@@ -99,6 +99,20 @@ public class  MagnetometerDbHelper{
 
 	}
 	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * Method to close the database connection
 	 */
 	public void close() {
@@ -108,7 +122,7 @@ public class  MagnetometerDbHelper{
 	/**
 	 * Method to create insert a row of data into the database
 	 */
-	public Magnetometer createMagnetoRowData(long timestamp,Float x, Float y, Float z){
+	public Magnetometer createMagnetometerRowData(long timestamp,Float x, Float y, Float z){
 		Magnetometer newRow = null ;
 		try
 		{
@@ -123,7 +137,7 @@ public class  MagnetometerDbHelper{
 					allColumns, ContextAwareSQLiteHelper.COLUMN_MAG_ID + " = " + insertId, null,
 					null, null, null);
 			cursor.moveToFirst();
-			newRow = cursorToMagnetoRow(cursor);
+			newRow = cursorToMagnetometerRow(cursor);
 			cursor.close();
 		}
 		catch(SQLException e)
@@ -140,7 +154,7 @@ public class  MagnetometerDbHelper{
 	/**
 	 * Method to delete a row from database.
 	 */
-	public void deleteMagnetoRowData(Magnetometer rowData) {
+	public void deleteMagnetometerRowData(Magnetometer rowData) {
 		try{
 			long id = rowData.getId();
 			System.out.println("Comment deleted with id: " + id);
@@ -153,7 +167,7 @@ public class  MagnetometerDbHelper{
 	}
 
 	/**
-	 * Method to list all row of the Gyrometer table
+	 * Method to list all row of the Magnetometer table
 	 */
 	public List<Magnetometer> getAllRows() {
 		List<Magnetometer> magnetoRows = new ArrayList<Magnetometer>();
@@ -165,7 +179,7 @@ public class  MagnetometerDbHelper{
 
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
-				Magnetometer magneto = cursorToMagnetoRow(cursor);
+				Magnetometer magneto = cursorToMagnetometerRow(cursor);
 				magnetoRows.add(magneto);
 				cursor.moveToNext();
 			}
@@ -183,9 +197,9 @@ public class  MagnetometerDbHelper{
 		return magnetoRows;
 	}
 	/**
-	 * Method to intialize a Gyrometer POJO object
+	 * Method to initialize a Magnetometer POJO object
 	 */
-	private Magnetometer cursorToMagnetoRow(Cursor cursor) {
+	private Magnetometer cursorToMagnetometerRow(Cursor cursor) {
 		Magnetometer magnetoRow = new Magnetometer();
 		try{
 			magnetoRow.setTimeStamp(cursor.getLong(0));

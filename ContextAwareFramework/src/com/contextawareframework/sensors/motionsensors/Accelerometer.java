@@ -61,14 +61,12 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 */
 	public void setId(long id) {
 		this.id = (int) id;
 	}
 	/**
-	 * 
 	 * @return
 	 */
 	public long getTimestamp() {
@@ -76,7 +74,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param timestamp
 	 */
 	public void setTimestamp(long timestamp) {
@@ -84,7 +81,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public double getX() {
@@ -92,7 +88,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param x
 	 */
 	public void setX(double x) {
@@ -100,7 +95,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public double getY() {
@@ -108,7 +102,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param y
 	 */
 	public void setY(double y) {
@@ -116,7 +109,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public double getZ() {
@@ -124,7 +116,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param z
 	 */
 	public void setZ(double z) {
@@ -132,7 +123,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public String getComment() {
@@ -141,7 +131,6 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
 	 * @param comment
 	 */
 	public void setComment(String comment) {
@@ -149,7 +138,7 @@ public class Accelerometer {
 	}
 
 	/**
-	 * 
+	 *  Return the one row data in string format
 	 */
 	public String toString()
 	{

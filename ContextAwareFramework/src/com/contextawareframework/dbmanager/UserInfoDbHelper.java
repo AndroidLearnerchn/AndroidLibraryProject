@@ -16,7 +16,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.contextawareframework.globalvariable.CAFConfig;
 import com.contextawareframework.os.UserInfo;
 
 /**
@@ -27,15 +29,44 @@ public class  UserInfoDbHelper{
 	// Database fields
 	private SQLiteDatabase database;
 	private ContextAwareSQLiteHelper dbHelper;
+	private static UserInfoDbHelper userInfoDbHelper;
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging();
+	private String TAG =  "UserInfoDbHelper" ;
+	
 	private String[] allColumns = { ContextAwareSQLiteHelper.COLUMN_USER_EMAIL,
 			ContextAwareSQLiteHelper.COLUMN_USER_ID, ContextAwareSQLiteHelper.COLUMN_DEV_EMAIL, ContextAwareSQLiteHelper.COLUMN_DEVICE_ID, ContextAwareSQLiteHelper.COLUMN_APP_ID
 	};
-
+	
 	/**
 	 * Default Constructor
 	 */
-	public UserInfoDbHelper(Context context) {
+	private UserInfoDbHelper(Context context) {
 		dbHelper = new ContextAwareSQLiteHelper(context);
+	}
+
+	public static synchronized UserInfoDbHelper getInstance(Context context)
+	{
+		if (userInfoDbHelper == null)
+			userInfoDbHelper = new UserInfoDbHelper(context);
+
+		return userInfoDbHelper;
+	}
+	/**
+	 * Method to enable debugging
+	 * @param boolean
+	 */
+	public void setEnableDebugging(boolean value)
+	{
+		enableDebugging = value;
+	}
+
+	/**
+	 * Method to get the present value of enableDebugging
+	 * @return boolean
+	 */
+	public boolean getEnableDebugging()
+	{
+		return enableDebugging;
 	}
 
 	/**
@@ -44,7 +75,20 @@ public class  UserInfoDbHelper{
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
-
+	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Method to close the database connection
 	 */
@@ -55,7 +99,7 @@ public class  UserInfoDbHelper{
 	/**
 	 * Method to create insert a row of data into the database
 	 */
-	public UserInfo createComment(String userEmail,String userId, String devEmail, String deviceId,String appId){
+	public UserInfo createUserInfoRowData(String userEmail,String userId, String devEmail, String deviceId,String appId){
 		ContentValues values = new ContentValues();
 		UserInfo newRow = null;
 		try
@@ -74,6 +118,10 @@ public class  UserInfoDbHelper{
 			cursor.moveToFirst();
 			newRow = getUserDetails(cursor);
 			cursor.close();
+			if(enableDebugging)
+			{
+				Log.d(TAG,"createUserInfoRowData Method");
+			}
 		}
 		catch(SQLException e)
 		{
@@ -87,12 +135,11 @@ public class  UserInfoDbHelper{
 	}
 
 	/**
-	 * Method to delete a row from database // Presently it will not work as no check
-	 * condition is provided for deleting the row.
+	 * Method to delete a row from database 
 	 */
-	public void deleteComment(UserInfo accel) {
+	public void deleteUserInfoRowData(UserInfo userInfo) {
 		try{
-			String id = accel.getUserId();
+			String id = userInfo.getUserId();
 			System.out.println("Comment deleted with id: " + id);
 			database.delete(ContextAwareSQLiteHelper.TABLE_USERINFO, ContextAwareSQLiteHelper.COLUMN_USER_ID
 					+ " = " + id, null);
@@ -109,7 +156,7 @@ public class  UserInfoDbHelper{
 	/**
 	 * Method to list all row of the UserInfo table
 	 */
-	public List<UserInfo> getAllComments() {
+	public List<UserInfo> getAllRows() {
 		List<UserInfo> comments = new ArrayList<UserInfo>();
 		try
 		{

@@ -69,6 +69,21 @@ public class  ProximityDbHelper{
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
+
+	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Method to close the database connection
 	 */

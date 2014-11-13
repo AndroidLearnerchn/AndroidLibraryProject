@@ -92,6 +92,20 @@ public class  LightDbHelper{
 		database = dbHelper.getWritableDatabase();
 	}
 	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * Method to close the database connection
 	 */
 	public void close() {
@@ -143,7 +157,7 @@ public class  LightDbHelper{
 	/**
 	 * Method to list all row of the Light table
 	 */
-	public List<Light> getAlRows() {
+	public List<Light> getAllRows() {
 		List<Light> lightRowData = new ArrayList<Light>();
 		try
 		{

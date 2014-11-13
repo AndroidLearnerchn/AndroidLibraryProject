@@ -153,7 +153,7 @@ public class  LocationDbHelper{
 	/**
 	 * Method to delete a row from database.
 	 */
-	public void deleteComment(LocationPojo location) {
+	public void deleteRow(LocationPojo location) {
 
 		long id = location.getId();
 		System.out.println("Comment deleted with id: " + id);
@@ -164,9 +164,9 @@ public class  LocationDbHelper{
 	/**
 	 * Method to list all row of the Location table
 	 */
-	public List<LocationPojo> getAllComments() {
+	public List<LocationPojo> getAllRows() {
 
-		List<LocationPojo> comments = new ArrayList<LocationPojo>();
+		List<LocationPojo> locationRow = new ArrayList<LocationPojo>();
 
 		Cursor cursor = database.query(ContextAwareSQLiteHelper.TABLE_LOCATION,
 				allColumns, null, null, null, null, null);
@@ -174,7 +174,7 @@ public class  LocationDbHelper{
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			LocationPojo location = cursorToLocationRow(cursor);
-			comments.add(location);
+			locationRow.add(location);
 			cursor.moveToNext();
 
 		}
@@ -185,7 +185,7 @@ public class  LocationDbHelper{
 		{
 			Log.d(TAG,"getAllRows");
 		}
-		return comments;
+		return locationRow;
 	}
 	/**
 	 * Method to initialize a Location POJO object

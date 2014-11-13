@@ -98,6 +98,20 @@ public class  GyroscopeDbHelper{
 
 	}
 	/**
+	 * Method to open the database in read only mode 
+	 */
+	public void openReadOnly()
+	{
+		try
+		{
+			database = dbHelper.getReadableDatabase();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * Method to close the database connection
 	 */
 	public void close() {
@@ -107,8 +121,8 @@ public class  GyroscopeDbHelper{
 	/**
 	 * Method to create insert a row of data into the database
 	 */
-	public Gyrometer createGyroRowData(long timestamp,Float x, Float y, Float z){
-		Gyrometer newRow = null ;
+	public Gyrometer createGyrometerRowData(long timestamp,Float x, Float y, Float z){
+		Gyrometer newRow = null;
 		try
 		{
 			ContentValues values = new ContentValues();
@@ -122,7 +136,7 @@ public class  GyroscopeDbHelper{
 					allColumns, ContextAwareSQLiteHelper.COLUMN_GYRO_ID + " = " + insertId, null,
 					null, null, null);
 			cursor.moveToFirst();
-			newRow = cursorToGyroRow(cursor);
+			newRow = cursorToGyrometerRow(cursor);
 			cursor.close();
 		}
 		catch(SQLException e)
@@ -139,9 +153,9 @@ public class  GyroscopeDbHelper{
 	/**
 	 * Method to delete a row from database.
 	 */
-	public void deleteGyroRowData(Gyrometer accel) {
+	public void deleteGyrometerRowData(Gyrometer gyrometerRow) {
 		try{
-			long id = accel.getId();
+			long id = gyrometerRow.getId();
 			System.out.println("Comment deleted with id: " + id);
 			database.delete(ContextAwareSQLiteHelper.TABLE_GYRO, ContextAwareSQLiteHelper.COLUMN_GYRO_ID+ " = " + id, null);
 		}
@@ -164,7 +178,7 @@ public class  GyroscopeDbHelper{
 
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
-				Gyrometer gyro = cursorToGyroRow(cursor);
+				Gyrometer gyro = cursorToGyrometerRow(cursor);
 				gyroRows.add(gyro);
 				cursor.moveToNext();
 			}
@@ -184,7 +198,7 @@ public class  GyroscopeDbHelper{
 	/**
 	 * Method to intialize a Gyrometer POJO object
 	 */
-	private Gyrometer cursorToGyroRow(Cursor cursor) {
+	private Gyrometer cursorToGyrometerRow(Cursor cursor) {
 		Gyrometer gyroRow = new Gyrometer();
 		try{
 			gyroRow.setTimeStamp(cursor.getLong(0));

@@ -97,7 +97,7 @@ public class CsvFileWriter {
 	public FileWriter createFile(File path,String folderName, String fileName) throws IOException
 	{	
 		FileWriter writer = null;
-		if(CAFConfig.isEnableDebugging())
+		if(enableDebugging)
 		{
 			Log.d(TAG,"createFile Method");
 		}
@@ -144,7 +144,7 @@ public class CsvFileWriter {
 				writer = new FileWriter(file,true); // If true it will append in the existing file
 
 				// To see the debugging message 
-				if(CAFConfig.isEnableDebugging())
+				if(enableDebugging)
 				{
 					Log.d(TAG, " file created");
 				}
@@ -158,7 +158,7 @@ public class CsvFileWriter {
 				file.delete(); 
 
 				// To see the debugging message 
-				if(CAFConfig.isEnableDebugging())
+				if(enableDebugging)
 				{
 					Log.d(TAG, " file exist, deleting file");
 				}
@@ -167,7 +167,7 @@ public class CsvFileWriter {
 				writer = new FileWriter(file,true);
 
 				// To see the debugging message
-				if(CAFConfig.isEnableDebugging())
+				if(enableDebugging)
 				{
 					Log.d(TAG, " "+"new file created : " );
 				}
@@ -198,7 +198,7 @@ public class CsvFileWriter {
 
 
 		}
-		if(CAFConfig.isEnableDebugging())
+		if(enableDebugging)
 		{
 			Log.d(TAG,""+ strbuilder);
 		}

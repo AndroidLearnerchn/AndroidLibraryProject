@@ -114,7 +114,7 @@ public class AccelerometerDataListener extends CAFService {
 		}
 		else			
 		{	
-			if(CAFConfig.isEnableDebugging())
+			if(enableDebugging)
 			{
 				Log.d(TAG,"enableAccelerometer Method");
 				Log.d(TAG,"listenerFromActivity is null");
