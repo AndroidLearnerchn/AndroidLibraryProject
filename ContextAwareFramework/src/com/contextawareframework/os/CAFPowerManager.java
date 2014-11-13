@@ -23,7 +23,10 @@ package com.contextawareframework.os;
 
 
 
+import com.contextawareframework.globalvariable.CAFConfig;
+
 import android.os.PowerManager;
+import android.util.Log;
 import android.widget.Toast;
 import android.content.Context;
 
@@ -31,31 +34,78 @@ import android.content.Context;
  * This class implements PARTIAL_WAKE_LOCK 
  */
 public class CAFPowerManager {
-	PowerManager.WakeLock wakeLock;
-	Context mcontext;
+	
+	/* Local variable for wakelock */
+	private PowerManager.WakeLock wakeLock;
+	
+	/* Local variable to store the context of the calling activity.*/
+	private Context mContext;
+	
+	/* powerManager to accquire the Power Manager service */
+	private PowerManager powerManager;
+	
+	/* To enable / disable Log messages. */
+	private String TAG = "CAFPowerManager"; 
+	
+	/* To enable / disable Log messages. */
+	private static boolean enableDebugging = CAFConfig.isEnableDebugging(); 
+	
 	/**
 	 * Method to assign the context of the component
 	 * @param context
 	 */
 	public CAFPowerManager(Context context)
 	{
-		mcontext=context;
+		mContext=context;
 	}
 
 	/**
-	 * Method to acquire a wake lock
+	 * Method to acquire a partial wake lock
 	 */
-	public void acquireWakeLock(){ 
+	public void acquirePartialWakeLock(){ 
 		try
 		{
-			//pm-Stores the handle to the system-level service POWER_SERVICE
-			PowerManager pm=(PowerManager)mcontext.getSystemService(Context.POWER_SERVICE);
+			//powerManager to accquire the Power Manager service
+			 powerManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
+			if( powerManager != null)
+			{
+				//create a new wakelock
+				wakeLock=powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK," Partial Wakelock ");
+				
+				// To acquire the wake lock
+				wakeLock.acquire();
+				if(enableDebugging)
+					Log.d(TAG,"Partial Wake Lock Accquired");
+				
+				//Toast acquire=Toast.makeText(mContext, " Accquired partial Wake lock ", Toast.LENGTH_SHORT);
+				//acquire.show();
+				
+				
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Method to acquire a lock which causes Screen up
+	 */
+	public void acquireCausesWakeupLock(){ 
+		try
+		{
+			//powerManager to accquire the Power Manager service
+			 powerManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
 			
 			//create a new wakelock
-			wakeLock=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My wakelock");
-
-			Toast acquire=Toast.makeText(mcontext, "Wake lock on", Toast.LENGTH_SHORT);
-			acquire.show();
+			 wakeLock=powerManager.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP," Accquire of this lock causes screen on ");
+			
+			// To acquire the wake lock
+			 wakeLock.acquire();
+			
+			 // To get a message if debugging is turned on
+			 if(enableDebugging)
+				 Log.d(TAG,"Partial Wake Lock Accquired");
+			 
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -66,16 +116,24 @@ public class CAFPowerManager {
 	 * @param time
 	 */
 	public void acquireWakelocktime(long time){
-		try{
-			//pm-Stores the handle to the system-level service POWER_SERVICE
-			PowerManager pm=(PowerManager)mcontext.getSystemService(Context.POWER_SERVICE);
+		try
+		{
+			//powerManager to acquire the Power Manager service
+			powerManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
+			
 			//create a new Wakelock
-			wakeLock=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My wakelock");
+			wakeLock=powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"Will accquire the lock for specified time");
+			
 			//acquire Wakelock
 			wakeLock.acquire(time);
+			
+			// To get a message if debugging is turned on
+			if(enableDebugging)
+				 Log.d(TAG,"Partial Wake Lock Accquired");
 
 		}
-		catch(Exception e){
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -92,6 +150,20 @@ public class CAFPowerManager {
 		{
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @return the enableDebugging
+	 */
+	public boolean isEnableDebugging() {
+		return enableDebugging;
+	}
+
+	/**
+	 * @param enableDebugging the enableDebugging to set
+	 */
+	public void setEnableDebugging(boolean enableDebugging) {
+		CAFPowerManager.enableDebugging = enableDebugging;
 	}
 
 
